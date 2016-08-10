@@ -5,9 +5,12 @@ import (
 )
 
 type (
-	// For Get - /notes
-	// For /notes/tasks/id
+	// For Get - /movies
 	MoviesResource struct {
 		Data []models.Movie `json:"data"`
+	}
+	// For Post/Put - /movies
+	MovieResource struct {
+		Data models.Movie `json:"data"`
 	}
 )

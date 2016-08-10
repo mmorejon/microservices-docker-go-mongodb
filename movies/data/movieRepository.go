@@ -1,8 +1,11 @@
 package data
 
 import (
+	"time"
+
 	"github.com/mmorejon/cinema/movies/models"
 	"gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
 )
 
 type MovieRepository struct {
@@ -17,4 +20,12 @@ func (r *MovieRepository) GetAll() []models.Movie {
 		movies = append(movies, result)
 	}
 	return movies
+}
+
+func (r *MovieRepository) Create(movie *models.Movie) error {
+	obj_id := bson.NewObjectId()
+	movie.Id = obj_id
+	movie.CreatedOn = time.Now()
+	err := r.C.Insert(&movie)
+	return err
 }
