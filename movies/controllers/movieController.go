@@ -92,3 +92,29 @@ func GetMovieById(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(j)
 }
+
+// Handler for HTTP Delete - "/movies/{id}"
+// Delete movie by id
+func DeleteMovie(rw http.ResponseWriter, req *http.Request) {
+	// Get id from incoming url
+	vars := mux.Vars(req)
+	id := vars["id"]
+
+	// Create new context
+	context := NewContext()
+	defer context.Close()
+	c := context.DbCollection("movies")
+	repo := &data.MovieRepository{c}
+
+	err := repo.Delete(id)
+	if err != nil {
+		if err == mgo.ErrNotFound {
+			rw.WriteHeader(http.StatusNotFound)
+			return
+		} else {
+			common.DisplayAppError(rw, err, "An unexpected error has occurred", 500)
+			return
+		}
+	}
+	rw.WriteHeader(http.StatusNoContent)
+}
