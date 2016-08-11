@@ -29,3 +29,8 @@ func (r *MovieRepository) Create(movie *models.Movie) error {
 	err := r.C.Insert(&movie)
 	return err
 }
+
+func (r *MovieRepository) GetById(id string) (movie models.Movie, err error) {
+	err = r.C.FindId(bson.ObjectIdHex(id)).One(&movie)
+	return
+}

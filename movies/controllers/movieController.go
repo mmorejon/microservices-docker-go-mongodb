@@ -4,9 +4,10 @@ import (
 	"encoding/json"
 	"net/http"
 
-	//"github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 	"github.com/mmorejon/cinema/movies/common"
 	"github.com/mmorejon/cinema/movies/data"
+	"gopkg.in/mgo.v2"
 )
 
 // Handler for HTTP Get - "/movies"
@@ -51,6 +52,42 @@ func CreateMovie(w http.ResponseWriter, r *http.Request) {
 		common.DisplayAppError(w, err, "An unexpected error has occurred", 500)
 		return
 	}
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(j)
+}
+
+// Handler for HTTP Get - "/movies/{id}"
+// Get movie by id
+func GetMovieById(w http.ResponseWriter, r *http.Request) {
+	// Get id from incoming url
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	// create new context
+	context := NewContext()
+	defer context.Close()
+	c := context.DbCollection("movies")
+	repo := &data.MovieRepository{c}
+
+	// Get movie by id
+	movie, err := repo.GetById(id)
+	if err != nil {
+		if err == mgo.ErrNotFound {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		} else {
+			common.DisplayAppError(w, err, "An unexpected error has occurred", 500)
+			return
+		}
+	}
+
+	j, err := json.Marshal(MovieResource{Data: movie})
+	if err != nil {
+		common.DisplayAppError(w, err, "An unexpected error has occurred", 500)
+		return
+	}
+
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)
 	w.Write(j)
