@@ -30,6 +30,11 @@ func (r *ShowTimeRepository) GetAll() []models.ShowTime {
 	return showtimes
 }
 
+func (r *ShowTimeRepository) GetByDate(date string) (showtime models.ShowTime, err error) {
+	err = r.C.Find(bson.M{"date": date}).One(&showtime)
+	return
+}
+
 func (r *ShowTimeRepository) Delete(id string) error {
 	err := r.C.Remove(bson.M{"_id": bson.ObjectIdHex(id)})
 	return err

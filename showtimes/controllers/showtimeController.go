@@ -31,6 +31,8 @@ func GetShowTimes(w http.ResponseWriter, r *http.Request) {
 	w.Write(j)
 }
 
+// Handler for HTTP Post - "/showtimes"
+// Create a new Showtime document
 func CreateShowTime(w http.ResponseWriter, r *http.Request) {
 	var dataResource ShowTimeResource
 	// Decode the incoming ShowTime json
@@ -59,6 +61,37 @@ func CreateShowTime(w http.ResponseWriter, r *http.Request) {
 	w.Write(j)
 }
 
+func GetShowTimeByDate(w http.ResponseWriter, r *http.Request) {
+	// Get date from incoming url
+	vars := mux.Vars(r)
+	date := vars["date"]
+
+	// Create new context
+	context := NewContext()
+	defer context.Close()
+	c := context.DbCollection("showtimes")
+	repo := &data.ShowTimeRepository{c}
+
+	// Get showtime by date
+	showtime, err := repo.GetByDate(date)
+	if err != nil {
+		common.DisplayAppError(w, err, "An unexpected error has occurred", 500)
+		return
+	}
+	// Create data for the response
+	j, err := json.Marshal(ShowTimeResource{Data: showtime})
+	if err != nil {
+		common.DisplayAppError(w, err, "An unexpected error has occurred", 500)
+		return
+	}
+	// Send response back
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(j)
+}
+
+// Handler for HTTP Delete - "/showtimes/{id}"
+// Delete a Showtime document by id
 func DeleteShowTime(w http.ResponseWriter, r *http.Request) {
 	// Get id from incoming url
 	vars := mux.Vars(r)
