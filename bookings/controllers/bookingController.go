@@ -39,3 +39,23 @@ func CreateBooking(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Write(j)
 }
+
+func GetBookings(w http.ResponseWriter, r *http.Request) {
+	// Create new context
+	context := NewContext()
+	defer context.Close()
+	c := context.DbCollection("bookings")
+	repo := &data.BookingRepository{c}
+	// Get all bookings
+	bookings := repo.GetAll()
+	// Create response data
+	j, err := json.Marshal(BookingsResource{Data: bookings})
+	if err != nil {
+		common.DisplayAppError(w, err, "An unexpected error has occurred", 500)
+		return
+	}
+	// Send response back
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(j)
+}
