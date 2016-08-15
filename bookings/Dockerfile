@@ -2,10 +2,10 @@
 FROM golang:1.6
 
 # copy the local package files to the container workspace
-ADD . /go/src/github.com/mmorejon/cinema/movies
+ADD . /go/src/github.com/mmorejon/cinema/bookings
 
 # Setting up working directory
-WORKDIR /go/src/github.com/mmorejon/cinema/movies
+WORKDIR /go/src/github.com/mmorejon/cinema/bookings
 
 # Get godeps for managing and restoring dependencies
 RUN go get github.com/tools/godep
@@ -13,11 +13,11 @@ RUN go get github.com/tools/godep
 # Restore godep dependencies
 RUN godep restore
 
-# Build the movies command inside the container.
-RUN go install github.com/mmorejon/cinema/movies
+# Build the bookings command inside the container.
+RUN go install github.com/mmorejon/cinema/bookings
 
 # Run the taskmanager command when the container starts.
-ENTRYPOINT /go/bin/movies
+ENTRYPOINT /go/bin/bookings
 
 # Service listens on port 8080.
 EXPOSE 8080
