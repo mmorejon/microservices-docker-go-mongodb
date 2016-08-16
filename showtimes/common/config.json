@@ -1,6 +1,6 @@
 {
-  "Server"      : "0.0.0.0:8081",
-  "MongoDBHost" : "127.0.0.1",
+  "Server"      : "0.0.0.0:8080",
+  "MongoDBHost" : "$DB_Host",
   "MongoDBUser"	: "",
   "MongoDBPwd"	: "",
   "Database"    : "showtimes"
