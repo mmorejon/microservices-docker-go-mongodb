@@ -14,8 +14,8 @@ WORKDIR /go/src/github.com/mmorejon/cinema/bookings
 # Build the bookings command inside the container.
 RUN go install github.com/mmorejon/cinema/bookings
 
-# Run the script command when the container starts.
-ENTRYPOINT ./run.sh
+# Run the bookings microservice when the container starts.
+ENTRYPOINT /go/bin/bookings
 
 # Service listens on port 8080.
 EXPOSE 8080

@@ -1,13 +1,37 @@
 version: '2'
 services:
+  proxy:
+    image: jwilder/nginx-proxy
+    container_name: cinema-nginx-proxy
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    ports:
+      - "80:80"
+
   movies:
     build: ./movies
     image: cinema/movies
+    container_name: cinema-movies
     depends_on:
       - db
     links:
       - db
-    ports:
-      - "8080:8080"
+    environment:
+      VIRTUAL_HOST: movies.local
+
+  bookings:
+    build: ./bookings
+    image: cinema/bookings
+    container_name: cinema-bookings
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      VIRTUAL_HOST: bookings.local
+
   db:
     image: mongo:3.3
+    container_name: cinema-db
+    ports:
+      - "27017:27017"
