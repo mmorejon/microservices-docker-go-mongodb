@@ -57,3 +57,5 @@ services:
     container_name: cinema-db
     ports:
       - "27017:27017"
+    volumes:
+      - ./backup:/backup:rw

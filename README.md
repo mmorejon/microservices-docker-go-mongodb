@@ -18,19 +18,38 @@ Development with Go by Shiju Varghese, ISBN 978-1-4842-1053-6
 Requirements
 ===========
 
-* Go 1.6
-* MongoDB 3.3
 * Docker 1.12
+* Docker Compose 1.8
 
-Install
-=======
+We must **add virtual domains** in order to use each **api entry point**. By default we are using: **movies.local**, **bookings.local**, **users.local** and **showtimes.local**
 
+**Virtual domains** has been defined in `docker-compose.yml` file and configured in `/etc/hosts` file. Example of `/etc/hosts` file:
 
+```
+127.0.0.1   movies.local, bookings.local, users.local, showtimes.local
+```
 
-Starting and Stopping Services
+Starting Services
 ==============================
 
+```
+docker-compose up -d
+```
 
+Restore database information
+======================
+
+You can start using an empty database for all microservices, but if you want you can restore a preconfigured data following this steps:
+
+Access to mongodb container typing:
+```
+docker exec -it cinema-db /bin/bash
+```
+
+Restore data typing:
+```
+/backup/restore.sh
+```
 
 Documentation
 ======================
@@ -38,6 +57,7 @@ Documentation
 ## Movie Service
 
 This service is used to get information about a movie. It provides the movie title, rating on a 1-10 scale, director and other information.
+
 
 ## Showtimes Service
 
