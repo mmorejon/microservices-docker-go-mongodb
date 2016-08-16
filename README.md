@@ -11,7 +11,8 @@ The Cinema backend is powered by 4 microservices, all of witch happen to be writ
  * Booking Service: Provides booking information. 
  * Users Service: Provides movie suggestions for users by communicating with other services.
 
-The Cinema use case is based on the project written in Python by [umermansoor](https://github.com/umermansoor/microservices)
+The Cinema use case is based on the project written in Python by [umermansoor](https://github.com/umermansoor/microservices).
+
 The proyect structure is based in the knowledge learned in the book: Web
 Development with Go by Shiju Varghese, ISBN 978-1-4842-1053-6
 
@@ -57,17 +58,20 @@ Restore database information
 
 You can start using an empty database for all microservices, but if you want you can restore a preconfigured data following this steps:
 
-Access to mongodb container typing:
+**_Access to mongodb container typing:_**
+
 ```
 docker exec -it cinema-db /bin/bash
 ```
 
-Restore data typing:
+**_Restore data typing:_**
+
 ```
 /backup/restore.sh
 ```
 
-Leave the container:
+**_Leave the container:_**
+
 ```
 exit
 ```
@@ -78,7 +82,7 @@ Documentation
 
 ## User Service
 
-This service returns information about the users of Cinema 3.
+This service returns information about the users of Cinema.
 
 **_Routes:_**
 
