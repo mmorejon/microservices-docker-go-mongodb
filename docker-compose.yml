@@ -30,6 +30,17 @@ services:
     environment:
       VIRTUAL_HOST: bookings.local
 
+  showtimes:
+    build: ./showtimes
+    image: cinema/showtimes
+    container_name: cinema-showtimes
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      VIRTUAL_HOST: showtimes.local
+
   db:
     image: mongo:3.3
     container_name: cinema-db

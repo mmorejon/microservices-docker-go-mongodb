@@ -14,8 +14,8 @@ WORKDIR /go/src/github.com/mmorejon/cinema/showtimes
 # Build the showtimes command inside the container.
 RUN go install github.com/mmorejon/cinema/showtimes
 
-# Run the script command when the container starts.
-ENTRYPOINT ./run.sh
+# Run the showtimes microservices when the container starts.
+ENTRYPOINT /go/bin/showtimes
 
 # Service listens on port 8080.
 EXPOSE 8080
