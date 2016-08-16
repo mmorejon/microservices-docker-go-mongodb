@@ -41,6 +41,17 @@ services:
     environment:
       VIRTUAL_HOST: showtimes.local
 
+  users:
+    build: ./users
+    image: cinema/users
+    container_name: cinema-users
+    depends_on:
+      - db
+    links:
+      - db
+    environment:
+      VIRTUAL_HOST: users.local
+
   db:
     image: mongo:3.3
     container_name: cinema-db

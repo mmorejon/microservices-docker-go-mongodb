@@ -14,8 +14,8 @@ WORKDIR /go/src/github.com/mmorejon/cinema/users
 # Build the users command inside the container.
 RUN go install github.com/mmorejon/cinema/users
 
-# Run the script when the container starts.
-ENTRYPOINT ./run.sh
+# Run the users microservice when the container starts.
+ENTRYPOINT /go/bin/users
 
 # Service listens on port 8080.
 EXPOSE 8080
