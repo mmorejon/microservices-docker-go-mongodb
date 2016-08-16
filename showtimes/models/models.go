@@ -9,8 +9,8 @@ import (
 type (
 	ShowTime struct {
 		Id        bson.ObjectId `bson:"_id,omitempty" json:"id"`
-		Date      string        `json:"date	,omitempty"`
+		Date      string        `json:"date"`
 		CreatedOn time.Time     `json:"createdon,omitempty"`
-		Movies    []string      `json:"movies,omitempty"`
+		Movies    []string      `json:"movies"`
 	}
 )
