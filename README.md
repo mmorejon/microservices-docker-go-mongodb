@@ -11,7 +11,7 @@ The Cinema backend is powered by 4 microservices, all of witch happen to be writ
  * Booking Service: Provides booking information. 
  * Users Service: Provides movie suggestions for users by communicating with other services.
 
-The Cinema use case is based on the project written in Python .... by ...
+The Cinema use case is based on the project written in Python by [umermansoor](https://github.com/umermansoor/microservices)
 The proyect structure is based in the knowledge learned in the book: Web
 Development with Go by Shiju Varghese, ISBN 978-1-4842-1053-6
 
@@ -29,11 +29,27 @@ We must **add virtual domains** in order to use each **api entry point**. By def
 127.0.0.1   movies.local, bookings.local, users.local, showtimes.local
 ```
 
-Starting Services
+Starting services
 ==============================
 
 ```
 docker-compose up -d
+```
+
+Stoping services
+==============================
+
+```
+docker-compose stop
+```
+
+Including new changes
+==============================
+
+If you need change some source code you can deploy it typing:
+
+```
+docker-compose build
 ```
 
 Restore database information
@@ -94,7 +110,9 @@ This service is used get a list of movies playing on a certain date.
 
 ## Booking Service
 
-**_Routes:_**
-
 Used to lookup booking information for users.
 
+**_Routes:_**
+
+* GET - http://bookings.local/bookings : Get all bookings
+* POST - http://bookings.local/bookings : Create booking
