@@ -4,10 +4,8 @@ import (
 	"encoding/json"
 	"net/http"
 
-	_ "github.com/gorilla/mux"
 	"github.com/mmorejon/cinema/bookings/common"
 	"github.com/mmorejon/cinema/bookings/data"
-	_ "gopkg.in/mgo.v2"
 )
 
 // Handler for HTTP Post - "/bookins"

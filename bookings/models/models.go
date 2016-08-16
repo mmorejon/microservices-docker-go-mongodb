@@ -8,7 +8,7 @@ type (
 	Booking struct {
 		Id         bson.ObjectId `bson:"_id,omitempty" json:"id"`
 		UserId     string        `json:"userid"`
-		Date       string        `json:"date"`
-		ShowTimeId []string      `json:"showtimeid"`
+		ShowtimeId string        `json:"showtimeid"`
+		Movies     []string      `json:"movies"`
 	}
 )
