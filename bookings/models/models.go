@@ -7,8 +7,8 @@ import (
 type (
 	Booking struct {
 		Id         bson.ObjectId `bson:"_id,omitempty" json:"id"`
-		UserId     string        `json:"userid,omitempty"`
-		Date       string        `json:"date,omitempty"`
-		ShowTimeId string        `json:"showtimeid,omitempty"`
+		UserId     string        `json:"userid"`
+		Date       string        `json:"date"`
+		ShowTimeId []string      `json:"showtimeid"`
 	}
 )
