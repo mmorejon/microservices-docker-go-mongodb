@@ -14,8 +14,8 @@ WORKDIR /go/src/github.com/mmorejon/cinema/movies
 # Build the movies command inside the container.
 RUN go install github.com/mmorejon/cinema/movies
 
-# Run the script when the container starts.
-ENTRYPOINT ./run.sh
+# Run the movies microservice when the container starts.
+ENTRYPOINT /go/bin/movies
 
 # Service listens on port 8080.
 EXPOSE 8080

@@ -1,0 +1,13 @@
+version: '2'
+services:
+  movies:
+    build: ./movies
+    image: cinema/movies
+    depends_on:
+      - db
+    links:
+      - db
+    ports:
+      - "8080:8080"
+  db:
+    image: mongo:3.3
