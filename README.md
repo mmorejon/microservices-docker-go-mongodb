@@ -24,10 +24,10 @@ Requirements
 
 We must **add virtual domains** in order to use each **api entry point**. By default we are using: **movies.local**, **bookings.local**, **users.local** and **showtimes.local**
 
-**Virtual domains** has been defined in `docker-compose.yml` file and configured in `/etc/hosts` file. Example of `/etc/hosts` file:
+**Virtual domains** has been defined in `docker-compose.yml` file and configured in `/etc/hosts` file. Add the following line in your `/etc/hosts` file:
 
 ```
-127.0.0.1   movies.local, bookings.local, users.local, showtimes.local
+127.0.0.1   movies.local bookings.local users.local showtimes.local
 ```
 
 Starting services
