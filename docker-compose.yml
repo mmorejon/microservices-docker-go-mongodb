@@ -14,6 +14,7 @@ services:
     container_name: cinema-movies
     depends_on:
       - db
+      - proxy
     links:
       - db
     environment:
@@ -25,6 +26,7 @@ services:
     container_name: cinema-bookings
     depends_on:
       - db
+      - proxy
     links:
       - db
     environment:
@@ -36,6 +38,7 @@ services:
     container_name: cinema-showtimes
     depends_on:
       - db
+      - proxy
     links:
       - db
     environment:
@@ -47,6 +50,7 @@ services:
     container_name: cinema-users
     depends_on:
       - db
+      - proxy
     links:
       - db
     environment:
