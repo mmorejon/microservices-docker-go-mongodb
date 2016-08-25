@@ -11,10 +11,12 @@ The Cinema backend is powered by 4 microservices, all of witch happen to be writ
  * Booking Service: Provides booking information. 
  * Users Service: Provides movie suggestions for users by communicating with other services.
 
-The Cinema use case is based on the project written in Python by [umermansoor](https://github.com/umermansoor/microservices).
+The Cinema use case is based on the project written in Python by [Umer Mansoor](https://github.com/umermansoor/microservices).
 
 The proyect structure is based in the knowledge learned in the book: Web
 Development with Go by Shiju Varghese, ISBN 978-1-4842-1053-6
+
+[Full multilanguage documentation with screenshots here.](http://mmorejon.github.io/en/blog/microservices-example-with-docker-go-and-mongodb/)
 
 Requirements
 ===========
