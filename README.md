@@ -122,3 +122,9 @@ Used to lookup booking information for users.
 
 * GET - http://bookings.local/bookings : Get all bookings
 * POST - http://bookings.local/bookings : Create booking
+
+### Significant Revisions
+
+* [Microservices - Martin Fowler](http://martinfowler.com/articles/microservices.html)
+* [Web Development with Go](http://www.apress.com/9781484210536)
+* [Umer Mansoor - Cinema](https://github.com/umermansoor/microservices)
