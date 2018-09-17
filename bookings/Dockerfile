@@ -1,5 +1,5 @@
 # golang image where workspace (GOPATH) configured at /go.
-FROM golang:1.6
+FROM golang:latest
 
 # Install dependencies
 RUN go get gopkg.in/mgo.v2
