@@ -1,13 +1,18 @@
 version: '3.7'
 services:
   proxy:
-    image: jwilder/nginx-proxy
-    container_name: cinema-nginx-proxy
+    image: traefik:1.7.4-alpine
+    command:
+      - "--api"
+      - "--docker"
+      - "--docker.watch"
+    labels:
+      - "traefik.frontend.rule=Host:monitor.local"
+      - "traefik.port=8080"
     volumes:
       - type: bind
         source: /var/run/docker.sock
-        target: /tmp/docker.sock
-        read_only: true
+        target: /var/run/docker.sock
     ports:
       - target: 80
         published: 80
@@ -17,54 +22,33 @@ services:
   movies:
     build: ./movies
     image: cinema/movies
-    container_name: cinema-movies
-    depends_on:
-      - db
-      - proxy
-    links:
-      - db
-    environment:
-      VIRTUAL_HOST: movies.local
+    labels:
+      - "traefik.backend=movies"
+      - "traefik.frontend.rule=Host:movies.local"
 
   bookings:
     build: ./bookings
     image: cinema/bookings
-    container_name: cinema-bookings
-    depends_on:
-      - db
-      - proxy
-    links:
-      - db
-    environment:
-      VIRTUAL_HOST: bookings.local
+    labels:
+      - "traefik.backend=bookings"
+      - "traefik.frontend.rule=Host:bookings.local"
 
   showtimes:
     build: ./showtimes
     image: cinema/showtimes
-    container_name: cinema-showtimes
-    depends_on:
-      - db
-      - proxy
-    links:
-      - db
-    environment:
-      VIRTUAL_HOST: showtimes.local
+    labels:
+      - "traefik.backend=showtimes"
+      - "traefik.frontend.rule=Host:showtimes.local"
 
   users:
     build: ./users
     image: cinema/users
-    container_name: cinema-users
-    depends_on:
-      - db
-      - proxy
-    links:
-      - db
-    environment:
-      VIRTUAL_HOST: users.local
+    labels:
+      - "traefik.backend=users"
+      - "traefik.frontend.rule=Host:users.local"
 
   db:
     image: mongo:3.3
-    container_name: cinema-db
     ports:
       - target: 27017
         published: 27017

@@ -24,13 +24,15 @@ Requirements
 * Docker 18.06.1-ce
 * Docker Compose 1.23.1
 
-We must **add virtual domains** in order to use each **api entry point**. By default we are using: **movies.local**, **bookings.local**, **users.local** and **showtimes.local**
+We must **add virtual domains** in order to use each **api entry point**. By default we are using: **movies.local**, **bookings.local**, **users.local**, **showtimes.local** and **monitor.local**
 
 **Virtual domains** has been defined in `docker-compose.yml` file and configured in `/etc/hosts` file. Add the following line in your `/etc/hosts` file:
 
 ```
-127.0.0.1   movies.local bookings.local users.local showtimes.local
+127.0.0.1   movies.local bookings.local users.local showtimes.local monitor.local
 ```
+
+**monitor.local** will be used to see the Dashboard created by Traefik.
 
 Starting services
 ==============================
@@ -62,12 +64,11 @@ You can start using an empty database for all microservices, but if you want you
 
 **_Restore mongodb data typing:_**
 
-This command will go inside the mongodb container (`cinema-db`) and will execute the script `restore.sh` located in `/backup/restore.sh`. Once the script finished the data inserted will be ready to be consulted.
+This command will go inside the mongodb container (`db` service described in `docker-compose.yml` file) and will execute the script `restore.sh` located in `/backup/restore.sh`. Once the script finished the data inserted will be ready to be consulted.
 
 ```
-docker container exec cinema-db /bin/bash /backup/restore.sh
+docker-compose exec db /bin/bash /backup/restore.sh
 ```
-
 
 Documentation
 ======================
@@ -113,8 +114,18 @@ Used to lookup booking information for users.
 * GET - http://bookings.local/bookings : Get all bookings
 * POST - http://bookings.local/bookings : Create booking
 
+Traefik Dashboard
+======================
+
+Access to the dashboard to see how Traefik organize the links.
+
+* http://monitor.local : Get Traefik dashboard
+
+<img src="img/traefik-dashboard.png" alt="Traefik Dashboard" title="Traefik Dashboard" />
+
 ### Significant Revisions
 
 * [Microservices - Martin Fowler](http://martinfowler.com/articles/microservices.html)
 * [Web Development with Go](http://www.apress.com/9781484210536)
 * [Umer Mansoor - Cinema](https://github.com/umermansoor/microservices)
+* [Traefik](https://traefik.io/)
