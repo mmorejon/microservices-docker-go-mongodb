@@ -58,24 +58,14 @@ docker-compose build
 Restore database information
 ======================
 
-You can start using an empty database for all microservices, but if you want you can restore a preconfigured data following this steps:
+You can start using an empty database for all microservices, but if you want you can restore a preconfigured data execute this step:
 
-**_Access to mongodb container typing:_**
+**_Restore mongodb data typing:_**
 
-```
-docker container exec -it cinema-db /bin/bash
-```
-
-**_Restore data typing:_**
+This command will go inside the mongodb container (`cinema-db`) and will execute the script `restore.sh` located in `/backup/restore.sh`. Once the script finished the data inserted will be ready to be consulted.
 
 ```
-/backup/restore.sh
-```
-
-**_Leave the container:_**
-
-```
-exit
+docker container exec cinema-db /bin/bash /backup/restore.sh
 ```
 
 
