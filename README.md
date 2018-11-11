@@ -21,8 +21,8 @@ Development with Go by Shiju Varghese, ISBN 978-1-4842-1053-6
 Requirements
 ===========
 
-* Docker 1.12
-* Docker Compose 1.8
+* Docker 18.06.1-ce
+* Docker Compose 1.23.1
 
 We must **add virtual domains** in order to use each **api entry point**. By default we are using: **movies.local**, **bookings.local**, **users.local** and **showtimes.local**
 
@@ -63,7 +63,7 @@ You can start using an empty database for all microservices, but if you want you
 **_Access to mongodb container typing:_**
 
 ```
-docker exec -it cinema-db /bin/bash
+docker container exec -it cinema-db /bin/bash
 ```
 
 **_Restore data typing:_**

@@ -1,12 +1,18 @@
-version: '2'
+version: '3.7'
 services:
   proxy:
     image: jwilder/nginx-proxy
     container_name: cinema-nginx-proxy
     volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - type: bind
+        source: /var/run/docker.sock
+        target: /tmp/docker.sock
+        read_only: true
     ports:
-      - "80:80"
+      - target: 80
+        published: 80
+        protocol: tcp
+        mode: host
 
   movies:
     build: ./movies
@@ -60,6 +66,11 @@ services:
     image: mongo:3.3
     container_name: cinema-db
     ports:
-      - "27017:27017"
+      - target: 27017
+        published: 27017
+        protocol: tcp
+        mode: host
     volumes:
-      - ./backup:/backup:rw
+      - type: bind
+        source: ./backup
+        target: /backup
