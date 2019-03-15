@@ -59,7 +59,7 @@ func initConfig() {
 // Session holds the mongodb session for database access
 var session *mgo.Session
 
-// Get database session
+// GetSession gets database session
 func GetSession() *mgo.Session {
 	if session == nil {
 		var err error

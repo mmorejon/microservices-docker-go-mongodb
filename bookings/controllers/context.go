@@ -16,7 +16,7 @@ func (c *Context) Close() {
 	c.MongoSession.Close()
 }
 
-// Returns mgo.collection for the given name
+// DbCollection returns mgo.collection for the given name
 func (c *Context) DbCollection(name string) *mgo.Collection {
 	return c.MongoSession.DB(common.AppConfig.Database).C(name)
 }
