@@ -8,7 +8,7 @@ metadata:
     component: {{ .Values.component }}
     release: {{ .Release.Name }}
 data:
-  CINEMA_movies: {{ .Values.config.server }}:{{ .Values.service.port }}
+  CINEMA_MOVIES: {{ .Values.config.server }}:{{ .Values.service.port }}
   MONGODB_HOST: {{ .Values.config.mongodbHost }}
   MONGODB_USER: {{ .Values.config.mongodbUser }}
   MONGODB_PWD: {{ .Values.config.mongodbPwd }}
