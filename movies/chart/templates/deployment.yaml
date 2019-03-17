@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ template "movies.fullname" . }}
+  labels:
+    app: {{ template "movies.name" . }}
+    project: {{ .Values.project }}
+    component: {{ .Values.component }}
+    release: {{ .Release.Name }}
+spec:
+  replicas: {{ .Values.replicas }}
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: {{ template "movies.name" . }}
+      project: {{ .Values.project }}
+      component: {{ .Values.component }}
+      release: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ template "movies.name" . }}
+        project: {{ .Values.project }}
+        component: {{ .Values.component }}
+        release: {{ .Release.Name }}
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.repository }}:{{ .Values.image.tag }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        envFrom:
+        - configMapRef:
+            name: {{ template "movies.fullname" . }}
+        resources:
+{{ toYaml .Values.resources | indent 10 }}
+        ports:
+        - containerPort: {{ .Values.service.port }}

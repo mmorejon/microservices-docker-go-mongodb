@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "movies.fullname" . }}
+  labels:
+    app: {{ template "movies.name" . }}
+    project: {{ .Values.project }}
+    component: {{ .Values.component }}
+    release: {{ .Release.Name }}
+data:
+  CINEMA_MOVIES: {{ .Values.config.server }}:{{ .Values.service.port }}
+  MONGODB_HOST: {{ .Values.config.mongodbHost }}
+  MONGODB_USER: {{ .Values.config.mongodbUser }}
+  MONGODB_PWD: {{ .Values.config.mongodbPwd }}
+  MONGODB_DATABASE: {{ .Values.config.database }}

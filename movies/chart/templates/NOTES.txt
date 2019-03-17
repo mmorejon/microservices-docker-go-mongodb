@@ -1,0 +1,2 @@
+From outside the cluster, the movies microservice URL is: http://{{ .Values.ingress.host }}
+Get the list of movies: http://{{ .Values.ingress.host }}/movies

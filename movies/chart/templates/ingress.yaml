@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ template "movies.fullname" . }}
+  labels:
+    app: {{ template "movies.name" . }}
+    project: {{ .Values.project }}
+    component: {{ .Values.component }}
+    release: {{ .Release.Name }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+    - host: {{ .Values.ingress.host }}
+      http:
+        paths:
+          - backend:
+              serviceName: {{ template "movies.fullname" . }}
+              servicePort: {{ .Values.service.port }}
