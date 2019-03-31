@@ -4,7 +4,7 @@ component: movies
 
 image:
   repository: mmorejon/cinema-movies
-  tag: latest
+  tag: 1.1.1
   pullPolicy: IfNotPresent
 ## replicas number for each component
 replicas: 1
