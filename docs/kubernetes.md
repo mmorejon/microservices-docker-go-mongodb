@@ -12,13 +12,13 @@ The Cinema project can be deployed in a kubernetes cluster in order to know the 
 
 ## Create Kubernetes Cluster
 
-Se crea un cluster de Kubernetes utilizando minikube y con el drive the virtualbox.
+A Kubernetes cluster is created using minikube and with the VirtualBox drive.
 
 ```
 minikube start --cpus 2 --memory 4096
 ```
 
-Comprobar el estado del cluster una vez terminada su creación
+Check the status of the cluster after its creation.
 
 ```
 minikube status
@@ -31,7 +31,7 @@ apiserver: Running
 kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.100
 ```
 
-Comprobar la conexión entre el cliente de kubernetes (kubectl) y el cluster
+Check the connection between the kubernetes client (kubectl) and the cluster.
 
 ```
 kubectl cluster-info
@@ -50,11 +50,11 @@ To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 helm init
 ```
 
-## Deploy Bongodb Service
+## Deploy MongoDB Service
 
 ```
 helm upgrade \
-	--install \
+  --install \
 	mongodb-replicaset \
 	--set replicas=1 \
 	--version 3.9.2 \
