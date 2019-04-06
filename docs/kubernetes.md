@@ -54,21 +54,21 @@ helm init
 
 ```
 helm upgrade \
-  --install \
-	mongodb-replicaset \
-	--set replicas=1 \
-	--version 3.9.2 \
-	stable/mongodb-replicaset
+--install \
+mongodb-replicaset \
+--set replicas=1 \
+--version 3.9.2 \
+stable/mongodb-replicaset
 ```
 
 ## Deploy Services
 
 ```
 {
-	helm install --name=cinema-users users/chart
-	helm install --name=cinema-movies movies/chart
-	helm install --name=cinema-showtimes showtimes/chart
-	helm install --name=cinema-bookings bookings/chart
+helm install --name=cinema-users users/chart
+helm install --name=cinema-movies movies/chart
+helm install --name=cinema-showtimes showtimes/chart
+helm install --name=cinema-bookings bookings/chart
 }
 ```
 
@@ -76,10 +76,10 @@ helm upgrade \
 
 ```
 {
-	helm upgrade cinema-users users/chart
-	helm upgrade cinema-movies movies/chart
-	helm upgrade cinema-showtimes showtimes/chart
-	helm upgrade cinema-bookings bookings/chart
+helm upgrade cinema-users users/chart
+helm upgrade cinema-movies movies/chart
+helm upgrade cinema-showtimes showtimes/chart
+helm upgrade cinema-bookings bookings/chart
 }
 
 ```
@@ -88,10 +88,10 @@ helm upgrade \
 
 ```
 {
-	helm delete --purge cinema-users
-	helm delete --purge cinema-movies
-	helm delete --purge cinema-showtimes
-	helm delete --purge cinema-bookings
+helm delete --purge cinema-users
+helm delete --purge cinema-movies
+helm delete --purge cinema-showtimes
+helm delete --purge cinema-bookings
 }
 ```
 
@@ -99,15 +99,11 @@ helm upgrade \
 
 ```
 {
-	kubectl cp backup mongodb-replicaset-0:/tmp/
-
-	kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d users -c users /tmp/backup/users/users/users.bson'
-
-	kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d movies -c movies /tmp/backup/movies/movies/movies.bson'
-
-	kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d showtimes -c showtimes /tmp/backup/showtimes/showtimes/showtimes.bson'
-
-	kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d bookings -c bookings /tmp/backup/bookings/bookings/bookings.bson'
+kubectl cp backup mongodb-replicaset-0:/tmp/
+kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d users -c users /tmp/backup/users/users/users.bson'
+kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d movies -c movies /tmp/backup/movies/movies/movies.bson'
+kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d showtimes -c showtimes /tmp/backup/showtimes/showtimes/showtimes.bson'
+kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d bookings -c bookings /tmp/backup/bookings/bookings/bookings.bson'
 }
 ```
 
