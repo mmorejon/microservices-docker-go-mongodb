@@ -24,7 +24,7 @@ The application can be deployed in both environments: **local machine** or in a 
 
 ## How To Use Cinema Services
 
-* [endpoints](./docs/testing.md)
+* [endpoints](./docs/endpoints.md)
 
 ### Significant Revisions
 
