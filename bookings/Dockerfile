@@ -5,6 +5,7 @@ RUN adduser -D -g '' elf
 # create workspace
 WORKDIR /opt/app/
 COPY go.mod .
+COPY go.sum .
 # fetch dependancies
 RUN go mod download
 RUN go mod verify
