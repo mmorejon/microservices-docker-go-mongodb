@@ -29,7 +29,37 @@ func (app *application) all(w http.ResponseWriter, r *http.Request) {
 	w.Write(b)
 }
 
-func (app *application) insertUser(w http.ResponseWriter, r *http.Request) {
+func (app *application) findByID(w http.ResponseWriter, r *http.Request) {
+	// Get id from incoming url
+	vars := mux.Vars(r)
+	id := vars["id"]
+
+	// Find user by id
+	m, err := app.users.FindByID(id)
+	if err != nil {
+		if err.Error() == "ErrNoDocuments" {
+			app.infoLog.Println("User not found")
+			return
+		}
+		// Any other error will send an internal server error
+		app.serverError(w, err)
+	}
+
+	// Convert user to json encoding
+	b, err := json.Marshal(m)
+	if err != nil {
+		app.serverError(w, err)
+	}
+
+	app.infoLog.Println("Have been found a user")
+
+	// Send response back
+	w.Header().Set("Content-Type", "application/json")
+	w.WriteHeader(http.StatusOK)
+	w.Write(b)
+}
+
+func (app *application) insert(w http.ResponseWriter, r *http.Request) {
 	// Define user model
 	var u models.User
 	// Get request information
@@ -47,7 +77,7 @@ func (app *application) insertUser(w http.ResponseWriter, r *http.Request) {
 	app.infoLog.Printf("New user have been created, id=%s", insertResult.InsertedID)
 }
 
-func (app *application) deleteUser(w http.ResponseWriter, r *http.Request) {
+func (app *application) delete(w http.ResponseWriter, r *http.Request) {
 	// Get id from incoming url
 	vars := mux.Vars(r)
 	id := vars["id"]
