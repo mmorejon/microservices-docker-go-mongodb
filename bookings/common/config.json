@@ -1,7 +1,0 @@
-{
-  "Server"      : "0.0.0.0:8080",
-  "MongoDBHost" : "db",
-  "MongoDBUser"	: "",
-  "MongoDBPwd"	: "",
-  "Database"    : "bookings"
-}

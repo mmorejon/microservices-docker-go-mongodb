@@ -38,8 +38,16 @@ services:
 
   bookings:
     build: ./bookings
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017"
+      # - "-enableCredentials"
+      # - "true"
+    # environment:
+    #   MONGODB_USERNAME: "demo"
+    #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
     labels:
-      - "traefik.http.routers.bookings.rule=Host(`bookings.local`)"
+      - "traefik.http.routers.bookings.rule=PathPrefix(`/api/bookings/`)"
 
   showtimes:
     build: ./showtimes
