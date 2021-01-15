@@ -45,7 +45,7 @@ func (m *MovieModel) FindByID(id string) (*models.Movie, error) {
 	var movie = models.Movie{}
 	err = m.C.FindOne(context.TODO(), bson.M{"_id": p}).Decode(&movie)
 	if err != nil {
-		// Checks if the user was not found
+		// Checks if the movie was not found
 		if err == mongo.ErrNoDocuments {
 			return nil, errors.New("ErrNoDocuments")
 		}
