@@ -2,6 +2,7 @@ package mongodb
 
 import (
 	"context"
+	"errors"
 
 	"github.com/mmorejon/cinema/movies/pkg/models"
 	"go.mongodb.org/mongo-driver/bson"
@@ -41,10 +42,13 @@ func (m *MovieModel) FindByID(id string) (*models.Movie, error) {
 	}
 
 	// Find movie by id
-	singleResult := m.C.FindOne(context.TODO(), bson.M{"_id": p})
 	var movie = models.Movie{}
-	err = singleResult.Decode(&movie)
+	err = m.C.FindOne(context.TODO(), bson.M{"_id": p}).Decode(&movie)
 	if err != nil {
+		// Checks if the user was not found
+		if err == mongo.ErrNoDocuments {
+			return nil, errors.New("ErrNoDocuments")
+		}
 		return nil, err
 	}
 

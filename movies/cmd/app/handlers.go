@@ -37,6 +37,11 @@ func (app *application) findByID(w http.ResponseWriter, r *http.Request) {
 	// Find movie by id
 	m, err := app.movies.FindByID(id)
 	if err != nil {
+		if err.Error() == "ErrNoDocuments" {
+			app.infoLog.Println("Movie not found")
+			return
+		}
+		// Any other error will send an internal server error
 		app.serverError(w, err)
 	}
 
