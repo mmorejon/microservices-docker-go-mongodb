@@ -25,8 +25,16 @@ services:
 
   movies:
     build: ./movies
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017"
+      # - "-enableCredentials"
+      # - "true"
+    # environment:
+    #   MONGODB_USERNAME: "demo"
+    #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
     labels:
-      - "traefik.http.routers.movies.rule=Path(`/api/movies/`)"
+      - "traefik.http.routers.movies.rule=PathPrefix(`/api/movies/`)"
 
   bookings:
     build: ./bookings
@@ -35,8 +43,16 @@ services:
 
   showtimes:
     build: ./showtimes
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017"
+      # - "-enableCredentials"
+      # - "true"
+    # environment:
+    #   MONGODB_USERNAME: "demo"
+    #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
     labels:
-      - "traefik.http.routers.showtimes.rule=Host(`showtimes.local`)"
+      - "traefik.http.routers.showtimes.rule=PathPrefix(`/api/showtimes/`)"
 
   users:
     build: ./users
