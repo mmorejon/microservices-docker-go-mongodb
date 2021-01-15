@@ -12,7 +12,7 @@ RUN go mod verify
 # copy the source code as the last step
 COPY . .
 # build binary
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o /go/bin/cinema-showtimes .
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o /go/bin/cinema-showtimes ./cmd/app
 
 
 # build a small image
@@ -23,11 +23,9 @@ LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-
 COPY --from=builder /etc/passwd /etc/passwd
 # copy the static executable
 COPY --from=builder --chown=elf:1000 /go/bin/cinema-showtimes /cinema-showtimes
-# copy default config file
-COPY --chown=elf:1000 common/config.json /common/config.json
 # use an unprivileged user.
 USER elf
-# service listens on port 8080.
-EXPOSE 8080
+# service listens on port 4000
+EXPOSE 4000
 # run app
 ENTRYPOINT ["./cinema-showtimes"]
