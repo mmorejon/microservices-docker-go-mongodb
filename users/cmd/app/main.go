@@ -50,11 +50,17 @@ func main() {
 	}
 	ctx, cancel := context.WithTimeout(context.Background(), 20*time.Second)
 	defer cancel()
+
 	err = client.Connect(ctx)
 	if err != nil {
 		errLog.Fatal(err)
 	}
-	defer client.Disconnect(ctx)
+
+	defer func() {
+		if err = client.Disconnect(ctx); err != nil {
+			panic(err)
+		}
+	}()
 
 	infoLog.Printf("Database connection established")
 

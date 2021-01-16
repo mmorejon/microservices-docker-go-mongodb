@@ -23,9 +23,7 @@ LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-
 COPY --from=builder /etc/passwd /etc/passwd
 # copy the static executable
 COPY --from=builder --chown=elf:1000 /go/bin/cinema-users /cinema-users
-# use an unprivileged user
+# use a non-root user
 USER elf
-# service listens on port 4000
-EXPOSE 4000
 # run app
 ENTRYPOINT ["./cinema-users"]
