@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"net/http"
+	"time"
 
 	"github.com/gorilla/mux"
 	"github.com/mmorejon/cinema/showtimes/pkg/models"
@@ -99,6 +100,7 @@ func (app *application) insert(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Insert new showtime
+	m.CreatedAt = time.Now()
 	insertResult, err := app.showtimes.Insert(m)
 	if err != nil {
 		app.serverError(w, err)

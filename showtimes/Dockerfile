@@ -19,13 +19,11 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o 
 FROM alpine:3.12.3
 LABEL language="golang"
 LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-docker-go-mongodb
-# import the user and group files from the builder.
+# import the user and group files from the builder
 COPY --from=builder /etc/passwd /etc/passwd
 # copy the static executable
 COPY --from=builder --chown=elf:1000 /go/bin/cinema-showtimes /cinema-showtimes
-# use an unprivileged user.
+# use a non-root user
 USER elf
-# service listens on port 4000
-EXPOSE 4000
 # run app
 ENTRYPOINT ["./cinema-showtimes"]
