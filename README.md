@@ -1,6 +1,6 @@
 # Cinema - Example of Microservices in Go with Docker and MongoDB
 
-### Overview
+## Overview
 
 Cinema is an example project which demonstrates the use of microservices for a fictional movie theater.
 The Cinema backend is powered by 4 microservices, all of witch happen to be written in Go, using MongoDB for manage the database and Docker to isolate and deploy the ecosystem.
@@ -16,6 +16,21 @@ The proyect structure is based in the knowledge learned in:
 
 * Golang structure: <https://peter.bourgon.org/go-best-practices-2016/#repository-structure>
 * Book Let's Go: <https://lets-go.alexedwards.net/>
+
+## Index
+
+* [Overview](#overview)
+    * [Deployment](#deployment)
+    * [How To Use Cinema Services](#how-to-use-cinema-services)
+    * [Significant Revisions](#significant-revisions)
+    * [The big picture](#the-big-picture)
+* [Localhost (docker-compose)](./docs/localhost.md#overview)
+    * [Requirements](./docs/localhost.md#requirements)
+    * [Starting services](./docs/localhost.md#starting-services)
+    * [Restore database information](./docs/localhost.md#restore-database-information)
+    * [Stoping services](./docs/localhost.md#stoping-services)
+    * [Traefik Proxy dashboard](./docs/localhost.md#traefik-proxy-dashboard)
+    * [Build from souce code](./docs/localhost.md#build-from-souce-code)
 
 ## Deployment
 

@@ -13,7 +13,7 @@ The Cinema project can be deployed in a single machine (localhost) using docker 
 
 Use the following command to deploy all services in your local environment.
 
-```
+```bash
 $ docker-compose up -d
 
 Creating microservices-docker-go-mongodb_bookings_1  ... done
@@ -24,7 +24,7 @@ Creating microservices-docker-go-mongodb_showtimes_1 ... done
 Creating microservices-docker-go-mongodb_proxy_1     ... done
 ```
 
-```
+```bash
 $ docker-compose ps
 
                    Name                                  Command               State                      Ports
@@ -51,7 +51,7 @@ Once starting all services the following links will be availables:
 
 You will start using an empty database for all microservices, but if you want you can restore a preconfigured data execute this command:
 
-```
+```bash
 $ docker-compose exec db mongorestore --uri mongodb://db:27017 --gzip  /backup
 
 2021-01-17T16:38:27.922+0000    preparing collections to restore from
@@ -78,8 +78,15 @@ This command will go inside the mongodb container (`db` service described in `do
 
 ## Stoping services
 
-```
-docker-compose stop
+```bash
+$ docker-compose stop
+
+Stopping microservices-docker-go-mongodb_bookings_1  ... done
+Stopping microservices-docker-go-mongodb_movies_1    ... done
+Stopping microservices-docker-go-mongodb_users_1     ... done
+Stopping microservices-docker-go-mongodb_showtimes_1 ... done
+Stopping microservices-docker-go-mongodb_proxy_1     ... done
+Stopping microservices-docker-go-mongodb_db_1        ... done
 ```
 
 ## Traefik Proxy dashboard
@@ -89,3 +96,24 @@ This project use Traefik Proxy v2.3.7, [the dashboard should look like this imag
 ![overview](images/traefik-dashboard.jpg)
 
 Next: [Endpoints](endpoints.md)
+
+## Build from souce code
+
+If you want to include new functionalities, fix bugs or do some tests use the source code to build the docker image from the docker compose file. To make it uncomment the `build` line in de microservice and comment the `image` line.
+
+```yaml
+  users:
+    build: ./users                                   # uncomment this line
+    # image: ghcr.io/mmorejon/cinema-users:v2.0.0    # comment this line
+    command:
+      - "-mongoURI"
+      - "mongodb://db:27017/"
+    #   - "-enableCredentials"
+    #   - "true"
+    # environment:
+    #   MONGODB_USERNAME: "demo"
+    #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
+    labels:
+      - "traefik.http.routers.users.rule=PathPrefix(`/api/users/`)"
+      - "traefik.http.services.users.loadbalancer.server.port=4000"
+```
