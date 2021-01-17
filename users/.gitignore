@@ -24,3 +24,9 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# Helm chart folder
+chart
+
+# VSCode
+.vscode

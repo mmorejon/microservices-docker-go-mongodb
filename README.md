@@ -7,28 +7,35 @@ The Cinema backend is powered by 4 microservices, all of witch happen to be writ
 
  * Movie Service: Provides information like movie ratings, title, etc.
  * Show Times Service: Provides show times information.
- * Booking Service: Provides booking information. 
+ * Booking Service: Provides booking information.
  * Users Service: Provides movie suggestions for users by communicating with other services.
 
 The Cinema use case is based on the project written in Python by [Umer Mansoor](https://github.com/umermansoor/microservices).
 
-The proyect structure is based in the knowledge learned in the book: Web
-Development with Go by Shiju Varghese, ISBN 978-1-4842-1053-6
+The proyect structure is based in the knowledge learned in:
+
+* Golang structure: <https://peter.bourgon.org/go-best-practices-2016/#repository-structure>
+* Book Let's Go: <https://lets-go.alexedwards.net/>
 
 ## Deployment
 
 The application can be deployed in both environments: **local machine** or in a **kubernetes cluster**. You can find the appropriate documentation for each case in the following links:
 
-* [localhost](./docs/localhost.md)
+* [local machine (docker compose)](./docs/localhost.md)
 * [kubernetes](./docs/kubernetes.md)
 
 ## How To Use Cinema Services
 
 * [endpoints](./docs/endpoints.md)
 
-### Significant Revisions
+## Significant Revisions
 
 * [Microservices - Martin Fowler](http://martinfowler.com/articles/microservices.html)
-* [Web Development with Go](http://www.apress.com/9781484210536)
 * [Umer Mansoor - Cinema](https://github.com/umermansoor/microservices)
-* [Traefik](https://traefik.io/)
+* [Traefik Proxy Docs](https://doc.traefik.io/traefik/)
+* [MongoDB Driver for Golang](https://github.com/mongodb/mongo-go-driver)
+* [MongoDB Golang Channel](https://www.youtube.com/c/MongoDBofficial/search?query=golang)
+
+## The big picture
+
+![overview](docs/images/overview.jpg)

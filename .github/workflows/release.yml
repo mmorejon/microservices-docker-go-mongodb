@@ -3,44 +3,70 @@ name: release
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
+
+env:
+  USERS_IMAGE_NAME: "cinema-users"
+  MOVIES_IMAGE_NAME: "cinema-movies"
+  SHOWTIMES_IMAGE_NAME: "cinema-showtimes"
+  BOOKINGS_IMAGE_NAME: "cinema-bookings"
 
 jobs:
-  goreleaser:
+  multi-registries:
+    name: "Build"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Unshallow
-        run: git fetch --prune --unshallow
-      - name: Setup Go
-        uses: actions/setup-go@v2
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+      - name: Login to DockerHub
+        uses: docker/login-action@v1
         with:
-          go-version: 1.15.x
-      - name: Download release notes utility
-        env:
-          GH_REL_URL: https://github.com/buchanae/github-release-notes/releases/download/0.2.0/github-release-notes-linux-amd64-0.2.0.tar.gz
-        run: cd /tmp && curl -sSL ${GH_REL_URL} | tar xz && sudo mv github-release-notes /usr/local/bin/
-      - name: Generate release notes
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          echo 'CHANGELOG' > /tmp/release.txt
-          github-release-notes -org mmorejon -repo microservices-docker-go-mongodb -since-latest-release >> /tmp/release.txt
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v1
         with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: false
-          prerelease: false
-      - name: Run GoReleaser
-        uses: goreleaser/goreleaser-action@v1
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.CR_PAT }}
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: Build and push users microservice
+        uses: docker/build-push-action@v2
         with:
-          version: latest
-          args: release --release-notes=/tmp/release.txt --skip-validate
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          push: true
+          context: ./users
+          file: ./Dockerfile
+          tags: |
+            mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+      - name: Build and push movies microservice
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: ./movies
+          file: ./Dockerfile
+          tags: |
+            mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+      - name: Build and push showtimes microservice
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: ./showtimes
+          file: ./Dockerfile
+          tags: |
+            mmorejon/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mmorejon/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+      - name: Build and push bookings microservice
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: ./bookings
+          file: ./Dockerfile
+          tags: |
+            mmorejon/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mmorejon/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
