@@ -39,7 +39,7 @@ jobs:
         with:
           push: true
           context: ./users/
-          file: ./Dockerfile
+          file: ./users/Dockerfile
           tags: |
             mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
             ghcr.io/mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
@@ -48,7 +48,7 @@ jobs:
         with:
           push: true
           context: ./movies/
-          file: ./Dockerfile
+          file: ./movies/Dockerfile
           tags: |
             mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
             ghcr.io/mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
@@ -57,7 +57,7 @@ jobs:
         with:
           push: true
           context: ./showtimes/
-          file: ./Dockerfile
+          file: ./showtimes/Dockerfile
           tags: |
             mmorejon/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
             ghcr.io/mmorejon/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
@@ -66,7 +66,7 @@ jobs:
         with:
           push: true
           context: ./bookings/
-          file: ./Dockerfile
+          file: ./bookings/Dockerfile
           tags: |
             mmorejon/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
             ghcr.io/mmorejon/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
