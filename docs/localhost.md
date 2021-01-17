@@ -1,10 +1,20 @@
 # Cinema - Localhost Deployment
 
-### Overview
+## Overview
 
 The Cinema project can be deployed in a single machine (localhost) using docker compose in order to know the behavior of microservices.
 
-### Requirements
+## Index
+
+* [Localhost (docker-compose)](#overview)
+* [Requirements](#requirements)
+* [Starting services](#starting-services)
+* [Restore database information](#restore-database-information)
+* [Stoping services](#stoping-services)
+* [Traefik Proxy dashboard](#traefik-proxy-dashboard)
+* [Build from souce code](#build-from-souce-code)
+
+## Requirements
 
 * Docker Engine  20.10.0
 * Docker Compose 1.27.4

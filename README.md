@@ -19,18 +19,10 @@ The proyect structure is based in the knowledge learned in:
 
 ## Index
 
-* [Overview](#overview)
-    * [Deployment](#deployment)
-    * [How To Use Cinema Services](#how-to-use-cinema-services)
-    * [Significant Revisions](#significant-revisions)
-    * [The big picture](#the-big-picture)
-* [Localhost (docker-compose)](./docs/localhost.md#overview)
-    * [Requirements](./docs/localhost.md#requirements)
-    * [Starting services](./docs/localhost.md#starting-services)
-    * [Restore database information](./docs/localhost.md#restore-database-information)
-    * [Stoping services](./docs/localhost.md#stoping-services)
-    * [Traefik Proxy dashboard](./docs/localhost.md#traefik-proxy-dashboard)
-    * [Build from souce code](./docs/localhost.md#build-from-souce-code)
+* [Deployment](#deployment)
+* [How To Use Cinema Services](#how-to-use-cinema-services)
+* [Significant Revisions](#significant-revisions)
+* [The big picture](#the-big-picture)
 
 ## Deployment
 
