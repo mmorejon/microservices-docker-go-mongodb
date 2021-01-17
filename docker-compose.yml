@@ -15,7 +15,7 @@ services:
         read_only: true
     ports:
       - target: 80
-        published: 80
+        published: 4000
         protocol: tcp
         mode: host
       - target: 8080
@@ -83,11 +83,11 @@ services:
     image: mongo:4.2.11
     labels:
       - "traefik.http.services.db.loadbalancer.server.port=27017"
-    ports:
-      - target: 27017
-        published: 27017
-        protocol: tcp
-        mode: host
+    # ports:
+    #   - target: 27017
+    #     published: 27017
+    #     protocol: tcp
+    #     mode: host
     volumes:
       - type: bind
         source: ./backup
