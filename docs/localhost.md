@@ -74,9 +74,7 @@ $ docker-compose exec db mongorestore --uri mongodb://db:27017 --gzip  /backup
 2021-01-17T16:38:28.186+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
 ```
 
-This command will go inside the mongodb container (`db` service described in `docker-compose.yml` file). Once the command finished the data inserted will be ready to be consulted. Try listing users againg.
-
-<http://localhost:4000/api/users/>
+This command will go inside the mongodb container (`db` service described in `docker-compose.yml` file). Once the command finished the data inserted will be ready to be consulted. Try listing users againg <http://localhost:4000/api/users/>
 
 ## Stoping services
 
@@ -86,7 +84,7 @@ docker-compose stop
 
 ## Traefik Proxy dashboard
 
-This project use Traefik Proxy v2.3.7, the dashboard should look like this image:
+This project use Traefik Proxy v2.3.7, [the dashboard should look like this image](http://localhost:8080/dashboard/#/):
 
 ![overview](images/traefik-dashboard.jpg)
 
