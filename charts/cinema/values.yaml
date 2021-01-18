@@ -15,7 +15,7 @@ mongodb:
 # Cinema users values
 users:
   image:
-    tag: "v2.0.0"
+    tag: "v2.0.1"
 
   args:
     - "-mongoURI"
@@ -24,7 +24,7 @@ users:
 # Cinema movies values
 movies:
   image:
-    tag: "v2.0.0"
+    tag: "v2.0.1"
 
   args:
     - "-mongoURI"
@@ -33,7 +33,7 @@ movies:
 # Cinema showtimes values
 showtimes:
   image:
-    tag: "v2.0.0"
+    tag: "v2.0.1"
 
   args:
     - "-mongoURI"
@@ -42,7 +42,7 @@ showtimes:
 # Cinema bookings values
 bookings:
   image:
-    tag: "v2.0.0"
+    tag: "v2.0.1"
 
   args:
     - "-mongoURI"
