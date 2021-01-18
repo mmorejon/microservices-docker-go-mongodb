@@ -1,2 +1,0 @@
-From outside the cluster, the bookings microservice URL is: http://{{ .Values.ingress.host }}
-Get the list of bookings: http://{{ .Values.ingress.host }}/bookings

@@ -1,110 +1,181 @@
 # Cinema - Kubernetes Deployment
 
-### Overview
+## Overview
 
-The Cinema project can be deployed in a kubernetes cluster in order to know the behavior of microservices.
+The Cinema project can be deployed in a kubernetes cluster in order to know the behavior of microservices
 
-### Requirements
+Index:
 
-* kubectl v1.14.0
-* minikube v1.0.0
-* virtualbox v6.0
+
+
+## Requirements
+
+* kubectl v1.20.1
+* minikube v1.16.0
+* virtualbox 6.1.16
+* helm v3.5.0
 
 ## Create Kubernetes Cluster
 
-A Kubernetes cluster is created using minikube and with the VirtualBox drive.
+A Kubernetes cluster is created using minikube
 
-```
-minikube start --cpus 2 --memory 4096
+```bash
+$ minikube start --cpus 2 --memory 4096
+
+😄  minikube v1.16.0 on Darwin 11.1
+✨  Using the hyperkit driver based on user configuration
+👍  Starting control plane node minikube in cluster minikube
+🔥  Creating hyperkit VM (CPUs=2, Memory=4096MB, Disk=20000MB) ...
+🐳  Preparing Kubernetes v1.20.0 on Docker 20.10.0 ...
+    ▪ Generating certificates and keys ...
+    ▪ Booting up control plane ...
+    ▪ Configuring RBAC rules ...
+🔎  Verifying Kubernetes components...
+🌟  Enabled addons: storage-provisioner, default-storageclass
+🏄  Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
 
-Check the status of the cluster after its creation.
+Check the cluster status
 
-```
-minikube status
-```
+```bash
+$ minikube status
 
-```
+minikube
+type: Control Plane
 host: Running
 kubelet: Running
 apiserver: Running
-kubectl: Correctly Configured: pointing to minikube-vm at 192.168.99.100
+kubeconfig: Configured
+timeToStop: Nonexistent
 ```
 
 Check the connection between the kubernetes client (kubectl) and the cluster.
 
-```
-kubectl cluster-info
-```
+```bash
+$ kubectl cluster-info
 
-```
-Kubernetes master is running at https://192.168.99.100:8443
-KubeDNS is running at https://192.168.99.100:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+Kubernetes control plane is running at https://192.168.64.173:8443
+KubeDNS is running at https://192.168.64.173:8443/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
 To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
 ```
 
-## Install Helm
+## Deploy Cinema project in Kubernetes
 
-```
-helm init
+To deploy this project should be used the `cinema` Helm chart located in `./charts` folder. This chart is an umbrella for all services needed to deploy the project. Take a look at the `dependencies` section in the `Chart.yaml` file.
+
+```bash
+$ cat ./charts/cinema/Chart.yaml
+
+apiVersion: v2
+name: cinema
+description: A Helm chart to deploy Cinema project in Kubernetes
+# chart type
+type: application
+# chart version
+version: 0.1.0
+# cinema app version
+appVersion: "v2.0.0"
+dependencies:
+  - condition: mongodb.enabled
+    name: mongodb
+    repository: https://charts.bitnami.com/bitnami
+    version: 10.4.0
+  - name: users
+  - name: movies
+  - name: showtimes
+  - name: bookings
 ```
 
-## Deploy MongoDB Service
+Dependencies like `users`, `movies`, `showtimes` and `bookings` are charts located inside `charts` folder, and `mongodb` dependency came from Bitnami repository.
 
-```
-helm upgrade \
-  --install \
-  mongodb-replicaset \
-  --set replicas=1 \
-  --version 3.9.2 \
-  stable/mongodb-replicaset
+Use the following command to deploy the whole project with just one line:
+
+```bash
+$ helm upgrade cinema --install  ./charts/cinema
+
+Release "cinema" does not exist. Installing it now.
+NAME: cinema
+LAST DEPLOYED: Mon Jan 18 15:39:01 2021
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
 ```
 
-## Deploy Services
+Then check the deployment status:
+
+```bash
+$ helm list
+
+NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
+cinema  default         1               2021-01-18 15:39:01.74132 +0100 CET     deployed        cinema-0.1.0    v2.0.0
+```
+
+## Check Cinema services status
+
+```bash
+$ kubectl get po
+
+NAME                                READY   STATUS    RESTARTS   AGE
+cinema-bookings-57dd76b7bd-7g2hc    1/1     Running   0          104s
+cinema-mongodb-75854c5d9c-hlfz7     1/1     Running   0          104s
+cinema-movies-86cf88bb67-khp4h      1/1     Running   0          104s
+cinema-showtimes-86b68b6f49-p2h4x   1/1     Running   0          104s
+cinema-users-6969d54b86-72fgg       1/1     Running   0          104s
+```
+
+## Populate mongodb cluster with information
+
+It is recommended to use this test data to check the apis of the services
 
 ```
 {
-  helm install --name=cinema-users users/chart
-  helm install --name=cinema-movies movies/chart
-  helm install --name=cinema-showtimes showtimes/chart
-  helm install --name=cinema-bookings bookings/chart
-}
-```
-
-## Update Services
-
-```
-{
-  helm upgrade cinema-users users/chart
-  helm upgrade cinema-movies movies/chart
-  helm upgrade cinema-showtimes showtimes/chart
-  helm upgrade cinema-bookings bookings/chart
+  POD=$(kubectl get po -l app.kubernetes.io/name=mongodb -o jsonpath='{.items[0].metadata.name}')
+  kubectl cp backup $POD:/tmp/
+  kubectl exec -it $POD -- mongorestore --uri mongodb://localhost:27017 --gzip  /tmp/backup
 }
 
+2021-01-18T15:04:43.845+0000    preparing collections to restore from
+2021-01-18T15:04:43.848+0000    reading metadata for cinema.movies from /tmp/backup/cinema/movies.metadata.json.gz
+2021-01-18T15:04:43.857+0000    reading metadata for cinema.showtimes from /tmp/backup/cinema/showtimes.metadata.json.gz
+2021-01-18T15:04:43.860+0000    reading metadata for cinema.users from /tmp/backup/cinema/users.metadata.json.gz
+2021-01-18T15:04:43.893+0000    reading metadata for cinema.bookings from /tmp/backup/cinema/bookings.metadata.json.gz
+2021-01-18T15:04:44.046+0000    restoring cinema.movies from /tmp/backup/cinema/movies.bson.gz
+2021-01-18T15:04:44.059+0000    no indexes to restore
+2021-01-18T15:04:44.059+0000    finished restoring cinema.movies (6 documents, 0 failures)
+2021-01-18T15:04:44.065+0000    restoring cinema.showtimes from /tmp/backup/cinema/showtimes.bson.gz
+2021-01-18T15:04:44.125+0000    no indexes to restore
+2021-01-18T15:04:44.125+0000    finished restoring cinema.showtimes (3 documents, 0 failures)
+2021-01-18T15:04:44.147+0000    restoring cinema.bookings from /tmp/backup/cinema/bookings.bson.gz
+2021-01-18T15:04:44.179+0000    restoring cinema.users from /tmp/backup/cinema/users.bson.gz
+2021-01-18T15:04:44.267+0000    no indexes to restore
+2021-01-18T15:04:44.282+0000    finished restoring cinema.bookings (2 documents, 0 failures)
+2021-01-18T15:04:44.283+0000    no indexes to restore
+2021-01-18T15:04:44.284+0000    finished restoring cinema.users (5 documents, 0 failures)
+2021-01-18T15:04:44.284+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
 ```
 
-## Remove Services
+## Test APIs services
 
-```
-{
-  helm delete --purge cinema-users
-  helm delete --purge cinema-movies
-  helm delete --purge cinema-showtimes
-  helm delete --purge cinema-bookings
-}
+To consult the APIs you can use the `port-forward` command to link the cluster service with the local ports
+
+```bash
+$ kubectl port-forward svc/cinema-users 4000:80
+
+Forwarding from 127.0.0.1:4000 -> 4000
+Forwarding from [::1]:4000 -> 4000
 ```
 
-## Load Service Information
+Now you can access to the following link: <http://localhost:4000/api/users/>. Use the same approach to the rest of the services.
 
-```
-{
-  kubectl cp backup mongodb-replicaset-0:/tmp/
-  kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d users -c users /tmp/backup/users/users/users.bson'
-  kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d movies -c movies /tmp/backup/movies/movies/movies.bson'
-  kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d showtimes -c showtimes /tmp/backup/showtimes/showtimes/showtimes.bson'
-  kubectl exec mongodb-replicaset-0 -- sh -c 'mongorestore -d bookings -c bookings /tmp/backup/bookings/bookings/bookings.bson'
-}
+Use the same approach to the rest of the services
+
+## Remove deployment
+
+```bash
+$ helm delete cinema
+
+release "cinema" uninstalled
 ```
 
 Next: [Endpoints](endpoints.md)
