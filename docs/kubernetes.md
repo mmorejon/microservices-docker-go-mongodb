@@ -81,7 +81,7 @@ type: application
 # chart version
 version: 0.1.0
 # cinema app version
-appVersion: "v2.0.0"
+appVersion: "v2.0.1"
 dependencies:
   - condition: mongodb.enabled
     name: mongodb
@@ -114,7 +114,7 @@ Then check the deployment status:
 $ helm list
 
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-cinema  default         1               2021-01-18 15:39:01.74132 +0100 CET     deployed        cinema-0.1.0    v2.0.0
+cinema  default         1               2021-01-18 15:39:01.74132 +0100 CET     deployed        cinema-0.1.0    v2.0.1
 ```
 
 ## Check Cinema services status
@@ -138,27 +138,27 @@ It is recommended to use this test data to check the apis of the services
 {
   POD=$(kubectl get po -l app.kubernetes.io/name=mongodb -o jsonpath='{.items[0].metadata.name}')
   kubectl cp backup $POD:/tmp/
-  kubectl exec -it $POD -- mongorestore --uri mongodb://localhost:27017 --gzip  /tmp/backup
+  kubectl exec -it $POD -- mongorestore --uri mongodb://localhost:27017 --gzip  /tmp/backup/cinema
 }
 
-2021-01-18T15:04:43.845+0000    preparing collections to restore from
-2021-01-18T15:04:43.848+0000    reading metadata for cinema.movies from /tmp/backup/cinema/movies.metadata.json.gz
-2021-01-18T15:04:43.857+0000    reading metadata for cinema.showtimes from /tmp/backup/cinema/showtimes.metadata.json.gz
-2021-01-18T15:04:43.860+0000    reading metadata for cinema.users from /tmp/backup/cinema/users.metadata.json.gz
-2021-01-18T15:04:43.893+0000    reading metadata for cinema.bookings from /tmp/backup/cinema/bookings.metadata.json.gz
-2021-01-18T15:04:44.046+0000    restoring cinema.movies from /tmp/backup/cinema/movies.bson.gz
-2021-01-18T15:04:44.059+0000    no indexes to restore
-2021-01-18T15:04:44.059+0000    finished restoring cinema.movies (6 documents, 0 failures)
-2021-01-18T15:04:44.065+0000    restoring cinema.showtimes from /tmp/backup/cinema/showtimes.bson.gz
-2021-01-18T15:04:44.125+0000    no indexes to restore
-2021-01-18T15:04:44.125+0000    finished restoring cinema.showtimes (3 documents, 0 failures)
-2021-01-18T15:04:44.147+0000    restoring cinema.bookings from /tmp/backup/cinema/bookings.bson.gz
-2021-01-18T15:04:44.179+0000    restoring cinema.users from /tmp/backup/cinema/users.bson.gz
-2021-01-18T15:04:44.267+0000    no indexes to restore
-2021-01-18T15:04:44.282+0000    finished restoring cinema.bookings (2 documents, 0 failures)
-2021-01-18T15:04:44.283+0000    no indexes to restore
-2021-01-18T15:04:44.284+0000    finished restoring cinema.users (5 documents, 0 failures)
-2021-01-18T15:04:44.284+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
+2021-01-18T19:43:55.343+0000    preparing collections to restore from
+2021-01-18T19:43:55.345+0000    reading metadata for movies.movies from /tmp/backup/cinema/movies/movies.metadata.json.gz
+2021-01-18T19:43:55.349+0000    reading metadata for showtimes.showtimes from /tmp/backup/cinema/showtimes/showtimes.metadata.json.gz
+2021-01-18T19:43:55.353+0000    reading metadata for users.users from /tmp/backup/cinema/users/users.metadata.json.gz
+2021-01-18T19:43:55.355+0000    reading metadata for bookings.bookings from /tmp/backup/cinema/bookings/bookings.metadata.json.gz
+2021-01-18T19:43:55.382+0000    restoring movies.movies from /tmp/backup/cinema/movies/movies.bson.gz
+2021-01-18T19:43:55.388+0000    restoring showtimes.showtimes from /tmp/backup/cinema/showtimes/showtimes.bson.gz
+2021-01-18T19:43:55.394+0000    restoring users.users from /tmp/backup/cinema/users/users.bson.gz
+2021-01-18T19:43:55.397+0000    no indexes to restore
+2021-01-18T19:43:55.397+0000    finished restoring movies.movies (6 documents, 0 failures)
+2021-01-18T19:43:55.401+0000    no indexes to restore
+2021-01-18T19:43:55.401+0000    finished restoring showtimes.showtimes (3 documents, 0 failures)
+2021-01-18T19:43:55.406+0000    no indexes to restore
+2021-01-18T19:43:55.406+0000    finished restoring users.users (5 documents, 0 failures)
+2021-01-18T19:43:55.407+0000    restoring bookings.bookings from /tmp/backup/cinema/bookings/bookings.bson.gz
+2021-01-18T19:43:55.422+0000    no indexes to restore
+2021-01-18T19:43:55.423+0000    finished restoring bookings.bookings (2 documents, 0 failures)
+2021-01-18T19:43:55.424+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
 ```
 
 ## Test APIs services

@@ -62,26 +62,26 @@ Once starting all services the following links will be availables:
 You will start using an empty database for all microservices, but if you want you can restore a preconfigured data execute this command:
 
 ```bash
-$ docker-compose exec db mongorestore --uri mongodb://db:27017 --gzip  /backup
+$ docker-compose exec db mongorestore --uri mongodb://db:27017 --gzip  /backup/cinema
 
-2021-01-17T16:38:27.922+0000    preparing collections to restore from
-2021-01-17T16:38:27.961+0000    reading metadata for cinema.users from /backup/cinema/users.metadata.json.gz
-2021-01-17T16:38:27.965+0000    reading metadata for cinema.movies from /backup/cinema/movies.metadata.json.gz
-2021-01-17T16:38:27.967+0000    reading metadata for cinema.showtimes from /backup/cinema/showtimes.metadata.json.gz
-2021-01-17T16:38:27.977+0000    reading metadata for cinema.bookings from /backup/cinema/bookings.metadata.json.gz
-2021-01-17T16:38:28.019+0000    restoring cinema.users from /backup/cinema/users.bson.gz
-2021-01-17T16:38:28.036+0000    no indexes to restore
-2021-01-17T16:38:28.044+0000    finished restoring cinema.users (5 documents, 0 failures)
-2021-01-17T16:38:28.084+0000    restoring cinema.showtimes from /backup/cinema/showtimes.bson.gz
-2021-01-17T16:38:28.099+0000    no indexes to restore
-2021-01-17T16:38:28.108+0000    finished restoring cinema.showtimes (3 documents, 0 failures)
-2021-01-17T16:38:28.134+0000    restoring cinema.movies from /backup/cinema/movies.bson.gz
-2021-01-17T16:38:28.157+0000    restoring cinema.bookings from /backup/cinema/bookings.bson.gz
-2021-01-17T16:38:28.171+0000    no indexes to restore
-2021-01-17T16:38:28.179+0000    finished restoring cinema.movies (6 documents, 0 failures)
-2021-01-17T16:38:28.182+0000    no indexes to restore
-2021-01-17T16:38:28.184+0000    finished restoring cinema.bookings (2 documents, 0 failures)
-2021-01-17T16:38:28.186+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
+2021-01-18T19:10:35.914+0000    preparing collections to restore from
+2021-01-18T19:10:36.016+0000    reading metadata for movies.movies from /backup/cinema/movies/movies.metadata.json.gz
+2021-01-18T19:10:36.089+0000    reading metadata for showtimes.showtimes from /backup/cinema/showtimes/showtimes.metadata.json.gz
+2021-01-18T19:10:36.143+0000    reading metadata for users.users from /backup/cinema/users/users.metadata.json.gz
+2021-01-18T19:10:36.178+0000    reading metadata for bookings.bookings from /backup/cinema/bookings/bookings.metadata.json.gz
+2021-01-18T19:10:36.236+0000    restoring bookings.bookings from /backup/cinema/bookings/bookings.bson.gz
+2021-01-18T19:10:36.308+0000    no indexes to restore
+2021-01-18T19:10:36.314+0000    finished restoring bookings.bookings (2 documents, 0 failures)
+2021-01-18T19:10:36.467+0000    restoring movies.movies from /backup/cinema/movies/movies.bson.gz
+2021-01-18T19:10:36.883+0000    no indexes to restore
+2021-01-18T19:10:36.888+0000    finished restoring movies.movies (6 documents, 0 failures)
+2021-01-18T19:10:36.894+0000    restoring showtimes.showtimes from /backup/cinema/showtimes/showtimes.bson.gz
+2021-01-18T19:10:36.955+0000    no indexes to restore
+2021-01-18T19:10:36.960+0000    finished restoring showtimes.showtimes (3 documents, 0 failures)
+2021-01-18T19:10:36.989+0000    restoring users.users from /backup/cinema/users/users.bson.gz
+2021-01-18T19:10:37.067+0000    no indexes to restore
+2021-01-18T19:10:37.072+0000    finished restoring users.users (5 documents, 0 failures)
+2021-01-18T19:10:37.075+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
 ```
 
 This command will go inside the mongodb container (`db` service described in `docker-compose.yml` file). Once the command finished the data inserted will be ready to be consulted. Try listing users againg <http://localhost:4000/api/users/>
