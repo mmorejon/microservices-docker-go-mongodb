@@ -26,7 +26,7 @@ func main() {
 	serverAddr := flag.String("serverAddr", "", "HTTP server network address")
 	serverPort := flag.Int("serverPort", 4000, "HTTP server network port")
 	mongoURI := flag.String("mongoURI", "mongodb://localhost:27017", "Database hostname url")
-	mongoDatabse := flag.String("mongoDatabse", "cinema", "Database name")
+	mongoDatabse := flag.String("mongoDatabse", "users", "Database name")
 	enableCredentials := flag.Bool("enableCredentials", false, "Enable the use of credentials for mongo connection")
 	flag.Parse()
 
