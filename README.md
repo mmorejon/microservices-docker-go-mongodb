@@ -12,7 +12,7 @@ The Cinema backend is powered by 4 microservices, all of which happen to be writ
 
 The Cinema use case is based on the project written in Python by [Umer Mansoor](https://github.com/umermansoor/microservices).
 
-The proyect structure is based in the knowledge learned in:
+The project structure is based in the knowledge learned in:
 
 * Golang structure: <https://peter.bourgon.org/go-best-practices-2016/#repository-structure>
 * Book Let's Go: <https://lets-go.alexedwards.net/>
