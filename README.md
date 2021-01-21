@@ -3,7 +3,7 @@
 ## Overview
 
 Cinema is an example project which demonstrates the use of microservices for a fictional movie theater.
-The Cinema backend is powered by 4 microservices, all of witch happen to be written in Go, using MongoDB for manage the database and Docker to isolate and deploy the ecosystem.
+The Cinema backend is powered by 4 microservices, all of which happen to be written in Go, using MongoDB for manage the database and Docker to isolate and deploy the ecosystem.
 
  * Movie Service: Provides information like movie ratings, title, etc.
  * Show Times Service: Provides show times information.
