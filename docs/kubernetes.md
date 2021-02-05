@@ -116,7 +116,7 @@ Dependency bookings did not declare a repository. Assuming it exists in the char
 Deleting outdated charts
 ```
 
-Use the following command to deploy the whole project with just one line:
+Then use the following command to deploy the whole project with just one line:
 
 ```bash
 $ helm upgrade cinema --install  ./charts/cinema
