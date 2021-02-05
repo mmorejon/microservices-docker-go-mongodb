@@ -2,5 +2,17 @@ dependencies:
 - name: mongodb
   repository: https://charts.bitnami.com/bitnami
   version: 10.4.0
-digest: sha256:1a97ea6166dd6a3fed7f1b7a5a08ca10c286330e2e634fc3933e9c4d94f42962
-generated: "2021-01-17T23:48:11.235073+01:00"
+- name: users
+  repository: ""
+  version: 0.x.x
+- name: movies
+  repository: ""
+  version: 0.x.x
+- name: showtimes
+  repository: ""
+  version: 0.x.x
+- name: bookings
+  repository: ""
+  version: 0.x.x
+digest: sha256:51691805aa471ff43cde62fb32e758efeece52d7428f7c206fdd754da7a56aee
+generated: "2021-02-05T15:07:51.329114+01:00"

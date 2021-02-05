@@ -13,6 +13,10 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     version: 10.4.0
   - name: users
+    version: 0.x.x
   - name: movies
+    version: 0.x.x
   - name: showtimes
+    version: 0.x.x
   - name: bookings
+    version: 0.x.x

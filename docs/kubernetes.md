@@ -88,14 +88,35 @@ dependencies:
     repository: https://charts.bitnami.com/bitnami
     version: 10.4.0
   - name: users
+    version: 0.x.x
   - name: movies
+    version: 0.x.x
   - name: showtimes
+    version: 0.x.x
   - name: bookings
+    version: 0.x.x
 ```
 
 Dependencies like `users`, `movies`, `showtimes` and `bookings` are charts located inside `charts` folder, and `mongodb` dependency came from Bitnami repository.
 
-Use the following command to deploy the whole project with just one line:
+First of all is needed update helm dependencies
+
+```bash
+$ helm dependency update charts/cinema
+
+Getting updates for unmanaged Helm repositories...
+...Successfully got an update from the "https://charts.bitnami.com/bitnami" chart repository
+Update Complete. ⎈Happy Helming!⎈
+Saving 5 charts
+Downloading mongodb from repo https://charts.bitnami.com/bitnami
+Dependency users did not declare a repository. Assuming it exists in the charts directory
+Dependency movies did not declare a repository. Assuming it exists in the charts directory
+Dependency showtimes did not declare a repository. Assuming it exists in the charts directory
+Dependency bookings did not declare a repository. Assuming it exists in the charts directory
+Deleting outdated charts
+```
+
+Then use the following command to deploy the whole project with just one line:
 
 ```bash
 $ helm upgrade cinema --install  ./charts/cinema
