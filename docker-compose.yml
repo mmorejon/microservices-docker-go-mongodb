@@ -1,13 +1,28 @@
 version: "3.8"
 services:
   proxy:
-    image: traefik:v2.3.7
+    image: traefik:v2.4.2
     command:
-      - "--api"
-      - "--api.dashboard"
-      - "--api.insecure"
+      # - "--log.level=DEBUG"
+      - "--api=true"
+      - "--api.dashboard=true"
+      - "--api.insecure=true" # Don't do that in production
       - "--providers.docker"
       - "--entrypoints.web.address=:80"
+      # add pilot token service
+      # - "--pilot.token=3d1bd97f-cb9d-4cde-8112-77ce2f5abc92"
+      # install plugin rewrite body
+      # - "--experimental.plugins.plugin-rewrite.modulename=github.com/traefik/plugin-rewritebody"
+      # - "--experimental.plugins.plugin-rewrite.version=v0.3.1"
+    labels: {}
+      # Create basics middlewares
+      # - "traefik.http.middlewares.my-auth.basicauth.users=test:$$apr1$$H6uskkkW$$IgXLP6ewTrSuBkTrqE8wj/"
+      # - "traefik.http.middlewares.my-compress.compress=true"
+      # - "traefik.http.middlewares.my-header.headers.customresponseheaders.X-Custom-Response-Header=cinema"
+      # Create middlewares for plugins
+      # - "traefik.http.middlewares.my-rewrite.plugin.plugin-rewrite.lastModified=true"
+      # - "traefik.http.middlewares.my-rewrite.plugin.plugin-rewrite.rewrites[0].regex=ID"
+      # - "traefik.http.middlewares.my-rewrite.plugin.plugin-rewrite.rewrites[0].replacement=MY-ID"
     volumes:
       - type: bind
         source: /var/run/docker.sock
@@ -37,6 +52,8 @@ services:
     labels:
       - "traefik.http.routers.movies.rule=PathPrefix(`/api/movies/`)"
       - "traefik.http.services.movies.loadbalancer.server.port=4000"
+      # Apply middlewares
+      # - "traefik.http.routers.movies.middlewares=my-header,my-compress,my-rewrite"
 
   bookings:
     # build: ./bookings
@@ -85,8 +102,6 @@ services:
 
   db:
     image: mongo:4.2.11
-    labels:
-      - "traefik.http.services.db.loadbalancer.server.port=27017"
     # ports:
     #   - target: 27017
     #     published: 27017
