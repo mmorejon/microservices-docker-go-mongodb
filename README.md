@@ -38,7 +38,7 @@ The application can be deployed in both environments: **local machine** or in a 
 
 ## Related Posts
 
-* [Traefik 2 - Advanced configuration with Docker Compose](https://mmorejon.io/blog/traefik-2-configuracion-avanzada-docker-compose/)
+* [Traefik 2 - Advanced configuration with Docker Compose](https://mmorejon.io/en/blog/traefik-2-advanced-configuration-docker-compose/)
 
 ## Significant Revisions
 
