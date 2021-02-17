@@ -21,6 +21,7 @@ The project structure is based in the knowledge learned in:
 
 * [Deployment](#deployment)
 * [How To Use Cinema Services](#how-to-use-cinema-services)
+* [Related Posts](related-posts)
 * [Significant Revisions](#significant-revisions)
 * [The big picture](#the-big-picture)
 
@@ -34,6 +35,10 @@ The application can be deployed in both environments: **local machine** or in a 
 ## How To Use Cinema Services
 
 * [endpoints](./docs/endpoints.md)
+
+## Related Posts
+
+* [Traefik 2 - Advanced configuration with Docker Compose](https://mmorejon.io/blog/traefik-2-configuracion-avanzada-docker-compose/)
 
 ## Significant Revisions
 
