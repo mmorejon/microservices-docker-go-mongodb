@@ -1,4 +1,4 @@
-module github.com/mmorejon/cinema/users
+module github.com/mmorejon/microservices-docker-go-mongodb/users
 
 go 1.15
 

@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/mmorejon/cinema/showtimes/pkg/models"
+	"github.com/mmorejon/microservices-docker-go-mongodb/showtimes/pkg/models"
 )
 
 func (app *application) all(w http.ResponseWriter, r *http.Request) {

@@ -1,4 +1,4 @@
-module github.com/mmorejon/cinema/showtimes
+module github.com/mmorejon/microservices-docker-go-mongodb/showtimes
 
 go 1.15
 

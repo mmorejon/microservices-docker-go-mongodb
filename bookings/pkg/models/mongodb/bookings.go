@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/mmorejon/cinema/bookings/pkg/models"
+	"github.com/mmorejon/microservices-docker-go-mongodb/bookings/pkg/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"

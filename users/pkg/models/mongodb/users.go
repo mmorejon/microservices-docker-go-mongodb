@@ -4,7 +4,7 @@ import (
 	"context"
 	"errors"
 
-	"github.com/mmorejon/cinema/users/pkg/models"
+	"github.com/mmorejon/microservices-docker-go-mongodb/users/pkg/models"
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -51,7 +51,7 @@ func (m *UserModel) FindByID(id string) (*models.User, error) {
 		}
 		return nil, err
 	}
-	
+
 	return &user, nil
 }
 
