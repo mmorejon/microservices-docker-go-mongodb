@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/mmorejon/cinema/movies/pkg/models"
+	"github.com/mmorejon/microservices-docker-go-mongodb/movies/pkg/models"
 )
 
 func (app *application) all(w http.ResponseWriter, r *http.Request) {

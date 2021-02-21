@@ -1,4 +1,4 @@
-module github.com/mmorejon/cinema/movies
+module github.com/mmorejon/microservices-docker-go-mongodb/movies
 
 go 1.15
 
