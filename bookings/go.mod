@@ -1,4 +1,4 @@
-module github.com/mmorejon/cinema/bookings
+module github.com/mmorejon/microservices-docker-go-mongodb/bookings
 
 go 1.15
 
