@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/mmorejon/cinema/showtimes/pkg/models/mongodb"
+	"github.com/mmorejon/microservices-docker-go-mongodb/showtimes/pkg/models/mongodb"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
