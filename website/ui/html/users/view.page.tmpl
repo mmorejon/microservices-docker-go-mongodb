@@ -1,0 +1,24 @@
+{{template "base" .}}
+
+{{define "main"}}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row d-flex justify-content-center">
+            <div class="col-md-6">
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <div class="form-group row d-flex justify-content-center">
+                            <span class="col-md-6 text-right">Full Name:</span>
+                            <span class="col-md-6 text-left">{{.Name}} {{.LastName}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{{end}}

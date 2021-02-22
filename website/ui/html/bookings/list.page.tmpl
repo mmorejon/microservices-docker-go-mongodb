@@ -1,0 +1,29 @@
+{{template "base" .}}
+
+{{define "main"}}
+
+<div class="album py-5 bg-light">
+    <div class="container">
+
+        <div class="row">
+            {{range .BookingsData}}
+            <div class="col-md-3">
+                <div class="card mb-3 shadow-sm">
+                    <div class="card-body">
+                        <p class="card-text">{{.UserFullName}}</p>
+                        <p class="card-text">{{.ShowTimeDate}}</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a class="btn btn-sm btn-outline-secondary" href="/bookings/view/{{.ID}}" role="button">View</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{end}}
+        </div>
+
+    </div>
+</div>
+
+{{end}}

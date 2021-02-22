@@ -1,0 +1,33 @@
+# golang alpine 1.15.6-alpine as base image
+FROM golang:1.15.6-alpine AS builder
+# create appuser.
+RUN adduser -D -g '' elf
+# create workspace
+WORKDIR /opt/web/
+COPY go.mod .
+COPY go.sum .
+# fetch dependancies
+RUN go mod download
+RUN go mod verify
+# copy the source code as the last step
+COPY . .
+# build binary
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o /go/bin/cinema-website ./cmd/web
+
+
+# build a small image
+FROM alpine:3.12.3
+LABEL language="golang"
+LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-docker-go-mongodb
+# import the user and group files from the builder
+COPY --from=builder /etc/passwd /etc/passwd
+# create workspace
+WORKDIR /opt/web/
+# copy the static executable
+COPY --from=builder --chown=elf:1000 /go/bin/cinema-website cinema-website
+# copy static files
+COPY ./ui ui
+# use a non-root user
+USER elf
+# run app
+ENTRYPOINT ["./cinema-website"]
