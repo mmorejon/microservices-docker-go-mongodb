@@ -10,6 +10,7 @@ env:
   MOVIES_IMAGE_NAME: "cinema-movies"
   SHOWTIMES_IMAGE_NAME: "cinema-showtimes"
   BOOKINGS_IMAGE_NAME: "cinema-bookings"
+  WEBSITE_IMAGE_NAME: "cinema-website"
 
 jobs:
   multi-registries:
@@ -43,6 +44,15 @@ jobs:
           tags: |
             mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
             ghcr.io/mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+      - name: Build and push website microservice
+        uses: docker/build-push-action@v2
+        with:
+          push: true
+          context: ./website/
+          file: ./website/Dockerfile
+          tags: |
+            mmorejon/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/mmorejon/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
       - name: Build and push movies microservice
         uses: docker/build-push-action@v2
         with:
