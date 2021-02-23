@@ -10,6 +10,7 @@ The Cinema project can be deployed in a single machine (localhost) using docker 
 * [Requirements](#requirements)
 * [Starting services](#starting-services)
 * [Restore database information](#restore-database-information)
+* [Enabling microservices APIs](#enabling-microservices-apis)
 * [Stoping services](#stoping-services)
 * [Traefik Proxy dashboard](#traefik-proxy-dashboard)
 * [Build from souce code](#build-from-souce-code)
@@ -26,36 +27,32 @@ Use the following command to deploy all services in your local environment.
 ```bash
 $ docker-compose up -d
 
-Creating microservices-docker-go-mongodb_bookings_1  ... done
+Creating microservices-docker-go-mongodb_showtimes_1 ... done
 Creating microservices-docker-go-mongodb_db_1        ... done
+Creating microservices-docker-go-mongodb_proxy_1     ... done
+Creating microservices-docker-go-mongodb_website_1   ... done
 Creating microservices-docker-go-mongodb_users_1     ... done
 Creating microservices-docker-go-mongodb_movies_1    ... done
-Creating microservices-docker-go-mongodb_showtimes_1 ... done
-Creating microservices-docker-go-mongodb_proxy_1     ... done
+Creating microservices-docker-go-mongodb_bookings_1  ... done
 ```
 
 ```bash
 $ docker-compose ps
 
-                   Name                                  Command               State                      Ports
------------------------------------------------------------------------------------------------------------------------------------
+                   Name                                  Command               State                     Ports
+---------------------------------------------------------------------------------------------------------------------------------
 microservices-docker-go-mongodb_bookings_1    ./cinema-bookins -mongoURI ...   Up
 microservices-docker-go-mongodb_db_1          docker-entrypoint.sh mongod      Up      27017/tcp
 microservices-docker-go-mongodb_movies_1      ./cinema-movies -mongoURI  ...   Up
-microservices-docker-go-mongodb_proxy_1       /entrypoint.sh --api --api ...   Up      0.0.0.0:4000->80/tcp, 0.0.0.0:8080->8080/tcp
+microservices-docker-go-mongodb_proxy_1       /entrypoint.sh --api=true  ...   Up      0.0.0.0:80->80/tcp, 0.0.0.0:8080->8080/tcp
 microservices-docker-go-mongodb_showtimes_1   ./cinema-showtimes -mongoU ...   Up
 microservices-docker-go-mongodb_users_1       ./cinema-users -mongoURI m ...   Up
+microservices-docker-go-mongodb_website_1     ./cinema-website -usersAPI ...   Up
 ```
 
-Once starting all services the following links will be availables:
+Once the services have started, you can access the web through the following link: <http://localhost>.
 
-| Service | Description |
-|---------|-------------|
-| [Traefik Proxy Dashboard](http://localhost:8080/dashboard/#/) | Allows you to identify Traefik componentes like routers, provider, services, middlewares among others |
-| [List users api](http://localhost:4000/api/users/) | List all users |
-| [List movies api](http://localhost:4000/api/movies/) | List all movies |
-| [List showtimes api](http://localhost:4000/api/showtimes/) | List all showtimes |
-| [List bookings api](http://localhost:4000/api/bookings/) | List all bookings |
+![Website Home](images/website-home.jpg)
 
 ## Restore database information
 
@@ -84,24 +81,56 @@ $ docker-compose exec db mongorestore --uri mongodb://db:27017 --gzip  /backup/c
 2021-01-18T19:10:37.075+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
 ```
 
-This command will go inside the mongodb container (`db` service described in `docker-compose.yml` file). Once the command finished the data inserted will be ready to be consulted. Try listing users againg <http://localhost:4000/api/users/>
+This command will go inside the mongodb container (`db` service described in `docker-compose.yml` file). Once the command finished the data inserted will be ready to be consulted. Try listing users againg <http://localhost/users/list>.
+
+![Users List](images/website-users.jpg)
+
+## Enabling microservices APIs
+
+The microservices are not exposed to ensure greater security, but if you need to enable them for testing you can do so through the tags defined by Trafik for the Docker provider.
+
+```yaml
+    labels:
+      # Enable public access
+      - "traefik.http.routers.users.rule=PathPrefix(`/api/users/`)"
+      - "traefik.http.services.users.loadbalancer.server.port=4000"
+```
+
+Once exposed all services the following links will be availables:
+
+| Service | Description |
+|---------|-------------|
+| [Traefik Proxy Dashboard](http://localhost:8080/dashboard/#/) | Allows you to identify Traefik componentes like routers, provider, services, middlewares among others |
+| [List users api](http://localhost/api/users/) | List all users |
+| [List movies api](http://localhost/api/movies/) | List all movies |
+| [List showtimes api](http://localhost/api/showtimes/) | List all showtimes |
+| [List bookings api](http://localhost/api/bookings/) | List all bookings |
+
+The following command is an example of how to list the users:
+
+```bash
+$ curl -X GET http://localhost/api/users/
+
+[{"ID":"600209d347932ef15c50af15","Name":"Wanda","LastName":"Austin"},{"ID":"600209d347932ef15c50af16","Name":"Charles","LastName":"Babbage"},{"ID":"600209d347932ef15c50af17","Name":"Stefan","LastName":"Banach"},{"ID":"600209d347932ef15c50af18","Name":"Laura","LastName":"Bassi"},{"ID":"600209d347932ef15c50af19","Name":"Niels","LastName":"Bohr"}]
+```
 
 ## Stoping services
 
 ```bash
 $ docker-compose stop
 
-Stopping microservices-docker-go-mongodb_bookings_1  ... done
-Stopping microservices-docker-go-mongodb_movies_1    ... done
-Stopping microservices-docker-go-mongodb_users_1     ... done
-Stopping microservices-docker-go-mongodb_showtimes_1 ... done
 Stopping microservices-docker-go-mongodb_proxy_1     ... done
+Stopping microservices-docker-go-mongodb_users_1     ... done
+Stopping microservices-docker-go-mongodb_movies_1    ... done
 Stopping microservices-docker-go-mongodb_db_1        ... done
+Stopping microservices-docker-go-mongodb_bookings_1  ... done
+Stopping microservices-docker-go-mongodb_website_1   ... done
+Stopping microservices-docker-go-mongodb_showtimes_1 ... done
 ```
 
 ## Traefik Proxy dashboard
 
-This project use Traefik Proxy v2.3.7, [the dashboard should look like this image](http://localhost:8080/dashboard/#/):
+This project use Traefik Proxy v2.4.2, [the dashboard should look like this image](http://localhost:8080/dashboard/#/):
 
 ![overview](images/traefik-dashboard.jpg)
 
@@ -114,7 +143,7 @@ If you want to include new functionalities, fix bugs or do some tests use the so
 ```yaml
   users:
     build: ./users                                   # uncomment this line
-    # image: ghcr.io/mmorejon/cinema-users:v2.0.0    # comment this line
+    # image: ghcr.io/mmorejon/cinema-users:v2.1.0    # comment this line
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -123,7 +152,8 @@ If you want to include new functionalities, fix bugs or do some tests use the so
     # environment:
     #   MONGODB_USERNAME: "demo"
     #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
-    labels:
-      - "traefik.http.routers.users.rule=PathPrefix(`/api/users/`)"
-      - "traefik.http.services.users.loadbalancer.server.port=4000"
+    labels: {}
+      # Enable public access
+      # - "traefik.http.routers.users.rule=PathPrefix(`/api/users/`)"
+      # - "traefik.http.services.users.loadbalancer.server.port=4000"
 ```

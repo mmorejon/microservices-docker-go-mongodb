@@ -30,7 +30,7 @@ services:
         read_only: true
     ports:
       - target: 80
-        published: 4000
+        published: 80
         protocol: tcp
         mode: host
       - target: 8080
@@ -38,9 +38,26 @@ services:
         protocol: tcp
         mode: host
 
+  website:
+    # build: ./website
+    image: ghcr.io/mmorejon/cinema-website:v2.1.0
+    command:
+      - "-usersAPI"
+      - "http://users:4000/api/users/"
+      - "-moviesAPI"
+      - "http://movies:4000/api/movies/"
+      - "-showtimesAPI"
+      - "http://showtimes:4000/api/showtimes/"
+      - "-bookingsAPI"
+      - "http://bookings:4000/api/bookings/"
+    labels:
+      # Enable public access
+      - "traefik.http.routers.website.rule=PathPrefix(`/`)"
+      - "traefik.http.services.website.loadbalancer.server.port=8000"
+
   movies:
     # build: ./movies
-    image: ghcr.io/mmorejon/cinema-movies:v2.0.1
+    image: ghcr.io/mmorejon/cinema-movies:v2.1.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -49,15 +66,16 @@ services:
     # environment:
     #   MONGODB_USERNAME: "demo"
     #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
-    labels:
-      - "traefik.http.routers.movies.rule=PathPrefix(`/api/movies/`)"
-      - "traefik.http.services.movies.loadbalancer.server.port=4000"
+    labels: {}
+      # Enable public access
+      # - "traefik.http.routers.movies.rule=PathPrefix(`/api/movies/`)"
+      # - "traefik.http.services.movies.loadbalancer.server.port=4000"
       # Apply middlewares
-      # - "traefik.http.routers.movies.middlewares=my-header,my-compress,my-rewrite"
+      # - "traefik.http.routers.movies.middlewares=my-header,my-compress"
 
   bookings:
     # build: ./bookings
-    image: ghcr.io/mmorejon/cinema-bookings:v2.0.1
+    image: ghcr.io/mmorejon/cinema-bookings:v2.1.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -66,13 +84,14 @@ services:
     # environment:
     #   MONGODB_USERNAME: "demo"
     #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
-    labels:
-      - "traefik.http.routers.bookings.rule=PathPrefix(`/api/bookings/`)"
-      - "traefik.http.services.bookings.loadbalancer.server.port=4000"
+    labels: {}
+      # Enable public access
+      # - "traefik.http.routers.bookings.rule=PathPrefix(`/api/bookings/`)"
+      # - "traefik.http.services.bookings.loadbalancer.server.port=4000"
 
   showtimes:
     # build: ./showtimes
-    image: ghcr.io/mmorejon/cinema-showtimes:v2.0.1
+    image: ghcr.io/mmorejon/cinema-showtimes:v2.1.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -81,13 +100,14 @@ services:
     # environment:
     #   MONGODB_USERNAME: "demo"
     #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
-    labels:
-      - "traefik.http.routers.showtimes.rule=PathPrefix(`/api/showtimes/`)"
-      - "traefik.http.services.showtimes.loadbalancer.server.port=4000"
+    labels: {}
+      # Enable public access
+      # - "traefik.http.routers.showtimes.rule=PathPrefix(`/api/showtimes/`)"
+      # - "traefik.http.services.showtimes.loadbalancer.server.port=4000"
 
   users:
     # build: ./users
-    image: ghcr.io/mmorejon/cinema-users:v2.0.1
+    image: ghcr.io/mmorejon/cinema-users:v2.1.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -96,9 +116,10 @@ services:
     # environment:
     #   MONGODB_USERNAME: "demo"
     #   MONGODB_PASSWORD: "e3LBVTPdlzxYbxt9"
-    labels:
-      - "traefik.http.routers.users.rule=PathPrefix(`/api/users/`)"
-      - "traefik.http.services.users.loadbalancer.server.port=4000"
+    labels: {}
+      # Enable public access
+      # - "traefik.http.routers.users.rule=PathPrefix(`/api/users/`)"
+      # - "traefik.http.services.users.loadbalancer.server.port=4000"
 
   db:
     image: mongo:4.2.11

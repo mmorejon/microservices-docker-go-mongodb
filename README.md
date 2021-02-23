@@ -23,7 +23,7 @@ The project structure is based in the knowledge learned in:
 * [How To Use Cinema Services](#how-to-use-cinema-services)
 * [Related Posts](related-posts)
 * [Significant Revisions](#significant-revisions)
-* [The big picture](#the-big-picture)
+* [The big picture](#screenshots)
 
 ## Deployment
 
@@ -48,6 +48,16 @@ The application can be deployed in both environments: **local machine** or in a 
 * [MongoDB Driver for Golang](https://github.com/mongodb/mongo-go-driver)
 * [MongoDB Golang Channel](https://www.youtube.com/c/MongoDBofficial/search?query=golang)
 
-## The big picture
+## Screenshots
+
+### Architecture
 
 ![overview](docs/images/overview.jpg)
+
+### Homepage
+
+![website home page](docs/images/website-home.jpg)
+
+### Users List
+
+![users list page](docs/images/website-users.jpg)
