@@ -14,5 +14,8 @@ dependencies:
 - name: bookings
   repository: ""
   version: 0.x.x
-digest: sha256:51691805aa471ff43cde62fb32e758efeece52d7428f7c206fdd754da7a56aee
-generated: "2021-02-05T15:07:51.329114+01:00"
+- name: website
+  repository: ""
+  version: 0.x.x
+digest: sha256:692ee21df7eca386f2a6b4e405552bf4e3a3287df2fd5b41fca43f9c67436950
+generated: "2021-02-24T19:38:07.319106+01:00"

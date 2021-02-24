@@ -12,10 +12,25 @@ mongodb:
   persistence:
     enabled: false
 
+# Cinema website values
+website:
+  image:
+    tag: "v2.1.0"
+
+  args:
+    - "-usersAPI"
+    - "http://cinema-users/api/users/"
+    - "-moviesAPI"
+    - "http://cinema-movies/api/movies/"
+    - "-showtimesAPI"
+    - "http://cinema-showtimes/api/showtimes/"
+    - "-bookingsAPI"
+    - "http://cinema-bookings/api/bookings/"
+
 # Cinema users values
 users:
   image:
-    tag: "v2.0.1"
+    tag: "v2.1.0"
 
   args:
     - "-mongoURI"
@@ -24,7 +39,7 @@ users:
 # Cinema movies values
 movies:
   image:
-    tag: "v2.0.1"
+    tag: "v2.1.0"
 
   args:
     - "-mongoURI"
@@ -33,7 +48,7 @@ movies:
 # Cinema showtimes values
 showtimes:
   image:
-    tag: "v2.0.1"
+    tag: "v2.1.0"
 
   args:
     - "-mongoURI"
@@ -42,7 +57,7 @@ showtimes:
 # Cinema bookings values
 bookings:
   image:
-    tag: "v2.0.1"
+    tag: "v2.1.0"
 
   args:
     - "-mongoURI"
