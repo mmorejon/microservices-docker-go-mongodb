@@ -79,9 +79,9 @@ description: A Helm chart to deploy Cinema project in Kubernetes
 # chart type
 type: application
 # chart version
-version: 0.1.0
+version: 0.2.0
 # cinema app version
-appVersion: "v2.0.1"
+appVersion: "v2.1.0"
 dependencies:
   - condition: mongodb.enabled
     name: mongodb
@@ -95,9 +95,11 @@ dependencies:
     version: 0.x.x
   - name: bookings
     version: 0.x.x
+  - name: website
+    version: 0.x.x
 ```
 
-Dependencies like `users`, `movies`, `showtimes` and `bookings` are charts located inside `charts` folder, and `mongodb` dependency came from Bitnami repository.
+Dependencies like `website`, `users`, `movies`, `showtimes` and `bookings` are charts located inside `charts` folder, and `mongodb` dependency came from Bitnami repository.
 
 First of all is needed update helm dependencies
 
@@ -107,12 +109,13 @@ $ helm dependency update charts/cinema
 Getting updates for unmanaged Helm repositories...
 ...Successfully got an update from the "https://charts.bitnami.com/bitnami" chart repository
 Update Complete. ⎈Happy Helming!⎈
-Saving 5 charts
+Saving 6 charts
 Downloading mongodb from repo https://charts.bitnami.com/bitnami
 Dependency users did not declare a repository. Assuming it exists in the charts directory
 Dependency movies did not declare a repository. Assuming it exists in the charts directory
 Dependency showtimes did not declare a repository. Assuming it exists in the charts directory
 Dependency bookings did not declare a repository. Assuming it exists in the charts directory
+Dependency website did not declare a repository. Assuming it exists in the charts directory
 Deleting outdated charts
 ```
 
@@ -123,7 +126,7 @@ $ helm upgrade cinema --install  ./charts/cinema
 
 Release "cinema" does not exist. Installing it now.
 NAME: cinema
-LAST DEPLOYED: Mon Jan 18 15:39:01 2021
+LAST DEPLOYED: Wed Feb 24 20:03:09 2021
 NAMESPACE: default
 STATUS: deployed
 REVISION: 1
@@ -135,7 +138,7 @@ Then check the deployment status:
 $ helm list
 
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-cinema  default         1               2021-01-18 15:39:01.74132 +0100 CET     deployed        cinema-0.1.0    v2.0.1
+cinema  default         1               2021-02-24 20:03:09.305628 +0100 CET    deployed        cinema-0.2.0    v2.1.0
 ```
 
 ## Check Cinema services status
@@ -144,11 +147,12 @@ cinema  default         1               2021-01-18 15:39:01.74132 +0100 CET     
 $ kubectl get po
 
 NAME                                READY   STATUS    RESTARTS   AGE
-cinema-bookings-57dd76b7bd-7g2hc    1/1     Running   0          104s
-cinema-mongodb-75854c5d9c-hlfz7     1/1     Running   0          104s
-cinema-movies-86cf88bb67-khp4h      1/1     Running   0          104s
-cinema-showtimes-86b68b6f49-p2h4x   1/1     Running   0          104s
-cinema-users-6969d54b86-72fgg       1/1     Running   0          104s
+cinema-bookings-64d56d595c-7vkgj    1/1     Running   0          47s
+cinema-mongodb-75854c5d9c-l9s2z     1/1     Running   0          47s
+cinema-movies-d9fd6f6cd-2l9lr       1/1     Running   0          47s
+cinema-showtimes-5575885ccb-pksxc   1/1     Running   0          47s
+cinema-users-9fb877fb7-zfsb2        1/1     Running   0          47s
+cinema-website-6896897d9-l4dxm      1/1     Running   0          47s
 ```
 
 ## Populate mongodb cluster with information
@@ -182,9 +186,24 @@ It is recommended to use this test data to check the apis of the services
 2021-01-18T19:43:55.424+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
 ```
 
-## Test APIs services
+## Test Cinema services
 
-To consult the APIs you can use the `port-forward` command to link the cluster service with the local ports
+To consult the website or the APIs you can use the `port-forward` command to link the cluster service with the local ports
+
+### Website
+
+```bash
+$ kubectl port-forward svc/cinema-website 8000:80
+
+Forwarding from 127.0.0.1:8000 -> 8000
+Forwarding from [::1]:8000 -> 8000
+```
+
+Access the following link in your web browser: <http://localhost:8000/>
+
+![website home page](images/website-home.jpg)
+
+### APIs
 
 ```bash
 $ kubectl port-forward svc/cinema-users 4000:80
