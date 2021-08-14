@@ -1,14 +1,13 @@
 # golang alpine 1.15.6-alpine as base image
-FROM golang:1.15.6-alpine AS builder
+FROM golang:1.16.7-alpine AS builder
 # create appuser
 RUN adduser -D -g '' elf
 # create workspace
 WORKDIR /opt/app/
-COPY go.mod .
-COPY go.sum .
+COPY go.mod go.sum ./
 # fetch dependancies
-RUN go mod download
-RUN go mod verify
+RUN go mod download && \
+    go mod verify
 # copy the source code as the last step
 COPY . .
 # build binary
@@ -16,7 +15,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o 
 
 
 # build a small image
-FROM alpine:3.12.3
+FROM alpine:3.14.1
 LABEL language="golang"
 LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-docker-go-mongodb
 # import the user and group files from the builder
