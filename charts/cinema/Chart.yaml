@@ -4,9 +4,9 @@ description: A Helm chart to deploy Cinema project in Kubernetes
 # chart type
 type: application
 # chart version
-version: 0.2.0
+version: 0.2.1
 # cinema app version
-appVersion: "v2.1.0"
+appVersion: "v2.1.2"
 dependencies:
   - condition: mongodb.enabled
     name: mongodb

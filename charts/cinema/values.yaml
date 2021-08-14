@@ -14,9 +14,6 @@ mongodb:
 
 # Cinema website values
 website:
-  image:
-    tag: "v2.1.0"
-
   args:
     - "-usersAPI"
     - "http://cinema-users/api/users/"
@@ -29,36 +26,24 @@ website:
 
 # Cinema users values
 users:
-  image:
-    tag: "v2.1.0"
-
   args:
     - "-mongoURI"
     - "mongodb://cinema-mongodb:27017/"
 
 # Cinema movies values
 movies:
-  image:
-    tag: "v2.1.0"
-
   args:
     - "-mongoURI"
     - "mongodb://cinema-mongodb:27017/"
 
 # Cinema showtimes values
 showtimes:
-  image:
-    tag: "v2.1.0"
-
   args:
     - "-mongoURI"
     - "mongodb://cinema-mongodb:27017/"
 
 # Cinema bookings values
 bookings:
-  image:
-    tag: "v2.1.0"
-
   args:
     - "-mongoURI"
     - "mongodb://cinema-mongodb:27017/"
