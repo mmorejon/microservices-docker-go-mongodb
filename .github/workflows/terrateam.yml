@@ -27,11 +27,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Terrateam Action
     steps:
-    - uses: 'actions/checkout@v3'
-    - id: 'auth'
-      name: 'Authenticate to Google Cloud'
-      uses: 'google-github-actions/auth@v0'
-      with:
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v0'
+        with:
           create_credentials_file: 'true'
           workload_identity_provider: 'projects/1037290380438/locations/global/workloadIdentityPools/terrateam/providers/terrateam'
           service_account: 'terrateam'
