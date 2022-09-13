@@ -1,6 +1,4 @@
 ##########################################################################
-# .github/workflows/terrateam.yml
-##########################################################################
 # DO NOT MODIFY
 #
 # THIS FILE SHOULD LIVE IN .github/workflows/terrateam.yml
@@ -27,16 +25,16 @@ jobs:
     runs-on: ubuntu-latest
     name: Terrateam Action
     steps:
-      - id: 'auth'
-        name: 'Authenticate to Google Cloud'
-        uses: 'google-github-actions/auth@v0'
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0
         with:
           create_credentials_file: 'true'
           workload_identity_provider: 'projects/1037290380438/locations/global/workloadIdentityPools/terrateam/providers/terrateam'
           service_account: 'terrateam'
-      - uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
+          project_id: '1037290380438'
       - name: Run Terrateam Action
         id: terrateam
         uses: terrateamio/action@v1 # Do not replace with a custom image. Doing so may cause Terrateam to not operate as intended.
