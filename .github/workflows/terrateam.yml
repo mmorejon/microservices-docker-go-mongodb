@@ -27,8 +27,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Terrateam Action
     steps:
-    - name: 'Authenticate to Google Cloud'
-      uses: 'actions/checkout@v3'
+    - uses: 'actions/checkout@v3'
     - id: 'auth'
       name: 'Authenticate to Google Cloud'
       uses: 'google-github-actions/auth@v0'
