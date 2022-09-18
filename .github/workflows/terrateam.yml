@@ -43,9 +43,9 @@ jobs:
           api-base-url: '${{ github.event.inputs.api-base-url }}'
         env:
           SECRETS_CONTEXT: ${{ toJson(secrets) }}
-          # TF_VAR_zerossl_email: ${{ secrets.ZEROSSL_EMAIL }}
-          # TF_VAR_zerossl_eab_hmac_key: ${{ secrets.ZEROSSL_EAB_HMAC_KEY }}
-          # TF_VAR_zerossl_eab_hmac_key_id: ${{ secrets.ZEROSSL_EAB_KEY_ID }}
-          # TF_VAR_mongodb_rootusername: ${{ secrets.MONGODB_USERNAME }}
-          # TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
+          TF_VAR_zerossl_email: ${{ secrets.ZEROSSL_EMAIL }}
+          TF_VAR_zerossl_eab_hmac_key: ${{ secrets.ZEROSSL_EAB_HMAC_KEY }}
+          TF_VAR_zerossl_eab_hmac_key_id: ${{ secrets.ZEROSSL_EAB_KEY_ID }}
+          TF_VAR_mongodb_rootusername: ${{ secrets.MONGODB_USERNAME }}
+          TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
 
