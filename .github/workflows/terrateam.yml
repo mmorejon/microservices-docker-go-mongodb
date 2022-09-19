@@ -32,9 +32,9 @@ jobs:
         uses: google-github-actions/auth@v0
         with:
           create_credentials_file: 'true'
-          workload_identity_provider: 'projects/579482828752/locations/global/workloadIdentityPools/terrateam-tf/providers/terrateam-gh-provider'
-          service_account: 'terrateam-tf@terrateam-cinema.iam.gserviceaccount.com'
-          project_id: 'terrateam-362405'
+          workload_identity_provider: 'projects/2814340753/locations/global/workloadIdentityPools/terrateam-tf/providers/terrateam-gh-provider'
+          service_account: 'terrateam-tf@wayofthesys-cinema.iam.gserviceaccount.com'
+          project_id: 'wayofthesys-cinema'
       - name: Run Terrateam Action
         id: terrateam
         uses: terrateamio/action@v1 # Do not replace with a custom image. Doing so may cause Terrateam to not operate as intended.
