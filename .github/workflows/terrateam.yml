@@ -32,8 +32,8 @@ jobs:
         uses: google-github-actions/auth@v0
         with:
           create_credentials_file: 'true'
-          workload_identity_provider: 'projects/1037290380438/locations/global/workloadIdentityPools/terrateam-tf/providers/terrateam-gh-provider'
-          service_account: 'terrateam-tf@terrateam-362405.iam.gserviceaccount.com'
+          workload_identity_provider: 'projects/579482828752/locations/global/workloadIdentityPools/terrateam-tf/providers/terrateam-gh-provider'
+          service_account: 'terrateam-tf@terrateam-cinema.iam.gserviceaccount.com'
           project_id: 'terrateam-362405'
       - name: Run Terrateam Action
         id: terrateam
