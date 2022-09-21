@@ -22,6 +22,9 @@ jobs:
       - name: Get short SHA
         id: slug
         run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
       - name: GitHub Package Registry
         uses: aevea/action-kaniko@master
         with:
@@ -34,9 +37,7 @@ jobs:
           tag: ${{ steps.slug.outputs.sha8 }}
           cache: true
           cache_registry: cache
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
         
 
         
