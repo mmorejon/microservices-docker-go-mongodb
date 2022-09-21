@@ -25,7 +25,7 @@ jobs:
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      - name: GitHub Package Registry
+      - name: GitHub Package Registry - Users
         uses: aevea/action-kaniko@master
         with:
           registry: ghcr.io
@@ -34,6 +34,18 @@ jobs:
           build_file: Dockerfile
           path: ./users/
           image: autotune/microservices-docker-go-mongodb-tf/users
+          tag: ${{ steps.slug.outputs.get_version }}
+          cache: true
+          cache_registry: cache
+      - name: GitHub Package Registry - Movies
+        uses: aevea/action-kaniko@master
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
+          build_file: Dockerfile
+          path: ./movies/
+          image: autotune/microservices-docker-go-mongodb-tf/movies
           tag: ${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
