@@ -19,64 +19,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Login to DockerHub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-      - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+      - name: Get short SHA
+        id: slug
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
+      - name: GitHub Package Registry
+        uses: aevea/action-kaniko@master
         with:
           registry: ghcr.io
-          username: ${{ github.repository_owner }}
-          password: ${{ secrets.CR_PAT }}
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
+          build_file: ./users/Dockerfile
+          path: ./users/
+          image: autotune/microservices-docker-go-mongodb-tf/users
+          tag: ${{ steps.slug.outputs.sha8 }}
+          cache: true
+          cache_registry: cache
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
-      - name: Build and push users microservice
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          context: ./users/
-          file: ./users/Dockerfile
-          tags: |
-            mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/autotune/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-      - name: Build and push website microservice
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          context: ./website/
-          file: ./website/Dockerfile
-          tags: |
-            autotune/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/autotune/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-      - name: Build and push movies microservice
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          context: ./movies/
-          file: ./movies/Dockerfile
-          tags: |
-            autotune/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-      - name: Build and push showtimes microservice
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          context: ./showtimes/
-          file: ./showtimes/Dockerfile
-          tags: |
-            autotune/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/autotune/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-      - name: Build and push bookings microservice
-        uses: docker/build-push-action@v2
-        with:
-          push: true
-          context: ./bookings/
-          file: ./bookings/Dockerfile
-          tags: |
-            autotune/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/autotune/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+        
