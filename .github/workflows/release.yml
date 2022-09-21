@@ -24,7 +24,7 @@ jobs:
         run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
       - name: Get the version
         id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        run: echo "::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}"
       - name: GitHub Package Registry - Users
         uses: aevea/action-kaniko@master
         with:
