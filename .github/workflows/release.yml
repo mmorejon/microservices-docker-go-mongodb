@@ -34,7 +34,7 @@ jobs:
           build_file: Dockerfile
           path: ./users/
           image: autotune/microservices-docker-go-mongodb-tf/users
-          tag: ${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+          tag: ghcr.io/autotune/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
           cache: true
           cache_registry: cache
 
