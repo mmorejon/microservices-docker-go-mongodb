@@ -28,7 +28,7 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.GH_USERNAME }}
           password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
-          build_file: ./users/Dockerfile
+          build_file: Dockerfile
           path: ./users/
           image: autotune/microservices-docker-go-mongodb-tf/users
           tag: ${{ steps.slug.outputs.sha8 }}
