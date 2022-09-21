@@ -43,7 +43,7 @@ jobs:
           file: ./users/Dockerfile
           tags: |
             mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/autotune/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
       - name: Build and push website microservice
         uses: docker/build-push-action@v2
         with:
@@ -51,8 +51,8 @@ jobs:
           context: ./website/
           file: ./website/Dockerfile
           tags: |
-            mmorejon/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/mmorejon/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            autotune/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/autotune/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
       - name: Build and push movies microservice
         uses: docker/build-push-action@v2
         with:
@@ -60,7 +60,7 @@ jobs:
           context: ./movies/
           file: ./movies/Dockerfile
           tags: |
-            mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            autotune/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
             ghcr.io/mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
       - name: Build and push showtimes microservice
         uses: docker/build-push-action@v2
@@ -69,8 +69,8 @@ jobs:
           context: ./showtimes/
           file: ./showtimes/Dockerfile
           tags: |
-            mmorejon/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/mmorejon/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            autotune/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/autotune/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
       - name: Build and push bookings microservice
         uses: docker/build-push-action@v2
         with:
@@ -78,5 +78,5 @@ jobs:
           context: ./bookings/
           file: ./bookings/Dockerfile
           tags: |
-            mmorejon/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
-            ghcr.io/mmorejon/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            autotune/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+            ghcr.io/autotune/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
