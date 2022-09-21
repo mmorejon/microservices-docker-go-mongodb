@@ -21,8 +21,11 @@ jobs:
         uses: actions/checkout@v2
       - name: Get short SHA
         id: slug
-        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-      - name: GitHub Package Registry
+        run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)
+      - name: Get the version
+        id: get_version
+        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+      - name: GitHub Package Registry - Users
         uses: aevea/action-kaniko@master
         with:
           registry: ghcr.io
@@ -31,10 +34,11 @@ jobs:
           build_file: Dockerfile
           path: ./users/
           image: autotune/microservices-docker-go-mongodb-tf/users
-          tag: ${{ steps.slug.outputs.sha8 }}
+          tag: |
+              ${{ steps.slug.outputs.sha8 }}
+              autotune/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+              ghcr.io/autotune/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }
           cache: true
           cache_registry: cache
-      - name: Get the version
-        id: get_version
-        run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+
         
