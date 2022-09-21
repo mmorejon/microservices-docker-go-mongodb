@@ -1,3 +1,7 @@
+40 lines (36 sloc)  1.07 KB
+RawBlame
+￼
+￼
 name: release
 
 on:
@@ -22,7 +26,7 @@ jobs:
       - name: Get short SHA
         id: slug
         run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
-      - name: GitHub Package Registry - Users
+      - name: GitHub Package Registry
         uses: aevea/action-kaniko@master
         with:
           registry: ghcr.io
@@ -31,11 +35,12 @@ jobs:
           build_file: Dockerfile
           path: ./users/
           image: autotune/microservices-docker-go-mongodb-tf/users
-          tag: ${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
+          tag: ${{ steps.slug.outputs.sha8 }}
           cache: true
           cache_registry: cache
       - name: Get the version
         id: get_version
         run: echo ::set-output name=VERSION::${GITHUB_REF/refs\/tags\//}
+        
 
         
