@@ -34,7 +34,7 @@ jobs:
           build_file: Dockerfile
           path: ./users/
           image: autotune/microservices-docker-go-mongodb-tf/users
-          tag: ${{ steps.slug.outputs.sha8 }}
+          tag: ${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
 
