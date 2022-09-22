@@ -13,4 +13,5 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(
     digitalocean_kubernetes_cluster.cinema.kube_config[0].cluster_ca_certificate
   )
+  alias = "cinema"
 }
