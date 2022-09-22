@@ -43,7 +43,7 @@ jobs:
         tf_actions_version: 0.13.0
         tf_actions_working_dir: 'digitalocean'
         tf_actions_subcommand: 'apply'
-        args: ' #-var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID}}" -var aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY}}"'
+        args: ''
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'digitalocean'
