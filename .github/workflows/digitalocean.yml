@@ -26,8 +26,8 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'digitalocean'
-        AWS_ACCESS_KEY_ID: "foo"
-        AWS_SECRET_ACCESS_KEY: "bar"
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
 
     - name: Terraform Validate
@@ -47,6 +47,6 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'digitalocean'
-        # AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-        # AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
