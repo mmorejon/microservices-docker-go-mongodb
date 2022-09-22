@@ -11,5 +11,5 @@ resource "digitalocean_kubernetes_cluster" "cinema" {
     min_nodes  = 4
     max_nodes  = 8 
   }
-  vpc_uuid = digitalocean_vpc.cinema-network.id
+  vpc_uuid = digitalocean_vpc.cinema.id
 }
