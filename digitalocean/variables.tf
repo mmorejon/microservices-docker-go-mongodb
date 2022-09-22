@@ -6,5 +6,5 @@ variable "do_token" {
 variable "domain_name" {
   type        = list 
   description = "Domain Name"
-  default     = ["wayofthesys.com"]
+  default     = ["wayofthesys.org"]
 }
