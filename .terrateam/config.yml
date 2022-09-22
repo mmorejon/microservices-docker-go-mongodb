@@ -31,5 +31,6 @@ dirs:
     tags: [gcp, prod]
     when_modified:
       file_patterns: ["gcp/prod/*.tf", "gcp/prod/*.tfvars"]
-
+  digitalocean:
+    tags: [digitalocean]
 
