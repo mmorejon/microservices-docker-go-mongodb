@@ -27,35 +27,9 @@ hooks:
     pre: []
     post: []
 dirs:
-  gcp/prod:
+  "gcp/prod":
     tags: [gcp, prod]
     when_modified:
       file_patterns: ["gcp/prod/*.tf", "gcp/prod/*.tfvars"]
-   digitalocean:
+  "digitalocean":
     tags: [digitalocean]
-workflows:
-  - tag_query: digitalocean
-    plan:
-      - type: env
-        name: AWS_ACCESS_KEY_ID
-        cmd: ['echo', '$SPACES_ACCESS_KEY_ID']
-      - type: env
-        name: AWS_SECRET_ACCESS_KEY
-        cmd: ['echo', '$SPACES_SECRET_ACCESS_KEY']
-      - type: env
-        name: DIGITAL_OCEAN_TOKEN
-        cmd: ['echo', '$DIGITAL_OCEAN_ACCESS_KEY']
-      - type: init
-      - type: plan
-    apply:
-      - type: env
-        name: AWS_ACCESS_KEY_ID
-        cmd: ['echo', '$SPACES_ACCESS_KEY_ID']
-      - type: env
-        name: AWS_SECRET_ACCESS_KEY
-        cmd: ['echo', '$SPACES_SECRET_ACCESS_KEY']
-      - type: env
-        name: DIGITAL_OCEAN_TOKEN
-        cmd: ['echo', '$DIGITAL_OCEAN_ACCESS_KEY']
-      - type: init
-      - type: apply
