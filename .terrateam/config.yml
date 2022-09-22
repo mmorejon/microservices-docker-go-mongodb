@@ -45,6 +45,9 @@ workflows:
       - type: env
         name: DIGITALOCEAN_ACCESS_TOKEN
         cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
+      - type: env
+        name: TF_VAR_do_token
+        cmd: ['echo', '$TF_VAR_do_token']
       - type: init
       - type: plan
     apply:
@@ -57,5 +60,8 @@ workflows:
       - type: env
         name: DIGITALOCEAN_ACCESS_TOKEN
         cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
+      - type: env
+        name: TF_VAR_do_token
+        cmd: ['echo', '$TF_VAR_do_token']
       - type: init
       - type: apply
