@@ -1,6 +1,6 @@
 provider "helm" {
   kubernetes {
-    host                   = "${digitalocean_kubernetes_cluster.cinema.endpoint}"
+    host                   = digitalocean_kubernetes_cluster.cinema.endpoint
     cluster_ca_certificate = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].cluster_ca_certificate)
     token                  = digitalocean_kubernetes_cluster.cinema.kube_config[0].token
   }
