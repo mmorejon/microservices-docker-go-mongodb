@@ -109,5 +109,13 @@ resource "helm_release" "bookinfo" {
     name  = "service.type"
     value = "ClusterIP"
   }
+  set {
+    name  = "gateway.selector"
+    value = "ingressgateway"
+  }
+  set {
+    name  = "gateway.hostname"
+    value = var.domain_name[0]
+  }
   depends_on = [helm_release.istiod]
 }
