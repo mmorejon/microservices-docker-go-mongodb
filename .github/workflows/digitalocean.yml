@@ -1,5 +1,4 @@
- 
-name: Deploy Infrastructure
+name: Deploy DigitalOcean Infra 
 
 on:
   push:
