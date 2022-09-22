@@ -27,10 +27,10 @@ hooks:
     pre: []
     post: []
 dirs:
-  gcp/prod:
+  "gcp/prod":
     tags: [gcp, prod]
     when_modified:
       file_patterns: ["gcp/prod/*.tf", "gcp/prod/*.tfvars"]
-  digitalocean:
+  "digitalocean":
     tags: [digitalocean]
 
