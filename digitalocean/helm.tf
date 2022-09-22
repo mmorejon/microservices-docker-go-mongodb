@@ -96,3 +96,18 @@ resource "helm_release" "istio-egress" {
   }
   depends_on = [helm_release.istiod]
 }
+
+resource "helm_release" "bookinfo" {
+  provider   = helm.cinema
+  repository = local.bookinfo-repo
+  name       = "bookinfo"
+  chart      = "every-ace/istio-bookinfo"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = kubernetes_namespace.devingress.metadata.0.name
+  set {
+    name  = "service.type"
+    value = "ClusterIP"
+  }
+  depends_on = [helm_release.istiod]
+}
