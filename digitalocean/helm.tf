@@ -18,6 +18,7 @@ resource "helm_release" "external-dns" {
   set {
     name  = "rbac.create"
     value = "true"
+  }
   set {
     name  = "domainFilters"
     value = "{${var.domain_name[0]}}"
