@@ -78,12 +78,9 @@ resource "helm_release" "istio-ingress" {
   cleanup_on_fail = true
   force_update    = true
   namespace       = kubernetes_namespace.istio-system.metadata.0.name
-  set {
-    name  = "service.loadBalancerIP"
-    value = var.loadBalancer_IP
-  }
-  depends_on = [helm_release.istiod]
+  depends_on      = [helm_release.istiod]
 }
+
 resource "helm_release" "istio-egress" {
   repository = local.istio-repo
   name       = "istio-egressgateway"
