@@ -8,3 +8,8 @@ variable "domain_name" {
   description = "Domain Name"
   default     = ["wayofthesys.org"]
 }
+
+variable "argocd_oidc_secret" {
+  type        = string
+  description = "ArgoCD OIDC Secret"
+}
