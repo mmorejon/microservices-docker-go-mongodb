@@ -72,6 +72,7 @@ resource "helm_release" "istiod" {
 }
 
 resource "helm_release" "istio-ingress" {
+  provider        = helm.cinema
   repository      = local.istio-repo
   name            = "istio-ingressgateway"
   chart           = "gateway"
@@ -82,6 +83,7 @@ resource "helm_release" "istio-ingress" {
 }
 
 resource "helm_release" "istio-egress" {
+  provider   = helm.cinema
   repository = local.istio-repo
   name       = "istio-egressgateway"
   chart      = "gateway"
