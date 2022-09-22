@@ -43,8 +43,8 @@ workflows:
         name: AWS_SECRET_ACCESS_KEY
         cmd: ['echo', '$SPACES_SECRET_ACCESS_KEY']
       - type: env
-        name: DIGITAL_OCEAN_TOKEN
-        cmd: ['echo', '$DIGITAL_OCEAN_ACCESS_KEY']
+        name: DIGITALOCEAN_ACCESS_TOKEN
+        cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
       - type: init
       - type: plan
     apply:
@@ -55,7 +55,7 @@ workflows:
         name: AWS_SECRET_ACCESS_KEY
         cmd: ['echo', '$SPACES_SECRET_ACCESS_KEY']
       - type: env
-        name: DIGITAL_OCEAN_TOKEN
-        cmd: ['echo', '$DIGITAL_OCEAN_ACCESS_KEY']
+        name: DIGITALOCEAN_ACCESS_TOKEN
+        cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
       - type: init
       - type: apply
