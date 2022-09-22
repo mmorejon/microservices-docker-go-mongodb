@@ -26,9 +26,9 @@ jobs:
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'digitalocean'
-        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        DIGITALOCEAN_TOKEN:  ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.SPACES_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.SPACES_SECRET_ACCESS_KEY }}
+        DIGITALOCEAN_TOKEN:  ${{ secrets.DIGITALOCEAN_ACCESS_KEY }}
 
     - name: Terraform Validate
       uses: hashicorp/terraform-github-actions@master
@@ -43,10 +43,10 @@ jobs:
         tf_actions_version: 1.0.0
         tf_actions_working_dir: 'digitalocean'
         tf_actions_subcommand: 'apply'
-        args: ''
+        args: '' 
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         TF_ACTION_WORKING_DIR: 'digitalocean'
-        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
-        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        DIGITALOCEAN_TOKEN:  ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+        AWS_ACCESS_KEY_ID:  ${{ secrets.SPACES_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.SPACES_SECRET_ACCESS_KEY }}
+        DIGITALOCEAN_TOKEN:  ${{ secrets.DIGITALOCEAN_ACCESS_KEY }}
