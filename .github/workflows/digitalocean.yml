@@ -49,4 +49,4 @@ jobs:
         TF_ACTION_WORKING_DIR: 'digitalocean'
         AWS_ACCESS_KEY_ID:  ${{ secrets.SPACES_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.SPACES_SECRET_ACCESS_KEY }}
-        TF_VAR_do_token:  ${{ secrets.DIGITALOCEAN_ACCESS_KEY }}
+        TF_VAR_do_token:  ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
