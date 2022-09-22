@@ -28,3 +28,72 @@ resource "helm_release" "external-dns" {
     value = "{ingress,service}"
   }
 }
+
+resource "helm_release" "istio-base" {
+  provider        = helm.cinema
+  repository      = local.istio-repo
+  name            = "istio-base"
+  chart           = "base"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = kubernetes_namespace.istio-system.metadata.0.name
+  depends_on      = [kubernetes_namespace.istio-system]
+}
+
+resource "helm_release" "istiod" {
+  provider        = helm.cinema
+  repository      = local.istio-repo
+  name            = "istiod"
+  chart           = "istiod"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = kubernetes_namespace.istio-system.metadata.0.name
+  set {
+    name  = "meshConfig.accessLogFile"
+    value = "/dev/stdout"
+  }
+  set {
+    name  = "grafana.enabled"
+    value = "true"
+  }
+  set {
+    name  = "kiali.enabled"
+    value = "true"
+  }
+  set {
+    name  = "servicegraph.enabled"
+    value = "true"
+  }
+  set {
+    name  = "tracing.enabled"
+    value = "true"
+  }
+  depends_on = [helm_release.istio-base]
+}
+
+resource "helm_release" "istio-ingress" {
+  repository      = local.istio-repo
+  name            = "istio-ingressgateway"
+  chart           = "gateway"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = kubernetes_namespace.istio-system.metadata.0.name
+  set {
+    name  = "service.loadBalancerIP"
+    value = var.loadBalancer_IP
+  }
+  depends_on = [helm_release.istiod]
+}
+resource "helm_release" "istio-egress" {
+  repository = local.istio-repo
+  name       = "istio-egressgateway"
+  chart      = "gateway"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = kubernetes_namespace.istio-system.metadata.0.name
+  set {
+    name  = "service.type"
+    value = "ClusterIP"
+  }
+  depends_on = [helm_release.istiod]
+}
