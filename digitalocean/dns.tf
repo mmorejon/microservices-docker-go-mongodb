@@ -1,11 +1,3 @@
 resource "digitalocean_domain" "do-wayofthesys" {
-  name       = "do.wayofthesys.com"
+  name       = "wayofthesys.org"
 }
-
-resource "digitalocean_record" "test" {
-  domain = digitalocean_domain.do-wayofthesys.id
-  type   = "A"
-  name   = "test"
-  value  = "159.89.244.226"
-}
-
