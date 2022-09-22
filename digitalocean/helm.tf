@@ -11,7 +11,7 @@ resource "helm_release" "external-dns" {
     name  = "provider"
     value = "digitalocean"
   }
-  set {
+  set_sensitive {
     name  = "digitalocean.apiToken"
     value = var.do_token 
   }
