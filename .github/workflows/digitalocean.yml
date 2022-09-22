@@ -40,7 +40,7 @@ jobs:
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
       with:
-        tf_actions_version: 0.13.0
+        tf_actions_version: 1.0.0
         tf_actions_working_dir: 'digitalocean'
         tf_actions_subcommand: 'apply'
         args: ''
