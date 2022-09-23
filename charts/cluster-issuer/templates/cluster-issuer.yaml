@@ -1,0 +1,20 @@
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: zerossl 
+spec:
+  acme:
+    email: {{ .Values.zerossl_email }}
+    server: https://acme.zerossl.com/v2/DV90
+    externalAccountBinding:
+      keyID: {{ .Values.zerossl_eab_hmac_key_id }}
+      keySecretRef:
+        name: zerossl-hmac-key 
+        key: secret
+      keyAlgorithm: HS256
+    privateKeySecretRef:
+        name: prod 
+    solvers:
+    - http01:
+        ingress:
+          class: nginx

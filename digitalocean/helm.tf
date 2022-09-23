@@ -123,3 +123,81 @@ resource "helm_release" "bookinfo" {
   }
   depends_on = [helm_release.istiod]
 }
+
+module "argocd" {
+  source  = "project-octal/argocd/kubernetes"
+  version = "1.0.0"
+
+  depends_on = [digitalocean_kubernetes_cluster.cinema, kubernetes_namespace.external-dns, kubernetes_namespace.argocd]
+
+  namespace              = "kube-argocd"
+  argocd_server_replicas = 2
+  argocd_repo_replicas   = 2
+  enable_dex             = false
+
+  ingress_enabled    = true
+  ingress_host       = "argocd.${var.domain_name}"
+  ingress_path       = "/"
+  ingress_class_name = "istio"
+  ingress_cert_issuer_annotation = {
+    "cert-manager.io/cluster-issuer" : "ZeroSSL" 
+  }
+
+  argocd_server_requests = {
+    cpu = "300m"
+    memory = "256Mi"
+  }
+  argocd_server_limits = {
+    cpu = "600m"
+    memory = "512Mi"
+  }
+
+  repo_server_exec_timeout = "300"
+  argocd_repo_requests = {
+    cpu = "300m"
+    memory = "256Mi"
+  }
+  argocd_repo_limits = {
+    cpu = "600m"
+    memory = "512Mi"
+  }
+  argocd_repositories = [
+    {
+      name = "Helm-Main"
+      type = "helm"
+      url = "https://charts.helm.sh/stable"
+    }
+  ]
+
+  oidc_config = {
+    name                      = var.argocd_oidc_name
+    issuer                    = var.argocd_oidc_issuer
+    client_id                 = var.argocd_oidc_client_id
+    client_secret             = var.argocd_oidc_client_secret
+    requested_scopes          = var.argocd_oidc_requested_scopes
+    requested_id_token_claims = var.argocd_oidc_requested_id_token_claims
+  }
+}
+
+resource "helm_release" "cluster-issuer" {
+  provider  = helm.cinema
+  name      = "cluster-issuer"
+  chart     = "../charts/cluster-issuer"
+  namespace = "kube-system"
+  depends_on = [
+    helm_release.cert-manager,
+    digitalocean_kubernetes_cluster.cinema,
+  ]
+  set_sensitive {
+    name  = "zerossl_email"
+    value = var.zerossl_email
+  }
+  set_sensitive {
+    name  = "zerossl_eab_hmac_key"
+    value = var.zerossl_eab_hmac_key
+  }
+  set_sensitive {
+    name  = "zerossl_eab_hmac_key_id"
+    value = var.zerossl_eab_hmac_key
+  }
+}
