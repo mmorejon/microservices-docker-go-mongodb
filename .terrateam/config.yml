@@ -46,7 +46,7 @@ workflows:
         name: TF_VAR_do_token
         cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
       - type: env
-        name: TF_VAR_argocd_oidc_secret
+        name: TF_VAR_argocd_oidc_client_secret
         cmd: ['echo', '$ARGOCD_OIDC_SECRET']
       - type: init
       - type: plan
@@ -61,7 +61,7 @@ workflows:
         name: TF_VAR_do_token
         cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
       - type: env
-        name: TF_VAR_argocd_oidc_secret
+        name: TF_VAR_argocd_oidc_client_secret
         cmd: ['echo', '$ARGOCD_OIDC_SECRET']
       - type: init
       - type: apply
