@@ -194,7 +194,7 @@ module "argocd" {
     client_id                 = var.argocd_oidc_client_id
     client_secret             = var.argocd_oidc_client_secret
     requested_id_token_claims = "object({})"
-    requested_scopes          = map()
+    requested_scopes          = tomap({}) 
   }
 }
 
