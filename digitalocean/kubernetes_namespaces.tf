@@ -35,3 +35,11 @@ resource "kubernetes_namespace" "argocd" {
     }
   }
 }
+
+resource "kubernetes_namespace" "cert-manager" {
+  depends_on = [digitalocean_kubernetes_cluster.cinema]
+  provider   = kubernetes.cinema
+  metadata {
+    name = "cert-manager"
+  }
+}
