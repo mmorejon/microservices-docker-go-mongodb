@@ -130,7 +130,7 @@ module "argocd" {
 
   depends_on = [digitalocean_kubernetes_cluster.cinema, kubernetes_namespace.external-dns, kubernetes_namespace.argocd]
 
-  namespace              = "kube-argocd"
+  namespace              = "argocd"
   argocd_server_replicas = 2
   argocd_repo_replicas   = 2
   enable_dex             = false
