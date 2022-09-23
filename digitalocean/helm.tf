@@ -161,7 +161,7 @@ module "argocd" {
   ingress_enabled    = true
   ingress_host       = "argocd.${var.domain_name[0]}"
   ingress_path       = "/"
-  ingress_class_name = "istio"
+  ingress_class_name = "gateway"
   ingress_cert_issuer_annotation = {
     "cert-manager.io/cluster-issuer" : "ZeroSSL" 
   }
