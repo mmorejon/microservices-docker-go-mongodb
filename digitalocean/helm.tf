@@ -153,7 +153,7 @@ module "argocd" {
     kubernetes = kubernetes.cinema
   }
 
-  namespace              = "argocd"
+  namespace              = "kube-argocd"
   argocd_server_replicas = 2
   argocd_repo_replicas   = 2
   enable_dex             = false
