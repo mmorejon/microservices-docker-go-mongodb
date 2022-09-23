@@ -193,7 +193,7 @@ module "argocd" {
     issuer                    = var.argocd_oidc_issuer
     client_id                 = var.argocd_oidc_client_id
     client_secret             = var.argocd_oidc_client_secret
-    requested_id_token_claims = "object({})"
+    requested_id_token_claims = "tomap({})"
     requested_scopes          = ["openid"]
   }
 }
