@@ -149,13 +149,17 @@ module "argocd" {
 
   depends_on = [digitalocean_kubernetes_cluster.cinema, kubernetes_namespace.external-dns, kubernetes_namespace.argocd]
 
+  providers = {
+    kubernetes = kubernetes.cinema
+  }
+
   namespace              = "argocd"
   argocd_server_replicas = 2
   argocd_repo_replicas   = 2
   enable_dex             = false
 
   ingress_enabled    = true
-  ingress_host       = "argocd.${var.domain_name}"
+  ingress_host       = "argocd.${var.domain_name[0]}"
   ingress_path       = "/"
   ingress_class_name = "istio"
   ingress_cert_issuer_annotation = {
