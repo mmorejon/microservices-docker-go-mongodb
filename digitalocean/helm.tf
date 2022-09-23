@@ -174,8 +174,6 @@ module "argocd" {
     issuer                    = var.argocd_oidc_issuer
     client_id                 = var.argocd_oidc_client_id
     client_secret             = var.argocd_oidc_client_secret
-    requested_scopes          = var.argocd_oidc_requested_scopes
-    requested_id_token_claims = var.argocd_oidc_requested_id_token_claims
   }
 }
 
