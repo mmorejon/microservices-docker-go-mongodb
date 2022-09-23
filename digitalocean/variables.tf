@@ -44,4 +44,17 @@ variable "argocd_oidc_client_secret" {
   description = "ArgoCD OIDC Client Secret"
 }
 
+variable "zerossl_email" {
+  type        = string
+  description = "ZeroSSL Email Address"
+}
 
+variable "zerossl_eab_hmac_key" {
+  type        = string
+  description = "ZeroSSL EAB HMAC KEY"
+}
+
+variable "zerossl_eab_hmac_key_id" {
+  type        = string
+  description = "ZeroSSL EAB HMAC KEY ID"
+}
