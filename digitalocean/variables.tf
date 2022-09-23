@@ -9,11 +9,6 @@ variable "domain_name" {
   default     = ["wayofthesys.org"]
 }
 
-variable "argocd_oidc_secret" {
-  type        = string
-  description = "ArgoCD OIDC Secret"
-}
-
 variable "argocd_gitops_repo" {
   type        = string
   description = "ArgoCD GitOps Repo"
