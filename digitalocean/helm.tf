@@ -33,6 +33,25 @@ resource "helm_release" "external-dns" {
   }
 }
 
+resource "helm_release" "cert-manager" {
+  provider   = helm.cinema
+  depends_on = [kubernetes_namespace.cert-manager]
+  name       = "cert-manager"
+  repository = "https://charts.jetstack.io"
+  chart      = "cert-manager"
+  version    = "v1.9.1"
+  namespace  = "kube-system"
+  timeout    = 120
+  set {
+    name  = "createCustomResource"
+    value = "true"
+  }
+  set {
+    name  = "installCRDs"
+    value = "true"
+  }
+}
+
 resource "helm_release" "istio-base" {
   provider        = helm.cinema
   repository      = local.istio-repo
