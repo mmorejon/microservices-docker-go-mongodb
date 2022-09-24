@@ -1,11 +1,11 @@
 resource "kubernetes_manifest" "gateway_resource" {
   provider   = kubernetes.cinema
-  namespace  = kubernetes_namespace.kube-argocd
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "Gateway"
     "metadata" = {
-      "name" = "argocd-gateway"
+      "name"       = "argocd-gateway"
+      "namespace"  = kubernetes_namespace.kube-argocd
     }
     "spec" = {
       "selector" = {
