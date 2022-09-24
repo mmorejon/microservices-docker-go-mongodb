@@ -154,7 +154,6 @@ module "argocd" {
   }
 
   namespace              = "kube-argocd"
-  namespace_annotations  = ""
   argocd_server_replicas = 2
   argocd_repo_replicas   = 2
   enable_dex             = false
