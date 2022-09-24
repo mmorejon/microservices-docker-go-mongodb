@@ -154,14 +154,15 @@ module "argocd" {
   }
 
   namespace              = "kube-argocd"
+  namespace_annotations  = ""
   argocd_server_replicas = 2
   argocd_repo_replicas   = 2
   enable_dex             = false
 
-  ingress_enabled    = true
+  ingress_enabled    = false 
   ingress_host       = "argocd.${var.domain_name[0]}"
   ingress_path       = "/"
-  ingress_class_name = "ingress"
+  ingress_class_name = "istio"
   ingress_cert_issuer_annotation = {
     "kubernetes.io/ingress.class" : "istio"
     "cert-manager.io/cluster-issuer" : "ZeroSSL" 
