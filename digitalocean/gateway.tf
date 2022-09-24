@@ -28,7 +28,7 @@ resource "kubernetes_manifest" "gateway_resource" {
         },
         {
           "hosts" = [
-            "argo.${var.domain_name[0]}",
+            "argocd.${var.domain_name[0]}",
           ]
           "port" = {
             "name"     = "http"
