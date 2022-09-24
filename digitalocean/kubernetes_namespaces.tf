@@ -43,3 +43,14 @@ resource "kubernetes_namespace" "cert-manager" {
     name = "cert-manager"
   }
 }
+
+resource "kubernetes_namespace" "cinema" {
+  depends_on = [digitalocean_kubernetes_cluster.cinema]
+  provider   = kubernetes.cinema
+  metadata {
+    name = "cinema"
+    labels = {
+      istio-injection = "enabled"
+    }
+  }
+}
