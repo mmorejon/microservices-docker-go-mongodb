@@ -7,7 +7,6 @@ resource "kubernetes_manifest" "virtualservice_resource" {
       "name" = "argocd"
       "namespace"  = "kube-argocd"
     }
-    }
     "spec" = {
       "gateways" = [
         "argocd-gateway",
