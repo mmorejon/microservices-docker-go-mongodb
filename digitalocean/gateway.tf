@@ -1,5 +1,5 @@
 resource "kubernetes_manifest" "gateway_resource" {
-  provider   = helm.cinema
+  provider   = kubernetes.cinema
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "Gateway"
