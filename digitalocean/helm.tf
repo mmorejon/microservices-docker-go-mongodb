@@ -161,7 +161,7 @@ module "argocd" {
   ingress_enabled    = true
   ingress_host       = "argocd.${var.domain_name[0]}"
   ingress_path       = "/"
-  ingress_class_name = "Ingress"
+  ingress_class_name = "ingress"
   ingress_cert_issuer_annotation = {
     "kubernetes.io/ingress.class" : "istio"
     "cert-manager.io/cluster-issuer" : "ZeroSSL" 
