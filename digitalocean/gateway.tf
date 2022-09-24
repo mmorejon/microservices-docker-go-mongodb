@@ -22,7 +22,7 @@ resource "kubernetes_manifest" "gateway_resource" {
             "protocol" = "HTTPS"
           }
           "tls" = {
-            "credentialName" = "argo-cert"
+            "credentialName" = "argocd-secret"
             "mode"           = "SIMPLE"
           }
         },
