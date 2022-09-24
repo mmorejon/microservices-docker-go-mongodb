@@ -1,6 +1,6 @@
 resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes.cinema
-  depends_on = [module.gke-cinema, module.external-dns, kubernetes_namespace.cinema]
+  depends_on = [digitalocean_kubernetes_cluster.cinema, module.external-dns, kubernetes_namespace.cinema]
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-argocd-tls"
     namespace = "kube-argocd"
