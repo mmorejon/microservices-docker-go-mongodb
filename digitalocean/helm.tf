@@ -157,7 +157,7 @@ module "argocd" {
   argocd_server_replicas = 2
   argocd_repo_replicas   = 2
   enable_dex             = false
-  labels                 = "{"foo" = "bar"}"
+  labels                 = {"foo" = "bar"}
   ingress_enabled    = false 
   ingress_host       = "argocd.${var.domain_name[0]}"
   ingress_path       = "/"
