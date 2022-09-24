@@ -1,5 +1,5 @@
 module "argocd" {
-  source  = "https://github.com/autotune/terraform-kubernetes-argocd"
+  source  = "git::https://github.com/autotune/terraform-kubernetes-argocd"
 
   depends_on = [digitalocean_kubernetes_cluster.cinema, kubernetes_namespace.external-dns, kubernetes_namespace.argocd]
 
