@@ -36,7 +36,7 @@ resource "kubernetes_manifest" "gateway_resource" {
             "protocol" = "HTTP"
           }
           "tls" = {
-            "httpsRedirect" = true
+            "httpsRedirect" = false 
           }
         },
       ]
