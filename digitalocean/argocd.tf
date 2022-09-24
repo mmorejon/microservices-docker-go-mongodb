@@ -1,6 +1,5 @@
 module "argocd" {
   source  = "https://github.com/autotune/terraform-kubernetes-argocd"
-  version = "1.0.0"
 
   depends_on = [digitalocean_kubernetes_cluster.cinema, kubernetes_namespace.external-dns, kubernetes_namespace.argocd]
 
