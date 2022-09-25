@@ -22,8 +22,8 @@ resource "kubernetes_manifest" "gateway_resource" {
             "protocol" = "HTTPS"
           }
           "tls" = {
-            "credentialName" = "argocd-secret"
-            "mode"           = "SIMPLE"
+            "credentialName" = "argocd-secret",
+            "mode"           = "SIMPLE",
             "acme.enabled"   = "true" 
             }
           }
