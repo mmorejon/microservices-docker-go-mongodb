@@ -1,3 +1,4 @@
+/ *
 resource "digitalocean_kubernetes_cluster" "cinema" {
   name   = "cinema"
   region = "nyc3"
@@ -12,4 +13,4 @@ resource "digitalocean_kubernetes_cluster" "cinema" {
     max_nodes  = 8 
   }
   vpc_uuid = digitalocean_vpc.cinema.id
-}
+}*/
