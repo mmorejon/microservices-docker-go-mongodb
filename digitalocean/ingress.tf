@@ -11,7 +11,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   spec {
     default_backend {
       service {
-        name = "argocd"
+        name = "argocd-argo-cd-server"
         port {
           number = 80
         }
