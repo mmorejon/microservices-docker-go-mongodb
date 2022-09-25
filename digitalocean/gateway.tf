@@ -24,6 +24,9 @@ resource "kubernetes_manifest" "gateway_resource" {
           "tls" = {
             "credentialName" = "argocd-secret"
             "mode"           = "SIMPLE"
+            "acme" = {
+              "enabled" = "true"
+            }
           }
         },
         {
