@@ -20,7 +20,6 @@ spec:
           class: nginx
     - dns01:
         digitalocean:
-          accessKeyID: "1MGv2le8uys7iENq7tS-uA" 
           tokenSecretRef:
             name: digital-ocean-secret 
             key: secret
