@@ -42,7 +42,7 @@ resource "kubernetes_secret" "digital-ocean-secret" {
   depends_on = [digitalocean_kubernetes_cluster.cinema]
   metadata {
     name      = "digital-ocean-secret"
-    namespace = "cert-manager"
+    namespace = "kube-system"
   }
   data = {
     token = base64encode(var.do_token)
