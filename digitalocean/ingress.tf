@@ -9,18 +9,13 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   }
 
   spec {
-    backend {
-      service_name = "argocd-argo-cd-server"
-      service_port = 80
-    }
-
     rule {
      host = "argocd.wayofthesys.org"
       http {
         path {
           backend {
-            service_name = "argocd-argo-cd-server"
-            service_port = 80
+            name = "argocd-argo-cd-server"
+            port = 80
           }
 
           path = "/"
