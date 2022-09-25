@@ -1,4 +1,3 @@
-/ *
 module "argocd" {
   source  = "git::https://github.com/autotune/terraform-kubernetes-argocd?ref=argocd-tls-disabled"
 
@@ -55,4 +54,4 @@ module "argocd" {
     requested_id_token_claims = tomap({})
     requested_scopes          = ["openid"]
   }
-} */
+} 
