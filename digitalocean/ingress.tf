@@ -1,4 +1,4 @@
-resource "kubernetes_ingress" "argocd_ingress" {
+resource "kubernetes_ingress_v1" "argocd_ingress" {
   provider = kubernetes.cinema
   metadata {
     name      = "argocd-ingress"
