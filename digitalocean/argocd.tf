@@ -1,4 +1,3 @@
-/*
 module "argocd" {
   source  = "git::https://github.com/autotune/terraform-kubernetes-argocd?ref=argocd-tls-disabled"
 
@@ -13,12 +12,12 @@ module "argocd" {
   argocd_repo_replicas   = 2
   enable_dex             = false
   labels                 = { "istio-injection" = "enabled"}
-  ingress_enabled    = false
+  ingress_enabled    = true
   ingress_host       = "argocd.${var.domain_name[0]}"
   ingress_path       = "/"
-  ingress_class_name = "istio"
+  ingress_class_name = "nginx"
   ingress_cert_issuer_annotation = {
-    "kubernetes.io/ingress.class" : "istio"
+    "kubernetes.io/ingress.class" : "nginx"
     "cert-manager.io/cluster-issuer" : "ZeroSSL"
   }
   argocd_server_requests = {
@@ -55,4 +54,4 @@ module "argocd" {
     requested_id_token_claims = tomap({})
     requested_scopes          = ["openid"]
   }
-}*/
+}
