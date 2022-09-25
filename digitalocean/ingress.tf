@@ -2,6 +2,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   provider = kubernetes.cinema
   metadata {
     name = "argocd-ingress"
+    namespace = "argocd"
     annotations = {
       "kubernetes.io/ingress.class" = "nginx"
     }
