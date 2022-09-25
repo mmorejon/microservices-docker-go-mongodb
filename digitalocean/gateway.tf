@@ -5,7 +5,7 @@ resource "kubernetes_manifest" "gateway_resource" {
     "kind"       = "Gateway"
     "metadata" = {
       "name"       = "argocd-gateway"
-      "namespace"  = "argocd"
+      "namespace"  = "kube-argocd"
     }
     "spec" = {
       "selector" = {
