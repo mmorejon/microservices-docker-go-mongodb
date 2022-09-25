@@ -9,23 +9,32 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   }
 
   spec {
-    rule {
-     host = "argocd.wayofthesys.org"
-      http {
-        path {
-          backend {
-            name = "argocd-argo-cd-server"
-            port = 80
-          }
-
-          path = "/"
+    default_backend {
+      service {
+        name = "argocd-argo-cd-server"
+        port {
+          number = 80
         }
-       }
+        rule {
+          host = "argocd.${var.domain_name[0]}"
+          http {
+            path {
+              backend {
+                service {
+                  name = "argocd-argo-cd-server"
+                  port {
+                    number = 80
+                  }
+                }
+                path = "/"
+              }
+            }
+          }
+        }
       }
+      // tls {
+      //  secret_name = "argocd-secret"
+      // }
     }
-  
-  // tls {
-  //  secret_name = "argocd-secret"
-  // }
+  }
 }
-
