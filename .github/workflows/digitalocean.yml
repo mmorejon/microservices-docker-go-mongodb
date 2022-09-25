@@ -1,0 +1,77 @@
+name: Deploy Infrastructure
+
+on:
+  push:
+    branches:
+      - digitalocean
+    paths-ignore:
+      - 'gcp/*'
+      - 'gcp/**'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    
+  tf_apply:
+    name: Deploy 
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Checkout Repo
+      uses: actions/checkout@master
+
+    - name: Terraform Init
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 1.0.0
+        tf_actions_working_dir: 'digitalocean'
+        tf_actions_subcommand: 'init'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
+        TF_VAR_zerossl_email: ${{ secrets.ZEROSSL_EMAIL }}
+        TF_VAR_zerossl_eab_hmac_key: ${{ secrets.ZEROSSL_EAB_HMAC_KEY }}
+        TF_VAR_zerossl_eab_hmac_key_id: ${{ secrets.ZEROSSL_EAB_KEY_ID }}
+        TF_VAR_mongodb_rootusername: ${{ secrets.MONGODB_USERNAME }}
+        TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
+        TF_VAR_argocd_access_token: ${{ secrets.ARGOCD_TOKEN }}
+        TF_VAR_argocd_oidc_token: ${{ secrets.ARGOCD_OIDC_SECRET }}
+
+    - name: Terraform Validate
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 1.0.0
+        tf_actions_working_dir: 'digitalocean'
+        tf_actions_subcommand: 'validate'
+      env:
+        TF_VAR_zerossl_email: ${{ secrets.ZEROSSL_EMAIL }}
+        TF_VAR_zerossl_eab_hmac_key: ${{ secrets.ZEROSSL_EAB_HMAC_KEY }}
+        TF_VAR_zerossl_eab_hmac_key_id: ${{ secrets.ZEROSSL_EAB_KEY_ID }}
+        TF_VAR_mongodb_rootusername: ${{ secrets.MONGODB_USERNAME }}
+        TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
+        TF_VAR_argocd_access_token: ${{ secrets.ARGOCD_TOKEN }}
+        TF_VAR_argocd_oidc_token: ${{ secrets.ARGOCD_OIDC_SECRET }}
+
+
+    - name: Terraform Apply
+      uses: hashicorp/terraform-github-actions@master
+      with:
+        tf_actions_version: 1.0.0
+        tf_actions_working_dir: 'digitalocean'
+        tf_actions_subcommand: 'apply'
+        args: '-var="grafana_api_key=${{ secrets.GRAFANA_API_KEY }}" -var="mongodb_root_password=${{ secrets.MONGODB_ROOT_PASSWORD }}" -var="gh_username=${{ secrets.GH_USERNAME }}" -var="package_registry_pat=${{ secrets.PACKAGE_REGISTRY_PAT }}" -var="aws_access_key_id=${{ secrets.AWS_ACCESS_KEY_ID}}" -var aws_secret_access_key=${{ secrets.AWS_SECRET_ACCESS_KEY}}" -var="oauth_cookie_secret=${{ secrets.OAUTH_COOKIE_SECRET }}" -var="oauth_client_id=${{ secrets.OAUTH_CLIENT_ID }}" -var=oauth_client_secret=${{ secrets.OAUTH_CLIENT_SECRET }} -var="sslcom_private_hmac_key=${{ secrets.SSLCOM_PRIVATE_KEYID }}" -var=sslcom_keyid=${{ secrets.SSLCOM_KEYID }} -var=sslcom_hmac_key=${{ secrets.SSLCOM_HMAC_KEY }}" -var="do_token=${{ secrets.DO_TOKEN }}" -var="atlantis_github_user=${{ secrets.ATLANTIS_GH_USER }} -var="atlantis_github_user_token=${{ secrets.ATLANTIS_GH_USER_TOKEN }} -var="letsencrypt_email"=${{ secrets.LETSENCRYPT_EMAIL }} -var="atlantis_github_user_token=${{ secrets.ATLANTIS_GH_TOKEN }}" -var="github_token=${{ secrets.ATLANTIS_GH_TOKEN }} -var="atlantis_github_user=${{ secrets.ATLANTIS_GH_USER }}"'
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
+        TF_VAR_zerossl_email: ${{ secrets.ZEROSSL_EMAIL }}
+        TF_VAR_zerossl_eab_hmac_key: ${{ secrets.ZEROSSL_EAB_HMAC_KEY }}
+        TF_VAR_zerossl_eab_hmac_key_id: ${{ secrets.ZEROSSL_EAB_KEY_ID }}
+        TF_VAR_mongodb_rootusername: ${{ secrets.MONGODB_USERNAME }}
+        TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
+        TF_VAR_argocd_access_token: ${{ secrets.ARGOCD_TOKEN }}
+        TF_VAR_argocd_oidc_token: ${{ secrets.ARGOCD_OIDC_SECRET }}
+
