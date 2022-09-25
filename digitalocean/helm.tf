@@ -154,12 +154,10 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
   cleanup_on_fail = true
   force_update    = true
-  namespace       = kubernetes_namespace.argocd.metadata.0.name
   # set {
   #   name  = "service.type"
   #   value = "ClusterIP"
   # }
-  depends_on = [helm_release.istiod]
 }
 
 resource "helm_release" "cluster-issuer" {
