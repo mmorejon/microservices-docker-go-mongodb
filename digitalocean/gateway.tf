@@ -4,7 +4,8 @@ resource "kubernetes_manifest" "argocd-gateway" {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "Gateway"
     "metadata" = {
-      "name" = "argocd-gateway"
+      "name"       = "argocd-gateway"
+       "namespace" = "kube-argocd"
     }
     "spec" = {
       "selector" = {
