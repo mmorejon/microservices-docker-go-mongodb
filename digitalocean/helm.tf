@@ -145,6 +145,23 @@ resource "helm_release" "bookinfo" {
 }
 */
 
+resource "helm_release" "argocd" {
+  depends_on = [kubernetes_namespace.argocd]
+  provider   = helm.cinema
+  repository = local.argocd-repo
+  namespace  = "argocd"
+  name       = "argocd"
+  chart      = "argo-cd"
+  cleanup_on_fail = true
+  force_update    = true
+  namespace       = kubernetes_namespace.argocd.metadata.0.name
+  # set {
+  #   name  = "service.type"
+  #   value = "ClusterIP"
+  # }
+  depends_on = [helm_release.istiod]
+}
+
 resource "helm_release" "cluster-issuer" {
   provider  = helm.cinema
   name      = "cluster-issuer"
