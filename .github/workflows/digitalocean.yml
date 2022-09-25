@@ -28,6 +28,9 @@ jobs:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
+        TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }
+        TF_VAR_aws_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        TF_VAR_do_token: ${{ secrets.DO_TOKEN }}
         TF_VAR_zerossl_email: ${{ secrets.ZEROSSL_EMAIL }}
         TF_VAR_zerossl_eab_hmac_key: ${{ secrets.ZEROSSL_EAB_HMAC_KEY }}
         TF_VAR_zerossl_eab_hmac_key_id: ${{ secrets.ZEROSSL_EAB_KEY_ID }}
@@ -50,7 +53,9 @@ jobs:
         TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
         TF_VAR_argocd_access_token: ${{ secrets.ARGOCD_TOKEN }}
         TF_VAR_argocd_oidc_token: ${{ secrets.ARGOCD_OIDC_SECRET }}
-
+        TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }
+        TF_VAR_aws_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        TF_VAR_do_token: ${{ secrets.DO_TOKEN }}
 
     - name: Terraform Apply
       uses: hashicorp/terraform-github-actions@master
@@ -63,6 +68,9 @@ jobs:
         AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         DIGITALOCEAN_TOKEN:  ${{ secrets.DO_TOKEN }}
+        TF_VAR_aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }
+        TF_VAR_aws_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        TF_VAR_do_token: ${{ secrets.DO_TOKEN }}
         TF_VAR_zerossl_email: ${{ secrets.ZEROSSL_EMAIL }}
         TF_VAR_zerossl_eab_hmac_key: ${{ secrets.ZEROSSL_EAB_HMAC_KEY }}
         TF_VAR_zerossl_eab_hmac_key_id: ${{ secrets.ZEROSSL_EAB_KEY_ID }}
