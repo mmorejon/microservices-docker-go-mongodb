@@ -52,6 +52,7 @@ resource "helm_release" "cert-manager" {
   }
 }
 
+/*
 resource "helm_release" "istio-base" {
   provider        = helm.cinema
   repository      = local.istio-repo
@@ -142,6 +143,7 @@ resource "helm_release" "bookinfo" {
   }
   depends_on = [helm_release.istiod]
 }
+*/
 
 resource "helm_release" "cluster-issuer" {
   provider  = helm.cinema
