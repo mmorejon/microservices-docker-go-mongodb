@@ -162,6 +162,6 @@ resource "helm_release" "cluster-issuer" {
   }
   set_sensitive {
     name  = "zerossl_eab_hmac_key_id"
-    value = var.zerossl_eab_hmac_key
+    value = var.zerossl_eab_hmac_key_id
   }
 }
