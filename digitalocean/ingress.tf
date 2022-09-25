@@ -24,12 +24,12 @@ resource "kubernetes_ingress" "argocd_ingress" {
 
           path = "/"
         }
-
+       }
       }
     }
-
-  tls {
-    secret_name = "argocd-secret"
-  }
+  
+  // tls {
+  //  secret_name = "argocd-secret"
+  // }
 }
 
