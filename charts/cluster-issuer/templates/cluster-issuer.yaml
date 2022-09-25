@@ -19,11 +19,9 @@ spec:
         ingress:
           class: nginx
     - dns01:
-        providers:
-        - name: digitalocean
-          digitalocean:
-            region: nyc3
-            accessKeyID: "1MGv2le8uys7iENq7tS-uA" 
-            secretAccessKeySecretRef:
-              name: digital-ocean-secret 
-              key: secret
+        digitalocean:
+          region: nyc3
+          accessKeyID: "1MGv2le8uys7iENq7tS-uA" 
+          secretAccessKeySecretRef:
+            name: digital-ocean-secret 
+            key: secret
