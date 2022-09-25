@@ -16,7 +16,7 @@ resource "kubernetes_manifest" "certificate_resource" {
         "kind" = "ClusterIssuer"
         "name" = "zerossl"
       }
-      "secretName" = "istio-customingressgateway-certs"
+      "secretName" = "${var.digital-ocean-secret}"
     }
   }
 }
