@@ -10,3 +10,29 @@ resource "kubernetes_secret" "argocd-tls" {
     "tls.key" = tls_private_key.key.private_key_pem
   }
 }
+
+resource "kubernetes_secret" "zerossl-eab-hmac-key" {
+  provider   = kubernetes.cinema
+  depends_on = [module.gke-cinema]
+  metadata {
+    name      = "zerossl-hmac-key"
+    namespace = "kube-system"
+  }
+  data = {
+    secret = var.zerossl_eab_hmac_key
+  }
+  type = "kubernetes.io/opaque"
+}
+
+resource "kubernetes_secret" "zerossl-eab-hmac-key-id" {
+  provider   = kubernetes.cinema
+  depends_on = [module.gke-cinema]
+  metadata {
+    name      = "zerossl-hmac-key-id"
+    namespace = "kube-system"
+  }
+  data = {
+    secret = var.zerossl_eab_hmac_key_id
+  }
+  type = "kubernetes.io/opaque"
+}
