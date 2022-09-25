@@ -1,3 +1,4 @@
+/* 
 resource "kubernetes_manifest" "virtualservice_resource" {
   provider = kubernetes.cinema
   manifest = {
@@ -31,3 +32,4 @@ resource "kubernetes_manifest" "virtualservice_resource" {
     }
   }
 }
+*/

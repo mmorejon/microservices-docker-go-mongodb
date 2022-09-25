@@ -1,3 +1,4 @@
+/*
 resource "kubernetes_manifest" "certificate_resource" {
   provider = kubernetes.cinema
   manifest = {
@@ -19,4 +20,4 @@ resource "kubernetes_manifest" "certificate_resource" {
       "secretName" = "${replace(var.domain_name[0], ".", "-")}-tls"
     }
   }
-}
+} */
