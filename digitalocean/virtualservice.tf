@@ -19,7 +19,7 @@ resource "kubernetes_manifest" "virtualservice_resource" {
           "route" = [
             {
               "destination" = {
-                "host" = "argocd-server.argocd.svc.cluster.local"
+                "host" = "argocd-server"
                 "port" = {
                   "number" = 80
                 }
