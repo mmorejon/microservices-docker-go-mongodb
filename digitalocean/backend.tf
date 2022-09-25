@@ -1,7 +1,7 @@
 terraform {
   backend "s3" {
     endpoint                    = "nyc3.digitaloceanspaces.com"
-    key                         = "cinema/prod.tfstate"
+    key                         = "cinema/production.tfstate"
     bucket                      = "wayofthesys"
     region                      = "us-east-1"
     skip_credentials_validation = true

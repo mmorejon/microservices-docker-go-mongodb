@@ -33,4 +33,35 @@ dirs:
       file_patterns: ["gcp/prod/*.tf", "gcp/prod/*.tfvars"]
   "digitalocean":
     tags: [digitalocean]
-
+workflows:
+  - tag_query: digitalocean
+    plan:
+      - type: env
+        name: AWS_ACCESS_KEY_ID
+        cmd: ['echo', '$SPACES_ACCESS_KEY_ID']
+      - type: env
+        name: AWS_SECRET_ACCESS_KEY
+        cmd: ['echo', '$SPACES_SECRET_ACCESS_KEY']
+      - type: env
+        name: TF_VAR_do_token
+        cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
+      - type: env
+        name: TF_VAR_argocd_oidc_client_secret
+        cmd: ['echo', '$ARGOCD_OIDC_SECRET']
+      - type: init
+      - type: plan
+    apply:
+      - type: env
+        name: AWS_ACCESS_KEY_ID
+        cmd: ['echo', '$SPACES_ACCESS_KEY_ID']
+      - type: env
+        name: AWS_SECRET_ACCESS_KEY
+        cmd: ['echo', '$SPACES_SECRET_ACCESS_KEY']
+      - type: env
+        name: TF_VAR_do_token
+        cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
+      - type: env
+        name: TF_VAR_argocd_oidc_client_secret
+        cmd: ['echo', '$ARGOCD_OIDC_SECRET']
+      - type: init
+      - type: apply
