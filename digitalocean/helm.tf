@@ -165,3 +165,11 @@ resource "helm_release" "cluster-issuer" {
     value = var.zerossl_eab_hmac_key_id
   }
 }
+
+resource "helm_release" "nginx-ingress-chart" {
+  provider   = helm.cinema
+  name       = "nginx-ingress-controller"
+  namespace  = "default"
+  repository = "https://charts.bitnami.com/bitnami"
+  chart      = "nginx-ingress-controller"
+}
