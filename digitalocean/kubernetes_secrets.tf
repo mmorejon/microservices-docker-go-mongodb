@@ -36,3 +36,16 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key-id" {
   }
   type = "kubernetes.io/opaque"
 }
+
+resource "kubernetes_secret" "digital-ocean-secret" {
+  provider   = kubernetes.cinema
+  depends_on = [digitalocean_kubernetes_cluster.cinema]
+  metadata {
+    name      = "digital-ocean-secret"
+    namespace = "cert-manager"
+  }
+  data = {
+    secret = base64encode(var.do_token)
+  }
+  type = "kubernetes.io/opaque"
+}
