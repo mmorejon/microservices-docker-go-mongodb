@@ -12,7 +12,7 @@ module "argocd" {
   argocd_repo_replicas   = 2
   enable_dex             = false
   labels                 = { "istio-injection" = "enabled"}
-  ingress_enabled    = true
+  ingress_enabled    = false 
   ingress_host       = "argocd.${var.domain_name[0]}"
   ingress_path       = "/"
   ingress_class_name = "nginx"
