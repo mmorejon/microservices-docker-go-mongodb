@@ -9,6 +9,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   }
 
   spec {
+    ingress_class_name = "nginx"
     default_backend {
       service {
         name = "argocd-argo-cd-server"
