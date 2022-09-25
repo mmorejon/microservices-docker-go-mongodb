@@ -154,10 +154,6 @@ resource "helm_release" "argocd" {
   chart      = "argo-cd"
   cleanup_on_fail = true
   force_update    = true
-  # set {
-  #   name  = "service.type"
-  #   value = "ClusterIP"
-  # }
 }
 
 resource "helm_release" "cluster-issuer" {
