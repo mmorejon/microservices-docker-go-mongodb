@@ -9,7 +9,7 @@ on:
       - 'gcp/**'
 
 jobs:
-  tf_apply:
+  tf_fmt:
     name: Deploy 
     runs-on: ubuntu-latest
     steps:
