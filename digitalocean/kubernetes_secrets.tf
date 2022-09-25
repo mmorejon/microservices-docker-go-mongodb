@@ -45,7 +45,7 @@ resource "kubernetes_secret" "digital-ocean-secret" {
     namespace = "cert-manager"
   }
   data = {
-    secret = base64encode(var.do_token)
+    token = base64encode(var.do_token)
   }
   type = "kubernetes.io/opaque"
 }

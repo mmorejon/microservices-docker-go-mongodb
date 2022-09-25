@@ -22,4 +22,4 @@ spec:
         digitalocean:
           tokenSecretRef:
             name: digital-ocean-secret 
-            key: secret
+            key: token 
