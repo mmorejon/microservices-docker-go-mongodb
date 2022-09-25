@@ -16,7 +16,7 @@ resource "kubernetes_manifest" "certificate_resource" {
         "kind" = "ClusterIssuer"
         "name" = "zerossl"
       }
-      "secretName" = "digital-ocean-secret"
+      "secretName" = "${replace(var.domain_name[0], ".", "-")}-tls"
     }
   }
 }
