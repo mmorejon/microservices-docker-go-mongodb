@@ -9,9 +9,6 @@ on:
       - 'gcp/**'
 
 jobs:
-  docker:
-    runs-on: ubuntu-latest
-    
   tf_apply:
     name: Deploy 
     runs-on: ubuntu-latest
