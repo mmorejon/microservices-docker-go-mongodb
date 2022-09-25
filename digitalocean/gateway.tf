@@ -1,11 +1,10 @@
-resource "kubernetes_manifest" "gateway_resource" {
-  provider   = kubernetes.cinema
+resource "kubernetes_manifest" "argocd-gateway" {
+  provider = kubernetes.cinema
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "Gateway"
     "metadata" = {
-      "name"       = "argocd-gateway"
-      "namespace"  = "kube-argocd"
+      "name" = "argocd-gateway"
     }
     "spec" = {
       "selector" = {
@@ -22,10 +21,8 @@ resource "kubernetes_manifest" "gateway_resource" {
             "protocol" = "HTTPS"
           }
           "tls" = {
-            "credentialName" = "argocd-secret",
-            "mode"           = "SIMPLE",
-            "acme.enabled"   = "true" 
-            }
+            "credentialName" = "argo-cert"
+            "mode"           = "SIMPLE"
           }
         },
         {
@@ -38,7 +35,7 @@ resource "kubernetes_manifest" "gateway_resource" {
             "protocol" = "HTTP"
           }
           "tls" = {
-            "httpsRedirect" = false 
+            "httpsRedirect" = true
           }
         },
       ]

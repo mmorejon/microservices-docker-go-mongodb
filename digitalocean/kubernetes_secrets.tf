@@ -13,7 +13,7 @@ resource "kubernetes_secret" "argocd-tls" {
 
 resource "kubernetes_secret" "zerossl-eab-hmac-key" {
   provider   = kubernetes.cinema
-  depends_on = [module.gke-cinema]
+  depends_on = [digitalocean_kubernetes_cluster.cinema]
   metadata {
     name      = "zerossl-hmac-key"
     namespace = "kube-system"
@@ -26,7 +26,7 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key" {
 
 resource "kubernetes_secret" "zerossl-eab-hmac-key-id" {
   provider   = kubernetes.cinema
-  depends_on = [module.gke-cinema]
+  depends_on = [digitalocean_kubernetes_cluster.cinema]
   metadata {
     name      = "zerossl-hmac-key-id"
     namespace = "kube-system"
