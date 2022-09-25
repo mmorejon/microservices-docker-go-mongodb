@@ -1,21 +1,22 @@
-resource "kubernetes_manifest" "virtualservice_resource" {
+resource "kubernetes_manifest" "certificate_resource" {
   provider = kubernetes.cinema
   manifest = {
-  "apiVersion" = "cert-manager.io/v1"
-  "kind" = "Certificate"
-  "metadata" = {
-    "name" = "argocd-cert"
-    "namespace" = "cert-manager"
-  }
-  "spec" = {
-    "commonName" = "*.${var.domain_name[0]}"
-    "dnsNames" = [
-      "*.${var.domain_name[0]}",
-    ]
-    "issuerRef" = {
-      "kind" = "ClusterIssuer"
-      "name" = "zerossl"
+    "apiVersion" = "cert-manager.io/v1"
+    "kind"       = "Certificate"
+    "metadata" = {
+      "name"      = "argocd-cert"
+      "namespace" = "cert-manager"
     }
-    "secretName" = "istio-customingressgateway-certs"
+    "spec" = {
+      "commonName" = "*.${var.domain_name[0]}"
+      "dnsNames" = [
+        "*.${var.domain_name[0]}",
+      ]
+      "issuerRef" = {
+        "kind" = "ClusterIssuer"
+        "name" = "zerossl"
+      }
+      "secretName" = "istio-customingressgateway-certs"
+    }
   }
 }
