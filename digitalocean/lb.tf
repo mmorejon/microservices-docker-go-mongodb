@@ -1,3 +1,4 @@
+/* 
 resource "digitalocean_loadbalancer" "ingress_load_balancer" {
   name   = "${var.domain_name[0]}-lb"
   region = var.do_region
@@ -22,3 +23,4 @@ resource "digitalocean_loadbalancer" "ingress_load_balancer" {
   vpc_uuid = digitalocean_vpc.cinema.id 
   droplet_ids = digitalocean_kubernetes_cluster.cinema.node_pool[0].nodes[*].droplet_id
 }
+*/
