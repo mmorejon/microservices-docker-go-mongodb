@@ -122,6 +122,7 @@ resource "helm_release" "istio-egress" {
   depends_on = [helm_release.istiod]
 }
 
+/*
 resource "helm_release" "istio-csr" {
   provider   = helm.cinema
   repository = local.jetstack-repo
@@ -132,6 +133,7 @@ resource "helm_release" "istio-csr" {
   force_update    = true
   depends_on = [helm_release.istiod]
 }
+*/
 
 resource "helm_release" "bookinfo" {
   provider   = helm.cinema
