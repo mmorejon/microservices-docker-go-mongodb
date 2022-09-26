@@ -20,6 +20,10 @@ resource "helm_release" "external-dns" {
     value = "true"
   }
   set {
+    name  = "service.loadBalancerIP"
+    value = digitalocean_loadbalancer.ingress_load_balancer.ip
+  }
+  set {
     name  = "domainFilters"
     value = "{${var.domain_name[0]}}" 
   }
