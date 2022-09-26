@@ -1,5 +1,6 @@
 resource "kubernetes_ingress_v1" "argocd_ingress" {
   provider = kubernetes.cinema
+  depends_on = [helm_release.cert-manager]
   metadata {
     name = "argocd-ingress"
     namespace = "argocd"
