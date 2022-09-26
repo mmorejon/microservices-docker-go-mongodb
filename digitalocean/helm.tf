@@ -120,6 +120,16 @@ resource "helm_release" "istio-egress" {
   depends_on = [helm_release.istiod]
 }
 
+resource "helm_release" "istio-csr" {
+  provider   = helm.cinema
+  repository = local.istio-repo
+  name       = "istio-csr"
+  chart      = "cert-manager-istio-csr"
+  cleanup_on_fail = true
+  force_update    = true
+  depends_on = [helm_release.istiod]
+}
+
 resource "helm_release" "bookinfo" {
   provider   = helm.cinema
   repository = local.bookinfo-repo
