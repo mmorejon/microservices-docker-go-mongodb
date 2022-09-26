@@ -122,7 +122,7 @@ resource "helm_release" "istio-egress" {
 
 resource "helm_release" "istio-csr" {
   provider   = helm.cinema
-  repository = local.istio-repo
+  repository = local.jetstack-repo
   name       = "istio-csr"
   chart      = "cert-manager-istio-csr"
   cleanup_on_fail = true
