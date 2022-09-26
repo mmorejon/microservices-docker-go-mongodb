@@ -20,7 +20,7 @@ resource "helm_release" "external-dns" {
     value = "true"
   }
   set {
-    name  = "service.loadBalancerIP"
+    name  = "service.LoadBalancerIP"
     value = digitalocean_loadbalancer.ingress_load_balancer.ip
   }
   set {
