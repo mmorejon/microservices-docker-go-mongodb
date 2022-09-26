@@ -33,6 +33,7 @@ resource "helm_release" "external-dns" {
   }
 }
 
+/*
 resource "helm_release" "cert-manager" {
   provider   = helm.cinema
   depends_on = [kubernetes_namespace.cert-manager]
@@ -51,6 +52,7 @@ resource "helm_release" "cert-manager" {
     value = "true"
   }
 }
+*/
 
 resource "helm_release" "istio-base" {
   provider        = helm.cinema
