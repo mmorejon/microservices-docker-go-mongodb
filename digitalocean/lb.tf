@@ -20,4 +20,5 @@ resource "digitalocean_loadbalancer" "ingress_load_balancer" {
   }
 
   vpc_uuid = digitalocean_vpc.cinema.id 
+  droplet_ids = digitalocean_kubernetes_cluster.cinema.node_pool[0]
 }
