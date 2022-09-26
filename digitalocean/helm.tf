@@ -31,12 +31,10 @@ resource "helm_release" "external-dns" {
     name  = "sources"
     value = "{ingress,service}"
   }
-  /* 
    set {
     name  = "istio-ingress-gateway"
     value = "istio-system/istio-ingressgateway"
   }
- */
 }
 
 resource "helm_release" "cert-manager" {
@@ -58,7 +56,6 @@ resource "helm_release" "cert-manager" {
   }
 }
 
-/*
 resource "helm_release" "istio-base" {
   provider        = helm.cinema
   repository      = local.istio-repo
@@ -149,7 +146,6 @@ resource "helm_release" "bookinfo" {
   }
   depends_on = [helm_release.istiod]
 }
-*/
 
 resource "helm_release" "argocd" {
   depends_on = [kubernetes_namespace.argocd]
