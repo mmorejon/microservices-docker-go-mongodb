@@ -1,8 +1,13 @@
-/* */
 variable "do_token" {
   type        = string
   description = "Digital Ocean Token"
   default     = ""
+}
+
+variable "do_region" {
+  type        = string
+  description = "Digital Ocean Region"
+  default     = "nyc3"
 }
 
 variable "domain_name" {
