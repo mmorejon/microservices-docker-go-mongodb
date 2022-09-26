@@ -177,7 +177,6 @@ resource "helm_release" "cluster-issuer" {
   chart     = "../charts/cluster-issuer"
   namespace = "kube-system"
   depends_on = [
-    helm_release.cert-manager,
     digitalocean_kubernetes_cluster.cinema,
   ]
   set_sensitive {
