@@ -4,13 +4,10 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
   metadata {
     name = "argocd-ingress"
     namespace = "argocd"
-    annotations = {
-      "kubernetes.io/ingress.class" = "nginx"
-    }
   }
 
   spec {
-    ingress_class_name = "nginx"
+    ingress_class_name = "istio"
     default_backend {
       service {
         name = "argocd-argo-cd-server"
@@ -33,7 +30,7 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
             }
           }
 
-          path = "/*"
+          path = "/"
         }
       }
     }
