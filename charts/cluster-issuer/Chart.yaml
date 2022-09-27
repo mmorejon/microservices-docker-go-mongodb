@@ -1,4 +1,4 @@
 name: cluster-issuer
 description: ClusterIssuer
-version: 0.0.5
+version: 0.0.6
 kubeVersion: ">=1.10.0-0"
