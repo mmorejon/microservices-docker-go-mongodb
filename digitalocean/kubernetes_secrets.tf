@@ -19,7 +19,7 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key" {
     namespace = "cert-manager"
   }
   data = {
-    secret = base64encode(var.zerossl_eab_hmac_key)
+    secret = var.zerossl_eab_hmac_key
   }
   type = "kubernetes.io/opaque"
 }
@@ -32,7 +32,7 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key-id" {
     namespace = "cert-manager"
   }
   data = {
-    secret = base64encode(var.zerossl_eab_hmac_key_id)
+    secret = var.zerossl_eab_hmac_key_id
   }
   type = "kubernetes.io/opaque"
 }
