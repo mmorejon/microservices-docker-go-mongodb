@@ -17,7 +17,7 @@ spec:
     solvers:
     - http01:
         ingress:
-          class: nginx
+          class: istio
     - dns01:
         digitalocean:
           tokenSecretRef:
