@@ -15,7 +15,7 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema]
   metadata {
-    name      = "zerossl-hmac-key"
+    name      = "zerossl-eab-hmac-key"
     namespace = "kube-system"
   }
   data = {
@@ -28,7 +28,7 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key-id" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema]
   metadata {
-    name      = "zerossl-hmac-key-id"
+    name      = "zerossl-eab-hmac-key-id"
     namespace = "kube-system"
   }
   data = {
