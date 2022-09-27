@@ -64,6 +64,7 @@ variable "zerossl_eab_hmac_key" {
 variable "zerossl_eab_hmac_key_id" {
   type        = string
   description = "ZeroSSL EAB HMAC KEY ID"
+  default     = "uAOxe7WsWUN0HAkadE-gyA"
 }
 
 /* */
