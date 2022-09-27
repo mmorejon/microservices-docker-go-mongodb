@@ -203,11 +203,11 @@ resource "helm_release" "cluster-issuer" {
     value = var.zerossl_email
   }
   set_sensitive {
-    name  = "zerossl_eab_hmac_key"
+    name  = "zerossl-eab-hmac-key"
     value = var.zerossl_eab_hmac_key
   }
   set_sensitive {
-    name  = "zerossl_eab_hmac_key_id"
+    name  = "zerossl-eab-hmac-key-id"
     value = var.zerossl_eab_hmac_key_id
   }
 }
