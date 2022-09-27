@@ -52,6 +52,25 @@ resource "helm_release" "cert-manager" {
   }
 }
 
+resource "helm_release" "kubed" {
+  provider   = helm.cinema
+  depends_on = [kubernetes_namespace.cert-manager]
+  name       = "kubed"
+  repository = "https://charts.appscode.com/stable/"
+  chart      = "kubed"
+  version    = "v0.11.0"
+  namespace  = "kube-system"
+  timeout    = 120
+  set {
+    name  = "apiserver.enabled"
+    value = "false"
+  }
+  set {
+    name  = "config.clusterName"
+    value = "cinema"
+  }
+}
+
 resource "helm_release" "istio-base" {
   provider        = helm.cinema
   repository      = local.istio-repo
