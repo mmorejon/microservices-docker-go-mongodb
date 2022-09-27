@@ -40,7 +40,7 @@ resource "helm_release" "cert-manager" {
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
   version    = "v1.9.1"
-  namespace  = "kube-system"
+  namespace  = "cert-manager"
   timeout    = 120
   set {
     name  = "createCustomResource"
