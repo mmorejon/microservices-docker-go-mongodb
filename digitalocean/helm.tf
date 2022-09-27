@@ -58,7 +58,7 @@ resource "helm_release" "kubed" {
   name       = "kubed"
   repository = "https://charts.appscode.com/stable/"
   chart      = "kubed"
-  version    = "v0.11.0"
+  version    = "v0.13.2"
   namespace  = "kube-system"
   timeout    = 120
   set {
