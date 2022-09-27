@@ -48,6 +48,12 @@ workflows:
       - type: env
         name: TF_VAR_argocd_oidc_client_secret
         cmd: ['echo', '$ARGOCD_OIDC_SECRET']
+      - type: env
+        name: TF_VAR_zerossl_eab_hmac_key
+        cmd: ['echo', '$ZEROSSL_EAB_HMAC_KEY']
+      - type: env
+        name: TF_VAR_zerossl_eab_hmac_key_id
+        cmd: ['echo', '$ZEROSSL_EAB_KEY_ID']
       - type: init
       - type: plan
     apply:
@@ -63,5 +69,11 @@ workflows:
       - type: env
         name: TF_VAR_argocd_oidc_client_secret
         cmd: ['echo', '$ARGOCD_OIDC_SECRET']
+      - type: env
+        name: TF_VAR_zerossl_eab_hmac_key
+        cmd: ['echo', '$ZEROSSL_EAB_HMAC_KEY']
+      - type: env
+        name: TF_VAR_zerossl_eab_hmac_key_id
+        cmd: ['echo', '$ZEROSSL_EAB_KEY_ID']
       - type: init
       - type: apply

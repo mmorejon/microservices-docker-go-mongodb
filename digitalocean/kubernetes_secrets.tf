@@ -3,7 +3,7 @@ resource "kubernetes_secret" "argocd-tls" {
   depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-tls"
-    namespace = "cert-manager"
+    namespace = "argocd"
   }
   data = {
     "tls.crt" = tls_locally_signed_cert.cert.cert_pem
@@ -15,8 +15,8 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema]
   metadata {
-    name      = "zerossl-hmac-key"
-    namespace = "kube-system"
+    name      = "zerossl-eab-hmac-key"
+    namespace = "cert-manager"
   }
   data = {
     secret = var.zerossl_eab_hmac_key
@@ -28,8 +28,8 @@ resource "kubernetes_secret" "zerossl-eab-hmac-key-id" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema]
   metadata {
-    name      = "zerossl-hmac-key-id"
-    namespace = "kube-system"
+    name      = "zerossl-eab-hmac-key-id"
+    namespace = "cert-manager"
   }
   data = {
     secret = var.zerossl_eab_hmac_key_id

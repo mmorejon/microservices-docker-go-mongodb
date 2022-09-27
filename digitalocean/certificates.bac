@@ -1,4 +1,3 @@
-/*
 resource "kubernetes_manifest" "certificate_resource" {
   provider = kubernetes.cinema
   manifest = {
@@ -6,7 +5,7 @@ resource "kubernetes_manifest" "certificate_resource" {
     "kind"       = "Certificate"
     "metadata" = {
       "name"      = "argocd-cert"
-      "namespace" = "cert-manager"
+      "namespace" = "argocd"
     }
     "spec" = {
       "commonName" = "*.${var.domain_name[0]}"
@@ -20,4 +19,4 @@ resource "kubernetes_manifest" "certificate_resource" {
       "secretName" = "${replace(var.domain_name[0], ".", "-")}-tls"
     }
   }
-} */
+} 

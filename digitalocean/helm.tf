@@ -27,7 +27,7 @@ resource "helm_release" "external-dns" {
     name  = "sources"
     value = "{ingress,service,istio-gateway}"
   }
-  set {
+   set {
     name  = "istio-ingress-gateway"
     value = "istio-system/istio-ingressgateway"
   }
@@ -40,7 +40,7 @@ resource "helm_release" "cert-manager" {
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
   version    = "v1.9.1"
-  namespace  = "kube-system"
+  namespace  = "cert-manager"
   timeout    = 120
   set {
     name  = "createCustomResource"
@@ -52,7 +52,25 @@ resource "helm_release" "cert-manager" {
   }
 }
 
-/*
+resource "helm_release" "kubed" {
+  provider   = helm.cinema
+  depends_on = [kubernetes_namespace.cert-manager]
+  name       = "kubed"
+  repository = "https://charts.appscode.com/stable/"
+  chart      = "kubed"
+  version    = "v0.13.2"
+  namespace  = "kube-system"
+  timeout    = 120
+  set {
+    name  = "apiserver.enabled"
+    value = "false"
+  }
+  set {
+    name  = "config.clusterName"
+    value = "cinema"
+  }
+}
+
 resource "helm_release" "istio-base" {
   provider        = helm.cinema
   repository      = local.istio-repo
@@ -121,6 +139,19 @@ resource "helm_release" "istio-egress" {
   depends_on = [helm_release.istiod]
 }
 
+/*
+resource "helm_release" "istio-csr" {
+  provider   = helm.cinema
+  repository = local.jetstack-repo
+  namespace  = "istio-system"
+  name       = "istio-csr"
+  chart      = "cert-manager-istio-csr"
+  cleanup_on_fail = true
+  force_update    = true
+  depends_on = [helm_release.istiod]
+}
+*/
+
 resource "helm_release" "bookinfo" {
   provider   = helm.cinema
   repository = local.bookinfo-repo
@@ -143,7 +174,21 @@ resource "helm_release" "bookinfo" {
   }
   depends_on = [helm_release.istiod]
 }
-*/
+
+resource "helm_release" "argocd" {
+  depends_on = [kubernetes_namespace.argocd]
+  provider   = helm.cinema
+  repository = local.argocd-repo
+  namespace  = "argocd"
+  name       = "argocd"
+  chart      = "argo-cd"
+  cleanup_on_fail = true
+  force_update    = true
+  set {
+    name = "server.extraArgs"
+    value = "- --insecure"
+  }
+}
 
 resource "helm_release" "cluster-issuer" {
   provider  = helm.cinema
@@ -151,7 +196,6 @@ resource "helm_release" "cluster-issuer" {
   chart     = "../charts/cluster-issuer"
   namespace = "kube-system"
   depends_on = [
-    helm_release.cert-manager,
     digitalocean_kubernetes_cluster.cinema,
   ]
   set_sensitive {
@@ -159,19 +203,38 @@ resource "helm_release" "cluster-issuer" {
     value = var.zerossl_email
   }
   set_sensitive {
-    name  = "zerossl_eab_hmac_key"
+    name  = "zerossl-eab-hmac-key"
     value = var.zerossl_eab_hmac_key
   }
   set_sensitive {
-    name  = "zerossl_eab_hmac_key_id"
+    name  = "zerossl-eab-hmac-key-id"
     value = var.zerossl_eab_hmac_key_id
   }
 }
 
+/*
 resource "helm_release" "nginx-ingress-chart" {
   provider   = helm.cinema
   name       = "nginx-ingress-controller"
   namespace  = "default"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx-ingress-controller"
+
+  set {
+    name  = "service.type"
+    value = "LoadBalancer"
+  }
+  set {
+    name  = "service.annotations.kubernetes\\.digitalocean\\.com/load-balancer-id"
+    value = digitalocean_loadbalancer.ingress_load_balancer.id
+  }
+  set {
+    name  = "service.beta.kubernetes.io/do-loadbalancer-hostname"
+    value = "${var.domain_name[0]}-lb"
+  }
+
+  depends_on = [
+    digitalocean_loadbalancer.ingress_load_balancer
+  ]
 }
+*/
