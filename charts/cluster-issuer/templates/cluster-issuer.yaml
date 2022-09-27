@@ -9,7 +9,7 @@ spec:
     externalAccountBinding:
       keyID: {{ .Values.zerossl_eab_hmac_key_id }}
       keySecretRef:
-        name: zerossl-hmac-key 
+        name: zerossl-eab-hmac-key 
         key: secret
       keyAlgorithm: HS256
     privateKeySecretRef:
