@@ -8,9 +8,9 @@ resource "kubernetes_manifest" "certificate_resource" {
       "namespace" = "argocd"
     }
     "spec" = {
-      "commonName" = "*.${var.domain_name[0]}"
+      "commonName" = "argocd.${var.domain_name[0]}"
       "dnsNames" = [
-        "*.${var.domain_name[0]}",
+        "argocd.${var.domain_name[0]}",
       ]
       "issuerRef" = {
         "kind" = "ClusterIssuer"
