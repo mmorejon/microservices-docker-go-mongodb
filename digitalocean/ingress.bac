@@ -35,9 +35,9 @@ resource "kubernetes_ingress_v1" "argocd_ingress" {
       }
     }
 
-    # tls {
-    #   secret_name = "tls-secret"
-    # }
+    tls {
+      secret_name = "argocd-secret"
+    }
   }
 }
 

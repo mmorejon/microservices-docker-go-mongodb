@@ -2,12 +2,14 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: zerossl 
+  namespace: kube-system
 spec:
   acme:
     email: {{ .Values.zerossl_email }}
     server: https://acme.zerossl.com/v2/DV90
     externalAccountBinding:
-      keyID: {{ .Values.zerossl_eab_hmac_key_id }}
+      keyID: "uAOxe7WsWUN0HAkadE-gyA"
+      # {{ .Values.zerossl_eab_hmac_key_id }}
       keySecretRef:
         name: zerossl-eab-hmac-key 
         key: secret
