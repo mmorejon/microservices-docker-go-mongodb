@@ -21,6 +21,9 @@ resource "kubernetes_manifest" "argocd-gateway" {
             "number"   = 80
             "protocol" = "HTTP"
           }
+          "tls" = {
+            "httpsRedirect" = false
+          }
         },
         {
           "hosts" = [
@@ -32,8 +35,7 @@ resource "kubernetes_manifest" "argocd-gateway" {
             "protocol" = "HTTPS"
           }
           "tls" = {
-            "credentialName" = "argocd-secret"
-            "httpsRedirect"  = false
+            "credentialName" = "argocd-cert"
             "mode"           = "SIMPLE"
           }
         },
