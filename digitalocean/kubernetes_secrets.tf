@@ -2,8 +2,9 @@ resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
   metadata {
-    name      = "${replace(var.domain_name[0], ".", "-")}-tls"
-    namespace = "argocd"
+    name      = "argo-cert"
+    # "${replace(var.domain_name[0], ".", "-")}-tls"
+    namespace = "istio-system"
   }
   data = {
     "tls.crt" = tls_locally_signed_cert.cert.cert_pem
