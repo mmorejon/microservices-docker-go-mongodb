@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
   name: zerossl 
-  namespace: istio-system
+  namespace: kube-system
 spec:
   acme:
     email: {{ .Values.zerossl_email }}
