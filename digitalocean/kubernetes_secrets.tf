@@ -4,7 +4,7 @@ resource "kubernetes_secret" "argocd-tls" {
   metadata {
     name      = "argo-cert"
     # "${replace(var.domain_name[0], ".", "-")}-tls"
-    namespace = "argocd"
+    namespace = "istio-system"
   }
   data = {
     "tls.crt" = tls_locally_signed_cert.cert.cert_pem

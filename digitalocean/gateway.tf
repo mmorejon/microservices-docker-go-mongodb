@@ -35,7 +35,7 @@ resource "kubernetes_manifest" "argocd-gateway" {
             "protocol" = "HTTPS"
           }
           "tls" = {
-            "credentialName" = "argocd-cert"
+            "credentialName" = "argo-cert"
             "mode"           = "SIMPLE"
           }
         },
