@@ -49,4 +49,5 @@ jobs:
           TF_VAR_mongodb_rootusername: ${{ secrets.MONGODB_USERNAME }}
           TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
           TF_VAR_argocd_access_token: ${{ secrets.ARGOCD_TOKEN }}
+          TF_VAR_argocd_oidc_client_secret: ${{ secrets.ARGOCD_OIDC_SECRET }}
 
