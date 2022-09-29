@@ -192,6 +192,10 @@ resource "helm_release" "argocd" {
     name = "dex.enabled"
     value = "true"
   }
+  set {
+    name  = "dex.config.url"
+    value = "https://argocd.${var.domain_name[0]}/api/dex"
+  }
 }
 
 resource "helm_release" "cluster-issuer" {
