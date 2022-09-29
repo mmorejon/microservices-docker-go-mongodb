@@ -187,7 +187,7 @@ resource "helm_release" "argocd" {
   force_update    = true
   set {
     name  = "server.extraArgs"
-    value = "{--insecure,--request-timeout=\"5m\"}"}
+    value = "{--insecure}"
   }
 }
 
