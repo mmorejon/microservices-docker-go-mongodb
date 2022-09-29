@@ -186,12 +186,8 @@ resource "helm_release" "argocd" {
   cleanup_on_fail = true
   force_update    = true
   set {
-    name = {
-      configs = {
-        "params" = "server.insecure"
-      }
-      value = "true"
-    }
+    name  = "server.extraArgs"
+    value = "{--insecure,--request-timeout=\"5m\"}"}
   }
 }
 
