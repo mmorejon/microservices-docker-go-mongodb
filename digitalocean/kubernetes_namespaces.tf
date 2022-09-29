@@ -30,9 +30,11 @@ resource "kubernetes_namespace" "argocd" {
   provider   = kubernetes.cinema
   metadata {
     name = "argocd"
+    /*
     labels = {
       istio-injection = "enabled"
     }
+   */
   }
 }
 

@@ -213,7 +213,6 @@ resource "helm_release" "cluster-issuer" {
   }
 }
 
-/*
 resource "helm_release" "nginx-ingress-chart" {
   provider   = helm.cinema
   name       = "nginx-ingress-controller"
@@ -238,4 +237,3 @@ resource "helm_release" "nginx-ingress-chart" {
     digitalocean_loadbalancer.ingress_load_balancer
   ]
 }
-*/
