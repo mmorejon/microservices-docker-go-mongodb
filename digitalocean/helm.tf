@@ -186,7 +186,7 @@ resource "helm_release" "argocd" {
   cleanup_on_fail = true
   force_update    = true
   set {
-    name = "server.insecure"
+    name = "configs.params.server.insecure"
     value = "true"
   }
 }
