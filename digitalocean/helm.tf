@@ -179,18 +179,14 @@ resource "helm_release" "argocd" {
   depends_on = [kubernetes_namespace.argocd]
   provider   = helm.cinema
   repository = local.argocd-repo
-  version    = "5.5.6"
+  version    = "5.5.0"
   namespace  = "argocd"
   name       = "argocd"
   chart      = "argo-cd"
   cleanup_on_fail = true
   force_update    = true
   set {
-    name = "server.extraArgs"
-    value = "- --insecure"
-  }
-  set {
-    name = "dex.enabled"
+    name = "server.insecure"
     value = "true"
   }
 }
