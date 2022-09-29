@@ -14,7 +14,7 @@ resource "kubernetes_manifest" "argocd-gateway" {
       "servers" = [
         {
           "hosts" = [
-            "argocd.wayofthesys.org",
+            "argocd.${var.domain_name[0]}",
           ]
           "port" = {
             "name"     = "http"
@@ -27,7 +27,7 @@ resource "kubernetes_manifest" "argocd-gateway" {
         },
         {
           "hosts" = [
-            "argocd.wayofthesys.org",
+            "argocd.${var.domain_name[0]},
           ]
           "port" = {
             "name"     = "https"
