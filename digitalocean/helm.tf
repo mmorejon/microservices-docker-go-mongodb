@@ -188,6 +188,10 @@ resource "helm_release" "argocd" {
     name = "server.extraArgs"
     value = "- --insecure"
   }
+  set {
+    name = "dex.enabled"
+    value = "true"
+  }
 }
 
 resource "helm_release" "cluster-issuer" {
