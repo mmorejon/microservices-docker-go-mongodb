@@ -235,8 +235,9 @@ resource "helm_release" "nginx-ingress-chart" {
     name  = "service.beta.kubernetes.io/do-loadbalancer-hostname"
     value = "${var.domain_name[0]}-lb"
   }
- */ 
+
   depends_on = [
     digitalocean_loadbalancer.ingress_load_balancer
   ]
+  */
 }
