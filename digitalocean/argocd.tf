@@ -5,7 +5,7 @@ resource "kubernetes_service_account" "argocd_manager" {
     namespace = "kube-system"
   }
   secret {
-    name = kubernetes_secret.argocd-manager.metadata.0.name
+    name = kubernetes_secret.argocd_manager.metadata.0.name
   }
 }
 
