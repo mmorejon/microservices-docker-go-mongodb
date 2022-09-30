@@ -43,11 +43,13 @@ variable "argocd_oidc_issuer" {
 variable "argocd_oidc_client_id" {
   type        = string
   description = "ArgoCD OIDC Client ID"
+  sensitive   = true
 }
 
 variable "argocd_oidc_client_secret" {
   type        = string
   description = "ArgoCD OIDC Client Secret"
+  sensitive   = true
 }
 
 variable "zerossl_email" {
