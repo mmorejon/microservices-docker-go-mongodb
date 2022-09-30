@@ -196,12 +196,7 @@ resource "helm_release" "argocd" {
 
   set_sensitive {
     name  = "server.config.dex.config"
-    value = "connectors ={\n"
-    config = {
-      "issuer"       = "https://accounts.google.com\n"
-      "clientID"     = "${var.argocd_oidc_client_id}\n"
-      "clientSecret" = "${var.argocd_oidc_client_secret}"
-    }
+    value = "connectors ={\n config = {\n \"issuer\"       = \"https://accounts.google.com\n\" \"clientID\"     = \"${var.argocd_oidc_client_id}\"\n \"clientSecret\" = \"${var.argocd_oidc_client_secret}\"}}"
   }
 }
 
