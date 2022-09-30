@@ -186,8 +186,8 @@ resource "helm_release" "argocd" {
   cleanup_on_fail = true
   force_update    = true
   set {
-    name  = "server.secretkey"
-    value = var.argocd_oidc_client_secret
+    name  = "server.extraArgs" 
+    value = "{--insecure}"
   }
 }
 
