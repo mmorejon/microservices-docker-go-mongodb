@@ -3,6 +3,29 @@ locals {
   jetstack-repo = "https://charts.jetstack.io"
   bookinfo-repo = "https://evry-ace.github.io/helm-charts"
   argocd-repo   = "https://argoproj.github.io/argo-helm"
+  argocd_dex_google = yamlencode(
+    {
+      server = {
+        "config" = {
+          "dex.config" = yamlencode(
+            {
+              connectors = [
+                {
+                  id   = "google"
+                  type = "oidc"
+                  name = "Google"
+                  config = {
+                    clientID     = var.argocd_oidc_client_id
+                    clientSecret = var.argocd_oidc_client_secret
+                  }
+                }
+              ]
+            }
+          )
+        }
+      }
+    }
+  )
   argocd_dex_config_name = yamlencode(
     {
       server = {
@@ -13,7 +36,7 @@ locals {
   argocd_dex_config_value = yamlencode(
     {
       connectors = [
-       {
+        {
           id   = "google"
           type = "oidc"
           name = "Google"

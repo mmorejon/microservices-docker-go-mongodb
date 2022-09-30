@@ -185,6 +185,9 @@ resource "helm_release" "argocd" {
   chart           = "argo-cd"
   cleanup_on_fail = true
   force_update    = true
+  values = [
+    local.argocd_dex_google
+  ]
   set {
     name  = "server.extraArgs"
     value = "{--insecure}"
@@ -192,11 +195,6 @@ resource "helm_release" "argocd" {
   set_sensitive {
     name  = "configs.secret.argocdServerAdminPassword"
     value = var.argocd_oidc_client_secret
-  }
-
-  set {
-    name  = local.argocd_dex_config_name
-    value = local.argocd_dex_config_value
   }
 }
 
