@@ -195,14 +195,8 @@ resource "helm_release" "argocd" {
   }
 
   set_sensitive {
-    name  = "server.config.dex.config.connectors"
-    value = <<-EOT
-    "- config:\n"
-        "issuer": "https://accounts.google.com"
-        "clientID": var.argocd_oidc_client_id
-        "clientSecret": \"var.argocd_oidc_client_secret\"
-    "url" = "https://argocd.wayofthesys.org"
-  EOT
+    name  = "server.config.dex.config.connectors.config.issuer"
+    value = "https://accounts.google.com"
   }
 }
 
