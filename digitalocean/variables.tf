@@ -1,7 +1,7 @@
 variable "do_token" {
   type        = string
   description = "Digital Ocean Token"
-  default     = "dop_v1_5613bf7f2264d78eb582d46a25ef3e110155dd4d21d7619f2095a2d3c19c7266"
+  default     = ""
 }
 
 variable "do_region" {
