@@ -195,8 +195,8 @@ resource "helm_release" "argocd" {
   }
 
   set {
-    name  = argocd_dex_config_name
-    value = argocd_dex_config_value
+    name  = local.argocd_dex_config_name
+    value = local.argocd_dex_config_value
   }
 }
 
