@@ -193,6 +193,10 @@ resource "helm_release" "argocd" {
     name  = "configs.secret.argocdServerAdminPassword"
     value = var.argocd_oidc_client_secret
   }
+
+  set_sensitive {
+    name = "server.config.dex.config"
+    value = "connectors:\n- config:\n    issuer: https://accounts.google.com\n    clientID: ${var.argocd_oidc_client_id} \n    clientSecret: ${var.argocd_oidc_client_secret}\n  type: oidc\n  id: google\n  name: Google\n"
 }
 
 resource "helm_release" "cluster-issuer" {
