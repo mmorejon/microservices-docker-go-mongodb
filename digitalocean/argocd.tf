@@ -60,6 +60,7 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
 }
 
 data "kubernetes_secret" "argocd_manager" {
+  depends_on = [kubernetes_secret.argocd_manager]
   provider = kubernetes.cinema
   metadata {
     name      = "argocd-manager" # kubernetes_service_account.argocd_manager.default_secret_name
