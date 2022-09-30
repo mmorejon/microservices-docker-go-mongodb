@@ -195,10 +195,8 @@ resource "helm_release" "argocd" {
   }
 
   set_sensitive {
-    name  = "server.config"
+    name  = "server.config.dex.config.connectors"
     value = <<-EOT
-  dex.config |
-    connectors:
     - config:
         issuer: https://accounts.google.com
         clientID: var.argocd_oidc_client_id 
