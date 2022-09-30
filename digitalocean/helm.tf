@@ -195,7 +195,7 @@ resource "helm_release" "argocd" {
   }
 
   set_sensitive {
-    name  = "server.config.dex.config.connectors.config.issuer"
+    name  = "server.config['dex.config'].connectors.config.issuer"
     value = "https://accounts.google.com"
   }
 }
