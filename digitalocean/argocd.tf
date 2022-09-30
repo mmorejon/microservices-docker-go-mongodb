@@ -4,6 +4,22 @@ resource "kubernetes_service_account" "argocd_manager" {
     name      = "argocd-manager"
     namespace = "kube-system"
   }
+  secret {
+    name = kubernetes_secret.argocd-manager.metadata.0.name
+  }
+}
+
+resource "kubernetes_secret" "argocd_manager" {
+  provider   = kubernetes.cinema
+  depends_on = [digitalocean_kubernetes_cluster.cinema]
+  metadata {
+    name      = "argocd-manager"
+    namespace = "kube-system"
+    annotations = {
+      "kubernetes.io/service-account.name" = "argocd-manager"
+    }
+  }
+  type = "kubernetes.io/service-account-token"
 }
 
 resource "kubernetes_cluster_role" "argocd_manager" {
@@ -57,9 +73,9 @@ resource "argocd_cluster" "do-cinema" {
   name   = "do-cinema"
 
   config {
-    bearer_token = digitalocean_kubernetes_cluster.cinema.kube_config[0].token 
+    bearer_token = kubernetes_secret.argocd_manager.token # digitalocean_kubernetes_cluster.cinema.kube_config[0].token 
     tls_client_config {
-      ca_data      = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].cluster_ca_certificate)
+      ca_data = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].cluster_ca_certificate)
     }
   }
 }
