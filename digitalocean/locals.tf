@@ -18,8 +18,14 @@ locals {
                     clientID     = var.argocd_oidc_client_id
                     clientSecret = var.argocd_oidc_client_secret
                   }
+                  requestedScopes = [
+                    -openid
+                    -profile
+                    -email
+                  ]
                 }
               ]
+              url : "https://argocd.${var.domain_name[0]}"
             }
           )
         }
