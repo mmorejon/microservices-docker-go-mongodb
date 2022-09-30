@@ -46,7 +46,7 @@ jobs:
           build_file: Dockerfile
           path: ./website/
           image: autotune/microservices-docker-go-mongodb-tf/website
-          tag: ${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.slug.outputs.get_version }}
+          tag: ${{ env.WEBSITE_IMAGE_NAME }}-${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
       - name: GitHub Package Registry - Movies
@@ -58,7 +58,7 @@ jobs:
           build_file: Dockerfile
           path: ./movies/
           image: autotune/microservices-docker-go-mongodb-tf/movies
-          tag: ${{ env.MOVIES_IMAGE_NAME }}:${{ steps.slug.outputs.get_version }}
+          tag: ${{ env.MOVIES_IMAGE_NAME }}-${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
       - name: GitHub Package Registry - Showtimes 
@@ -70,7 +70,7 @@ jobs:
           build_file: Dockerfile
           path: ./showtimes/
           image: autotune/microservices-docker-go-mongodb-tf/showtimes
-          tag: ${{ env.SHOWTIMES_IMAGE_NAME}}:${{ steps.slug.outputs.get_version }}
+          tag: ${{ env.SHOWTIMES_IMAGE_NAME}}-${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
       - name: GitHub Package Registry - Bookings
@@ -82,10 +82,6 @@ jobs:
           build_file: Dockerfile
           path: ./bookings/
           image: autotune/microservices-docker-go-mongodb-tf/bookings
-          tag: ${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.slug.outputs.get_version }}
+          tag: ${{ env.BOOKINGS_IMAGE_NAME }}-${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
-
-        
-
-        
