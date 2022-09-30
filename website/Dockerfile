@@ -25,7 +25,7 @@ WORKDIR /opt/web/
 # copy the static executable
 COPY --from=builder /go/bin/cinema-website cinema-website
 # change permissions since doing so via COPY --chown=elf:1000 fails
-RUN chown -R elf:"$(id -g elf)" /cinema-website
+RUN chown -R elf:"$(id -g elf)" /go/bin/cinema-website
 # copy static files
 COPY ./ui ui
 # use a non-root user
