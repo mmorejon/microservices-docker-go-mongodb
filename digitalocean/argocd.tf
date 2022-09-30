@@ -43,7 +43,6 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
   }
 }
 
-/* 
 data "kubernetes_secret" "argocd_manager" {
   metadata {
     name      = kubernetes_service_account.argocd_manager.default_secret_name
@@ -51,6 +50,7 @@ data "kubernetes_secret" "argocd_manager" {
   }
 }
 
+/*
 resource "argocd_cluster" "do-cinema" {
   server = format("https://%s", digitalocean_kubernetes_cluster.cinema.endpoint)
   name   = "do-cinema"
