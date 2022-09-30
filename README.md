@@ -35,6 +35,7 @@ The project structure is based in the knowledge learned in:
   - secret1
   - secret2
   - secret3 
+* Partner with company like fotc.com, Contino, 2nd Watch, etc. to raise regional limits needed for 4x e2-standard-4 GKE instances minimum 
 
 ## Deployment
 
