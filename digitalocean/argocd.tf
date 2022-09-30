@@ -53,7 +53,7 @@ data "kubernetes_secret" "argocd_manager" {
 */
 
 resource "argocd_cluster" "do-cinema" {
-  server = format("https://%s", digitalocean_kubernetes_cluster.cinema.endpoint)
+  server = digitalocean_kubernetes_cluster.cinema.endpoint
   name   = "do-cinema"
 
   config {
