@@ -68,40 +68,6 @@ data "kubernetes_secret" "argocd_manager" {
   }
 }
 
-resource "kubernetes_config_map" "argocd_cm" {
-  provider = kubernetes.cinema
-  metadata {
-    name      = "argocd-cm"
-    namespace = "argocd"
-
-    labels = {
-      "app.kubernetes.io/instance" = "argocd"
-
-      "app.kubernetes.io/managed-by" = "Helm"
-
-      "app.kubernetes.io/name" = "argo-cd"
-
-      "app.kubernetes.io/part-of" = "argocd"
-
-      "helm.sh/chart" = "argo-cd-4.1.5"
-    }
-
-    annotations = {
-      "meta.helm.sh/release-name" = "argocd"
-
-      "meta.helm.sh/release-namespace" = "argocd"
-    }
-  }
-
-  data = {
-    "application.instanceLabelKey" = "argocd.argoproj.io/instance"
-
-    "dex.config" = "connectors:\n- config:\n    issuer: https://accounts.google.com\n    clientID: sensitive(${var.argocd_oidc_client_id})\n    clientSecret: sensitive(${var.argocd_oidc_client_secret})\n  type: oidc\n  id: google\n  name: Google\n  requestedScopes:\n    - openid\n    - profile\n    - email\n"
-
-    url = "https://argocd.${var.domain_name[0]}"
-  }
-}
-
 /*
 resource "argocd_cluster" "do-cinema" {
   server = digitalocean_kubernetes_cluster.cinema.endpoint
