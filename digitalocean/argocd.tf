@@ -1,4 +1,5 @@
 resource "kubernetes_service_account" "argocd_manager" {
+  provider = kubernetes.cinema
   metadata {
     name      = "argocd-manager"
     namespace = "kube-system"
@@ -6,6 +7,7 @@ resource "kubernetes_service_account" "argocd_manager" {
 }
 
 resource "kubernetes_cluster_role" "argocd_manager" {
+  provider = kubernetes.cinema
   metadata {
     name = "argocd-manager-role"
   }
@@ -23,6 +25,7 @@ resource "kubernetes_cluster_role" "argocd_manager" {
 }
 
 resource "kubernetes_cluster_role_binding" "argocd_manager" {
+  provider = kubernetes.cinema
   metadata {
     name = "argocd-manager-role-binding"
   }
