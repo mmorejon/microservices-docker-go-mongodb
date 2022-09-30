@@ -96,7 +96,7 @@ resource "kubernetes_config_map" "argocd_cm" {
   data = {
     "application.instanceLabelKey" = "argocd.argoproj.io/instance"
 
-    "dex.config" = "connectors:\n- config:\n    issuer: https://accounts.google.com\n    clientID: ${var.argocd_oidc_client_id}\n    clientSecret: ${var.argocd_oidc_client_secret}\n  type: oidc\n  id: google\n  name: Google\n  requestedScopes:\n    - openid\n    - profile\n    - email\n"
+    "dex.config" = "connectors:\n- config:\n    issuer: https://accounts.google.com\n    clientID: sensitive(${var.argocd_oidc_client_id})\n    clientSecret: sensitive(${var.argocd_oidc_client_secret})\n  type: oidc\n  id: google\n  name: Google\n  requestedScopes:\n    - openid\n    - profile\n    - email\n"
 
     url = "https://argocd.${var.domain_name[0]}"
   }
