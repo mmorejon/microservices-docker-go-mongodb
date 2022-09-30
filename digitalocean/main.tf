@@ -15,3 +15,10 @@ provider "kubernetes" {
   )
   alias = "cinema"
 }
+
+provider "argocd" {
+  server_addr = "argocd.wayofthesys.org:443" 
+  username  = "admin"           
+  password  = var.argocd_oidc_client_secret             
+  insecure    = false             
+}
