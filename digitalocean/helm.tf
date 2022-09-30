@@ -186,7 +186,7 @@ resource "helm_release" "argocd" {
   cleanup_on_fail = true
   force_update    = true
   set {
-    name  = "server.extraArgs" 
+    name  = "server.extraArgs"
     value = "{--insecure}"
   }
   set_sensitive {
@@ -195,8 +195,13 @@ resource "helm_release" "argocd" {
   }
 
   set_sensitive {
-    name = "server.config.dex.config"
-    value = "connectors:\n- config:\n    issuer: https://accounts.google.com\n    clientID: ${var.argocd_oidc_client_id} \n    clientSecret: ${var.argocd_oidc_client_secret}\n  type: oidc\n  id: google\n  name: Google\n"
+    name  = "server.config.dex.config"
+    value = "connectors ={\n"
+    config = {
+      "issuer"       = "https://accounts.google.com\n"
+      "clientID"     = "${var.argocd_oidc_client_id}\n"
+      "clientSecret" = "${var.argocd_oidc_client_secret}"
+    }
   }
 }
 
