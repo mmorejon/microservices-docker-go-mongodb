@@ -194,7 +194,7 @@ resource "helm_release" "argocd" {
     value = var.argocd_oidc_client_secret
   }
 
-  set_string {
+  set {
     name  = "server.config.dex\\.config.connectors ={ -config ={ issuer}}"
     value = "https://accounts.google.com"
   }
