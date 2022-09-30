@@ -13,10 +13,14 @@ locals {
   argocd_dex_config_value = yamlencode(
     {
       connectors = [
-        {
-          id   = "github"
-          type = "github"
-          name = "Github"
+       {
+          id   = "google"
+          type = "oidc"
+          name = "Google"
+          config = {
+            clientID     = var.argocd_oidc_client_id
+            clientSecret = var.argocd_oidc_client_secret
+          }
         }
       ]
     }
