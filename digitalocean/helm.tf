@@ -195,8 +195,8 @@ resource "helm_release" "argocd" {
   }
 
   set {
-    name  = "server.config.dex\\.config.connectors ={ -config ={ issuer}}"
-    value = "https://accounts.google.com"
+    name  = argocd_dex_config_name
+    value = argocd_dex_config_value
   }
 }
 
