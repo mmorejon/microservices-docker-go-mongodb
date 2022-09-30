@@ -63,4 +63,3 @@ resource "argocd_cluster" "do-cinema" {
     }
   }
 }
-*/
