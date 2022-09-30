@@ -73,10 +73,11 @@ resource "argocd_cluster" "do-cinema" {
   name   = "do-cinema"
 
   config {
-    bearer_token = base64decode(data.kubernetes_secret.argocd_manager.data["token"])
+    bearer_token = data.kubernetes_secret.argocd_manager.data["token"]
     tls_client_config {
       ca_data = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].cluster_ca_certificate)
-      insecure = true
+      client_certificate = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].client_certificate)
+      client_key = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].client_key)
     }
   }
 }
