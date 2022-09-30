@@ -1,3 +1,4 @@
+/* 
 resource "kubernetes_service_account" "argocd_manager" {
   provider = kubernetes.cinema
   metadata {
@@ -43,7 +44,6 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
   }
 }
 
-/*
 data "kubernetes_secret" "argocd_manager" {
   metadata {
     name      = "name" # kubernetes_service_account.argocd_manager.default_secret_name
