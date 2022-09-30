@@ -19,9 +19,9 @@ locals {
                     clientSecret = var.argocd_oidc_client_secret
                   }
                   requestedScopes = [
-                    -openid
-                    -profile
-                    -email
+                    "-openid",
+                    "-profile",
+                    "-email"
                   ]
                 }
               ]
