@@ -11,18 +11,20 @@ RUN go mod download && \
 # copy the source code as the last step
 COPY . .
 # build binary
-RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o /go/bin/cinema-bookins ./cmd/app
+RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o /go/bin/cinema-bookings ./cmd/app
 
 
 # build a small image
 FROM alpine:3.14.1
 LABEL language="golang"
-LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-docker-go-mongodb
+LABEL org.opencontainers.image.source https://github.com/autotune/microservices-docker-go-mongodb-tf
 # import the user and group files from the builder
 COPY --from=builder /etc/passwd /etc/passwd
 # copy the static executable
-COPY --from=builder --chown=elf:1000 /go/bin/cinema-bookins /cinema-bookins
+COPY --from=builder /go/bin/cinema-bookings /cinema-bookings
+# change permissions since doing so via COPY --chown=elf:1000 fails
+RUN chown -R elf:"$(id -g elf)" cinema-bookings
 # use a non-root user
 USER elf
 # run app
-ENTRYPOINT ["./cinema-bookins"]
+ENTRYPOINT ["./cinema-bookings"]

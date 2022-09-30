@@ -46,14 +46,14 @@ workflows:
         name: TF_VAR_do_token
         cmd: ['echo', '$DIGITALOCEAN_ACCESS_TOKEN']
       - type: env
-        name: TF_VAR_argocd_oidc_client_secret
-        cmd: ['echo', '$ARGOCD_OIDC_SECRET']
-      - type: env
         name: TF_VAR_zerossl_eab_hmac_key
         cmd: ['echo', '$ZEROSSL_EAB_HMAC_KEY']
       - type: env
         name: TF_VAR_zerossl_eab_hmac_key_id
         cmd: ['echo', '$ZEROSSL_EAB_KEY_ID']
+      - type: env
+        name: TF_VAR_argocd_oidc_client_secret
+        cmd: ['echo', '$ARGOCD_OIDC_SECRET']
       - type: env
         name: TF_VAR_argocd_oidc_client_id
         cmd: ['echo', '$ARGOCD_OIDC_CLIENT_ID']

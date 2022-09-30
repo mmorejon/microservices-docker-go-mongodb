@@ -34,7 +34,19 @@ jobs:
           build_file: Dockerfile
           path: ./users/
           image: autotune/microservices-docker-go-mongodb-tf/users
-          tag: ${{ steps.slug.outputs.get_version }}
+          tag: ${{ env.USERS_IMAGE_NAME }}-${{ steps.slug.outputs.get_version }}
+          cache: true
+          cache_registry: cache
+      - name: GitHub Package Registry - Website
+        uses: aevea/action-kaniko@master
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
+          build_file: Dockerfile
+          path: ./website/
+          image: autotune/microservices-docker-go-mongodb-tf/website
+          tag: ${{ env.WEBSITE_IMAGE_NAME }}-${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
       - name: GitHub Package Registry - Movies
@@ -46,10 +58,30 @@ jobs:
           build_file: Dockerfile
           path: ./movies/
           image: autotune/microservices-docker-go-mongodb-tf/movies
-          tag: ${{ steps.slug.outputs.get_version }}
+          tag: ${{ env.MOVIES_IMAGE_NAME }}-${{ steps.slug.outputs.get_version }}
           cache: true
           cache_registry: cache
-
-        
-
-        
+      - name: GitHub Package Registry - Showtimes 
+        uses: aevea/action-kaniko@master
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
+          build_file: Dockerfile
+          path: ./showtimes/
+          image: autotune/microservices-docker-go-mongodb-tf/showtimes
+          tag: ${{ env.SHOWTIMES_IMAGE_NAME}}-${{ steps.slug.outputs.get_version }}
+          cache: true
+          cache_registry: cache
+      - name: GitHub Package Registry - Bookings
+        uses: aevea/action-kaniko@master
+        with:
+          registry: ghcr.io
+          username: ${{ secrets.GH_USERNAME }}
+          password: ${{ secrets.PACKAGE_REGISTRY_PAT }}
+          build_file: Dockerfile
+          path: ./bookings/
+          image: autotune/microservices-docker-go-mongodb-tf/bookings
+          tag: ${{ env.BOOKINGS_IMAGE_NAME }}-${{ steps.slug.outputs.get_version }}
+          cache: true
+          cache_registry: cache

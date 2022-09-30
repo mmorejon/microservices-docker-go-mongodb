@@ -19,11 +19,23 @@ The project structure is based in the knowledge learned in:
 
 ## Index
 
+* [Manual Steps for GCP/Do](#cloud-providers)
 * [Deployment](#deployment)
 * [How To Use Cinema Services](#how-to-use-cinema-services)
 * [Related Posts](related-posts)
 * [Significant Revisions](#significant-revisions)
 * [The big picture](#screenshots)
+
+## Cloud Providers
+
+* GCP: Configure OIDC OAuth2 Consent Screen and credentials token for ArgoCD (see: https://argo-cd.readthedocs.io/en/stable/operator-manual/user-management/google/)
+* GCP: Run examples/oidc-simple on local machine, or once as part of CICD initialization pipeline, with changes noted at https://github.com/autotune/terraform-google-github-actions-runners/pull/1/files
+* GitHub: fork into your own repo and run release.yml workflow 
+* Configure required secrets for repo (mentioned below)
+  - secret1
+  - secret2
+  - secret3 
+* Partner with company like fotc.com, Contino, 2nd Watch, etc. to raise regional limits needed for 4x e2-standard-4 GKE instances minimum 
 
 ## Deployment
 

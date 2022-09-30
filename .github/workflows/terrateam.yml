@@ -32,9 +32,9 @@ jobs:
         uses: google-github-actions/auth@v0
         with:
           create_credentials_file: 'true'
-          workload_identity_provider: 'projects/2814340753/locations/global/workloadIdentityPools/terrateam-tf/providers/terrateam-gh-provider'
-          service_account: 'terrateam-tf@wayofthesys-cinema.iam.gserviceaccount.com'
-          project_id: 'wayofthesys-cinema'
+          workload_identity_provider: 'projects/835403465390/locations/global/workloadIdentityPools/terrateam-tf/providers/terrateam-gh-provider'
+          service_account: 'terrateam-tf@wayofthesys-cinema-363715.iam.gserviceaccount.com'
+          project_id: 'wayofthesys-cinema-363715'
       - name: Run Terrateam Action
         id: terrateam
         uses: terrateamio/action@v1 # Do not replace with a custom image. Doing so may cause Terrateam to not operate as intended.
@@ -49,4 +49,5 @@ jobs:
           TF_VAR_mongodb_rootusername: ${{ secrets.MONGODB_USERNAME }}
           TF_VAR_mongodb_rootpassword: ${{ secrets.MONGODB_PASSWORD }} 
           TF_VAR_argocd_access_token: ${{ secrets.ARGOCD_TOKEN }}
+          TF_VAR_argocd_oidc_client_secret: ${{ secrets.ARGOCD_OIDC_SECRET }}
 
