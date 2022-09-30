@@ -43,20 +43,21 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
   }
 }
 
+/*
 data "kubernetes_secret" "argocd_manager" {
   metadata {
     name      = kubernetes_service_account.argocd_manager.default_secret_name
     namespace = kubernetes_service_account.argocd_manager.metadata.0.namespace
   }
 }
+*/
 
-/*
 resource "argocd_cluster" "do-cinema" {
   server = format("https://%s", digitalocean_kubernetes_cluster.cinema.endpoint)
   name   = "do-cinema"
 
   config {
-    bearer_token = kubernetes_secret.argocd_manager.data["token"]
+    bearer_token = digitalocean_kubernetes_cluster.cinema.kube_config[0].token 
     tls_client_config {
       ca_data      = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].cluster_ca_certificate)
     }
