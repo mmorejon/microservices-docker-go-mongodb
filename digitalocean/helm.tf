@@ -189,6 +189,10 @@ resource "helm_release" "argocd" {
     name  = "server.extraArgs" 
     value = "{--insecure}"
   }
+  set_sensitive {
+    name  = "configs.secret.argocdServerAdminPassword"
+    value = var.argocd_oidc_client_secret
+  }
 }
 
 resource "helm_release" "cluster-issuer" {
