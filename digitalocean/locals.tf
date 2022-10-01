@@ -38,7 +38,7 @@ locals {
                   ]
                 }
               ]
-              url : "https://argocd.${var.domain_name[0]}"
+          url : "https://argocd.${var.domain_name[0]}"
             }
           )
         }
