@@ -179,7 +179,7 @@ resource "helm_release" "argocd" {
   depends_on      = [kubernetes_namespace.argocd]
   provider        = helm.cinema
   repository      = local.argocd-repo
-  version         = "5.4.0"
+  version         = "5.5.0"
   namespace       = "argocd"
   name            = "argocd"
   chart           = "argo-cd"
