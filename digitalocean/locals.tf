@@ -9,12 +9,12 @@ locals {
         "config" = {
           "rbacConfig" = yamlencode(
             {
-              policy.csv = [
+              "policy.csv" = [
                 # Role definition : these users are admin
                 "brian, autotune@contrasting.org, role:admin",
                 {
-                  policy.default = "",
-                  scopes         = "[email, group]"
+                  "policy.default" = "",
+                  "scopes"         = "[email, group]"
                 }
               ]
           })
