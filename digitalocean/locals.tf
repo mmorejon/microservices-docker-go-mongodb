@@ -16,6 +16,7 @@ locals {
                   type = "oidc"
                   name = "Google"
                   config = {
+                    issuer       = "https://accounts.google.com"
                     clientID     = var.argocd_oidc_client_id
                     clientSecret = var.argocd_oidc_client_secret
                   }
