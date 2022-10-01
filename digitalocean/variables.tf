@@ -67,3 +67,8 @@ variable "zerossl_eab_hmac_key_id" {
   description = "ZeroSSL EAB HMAC KEY ID"
 }
 
+variable "github_repo" {
+  type        = string
+  description = "GitHub Repository for ArgoCD deploy key"
+  default     = "microservices-docker-go-mongodb-tf"
+}
