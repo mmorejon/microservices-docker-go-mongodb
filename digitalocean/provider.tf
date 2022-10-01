@@ -24,7 +24,7 @@ provider "argocd" {
   server_addr = "argocd.wayofthesys.org:443"
   insecure    = false
   username    = "admin"
-  password    = base64decode(data.kubernetes_secret.argocd_admin.data["password"])
+  password    = data.kubernetes_secret.argocd_admin.data["password"]
 
   kubernetes {
   host             = digitalocean_kubernetes_cluster.cinema.endpoint
