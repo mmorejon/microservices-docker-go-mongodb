@@ -14,6 +14,16 @@ terraform {
 provider "argocd" {
   server_addr = "argocd.wayofthesys.org:443"
   insecure    = false
+  username    = admin
+  password    = var.argocd_oidc_client_secret
+
+  kubernetes {
+  host             = digitalocean_kubernetes_cluster.cinema.endpoint
+  token            = digitalocean_kubernetes_cluster.cinema.kube_config[0].token
+  cluster_ca_certificate = base64decode(
+    digitalocean_kubernetes_cluster.cinema.kube_config[0].cluster_ca_certificate
+  )
+ }
 }
 
 provider "digitalocean" {
