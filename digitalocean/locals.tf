@@ -7,6 +7,17 @@ locals {
     {
       server = {
         "config" = {
+          rbacConfig = yamlencode(
+            {
+              policy.csv = [
+                # Role definition : these users are admin
+                "brian, autotune@contrasting.org, role:admin",
+                {
+                  policy.default = "",
+                  scopes         = "[email, group]"
+                }
+              ]
+          })
           "admin.enabled" = "true"
           "dex.config" = yamlencode(
             {
