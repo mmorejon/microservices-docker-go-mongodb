@@ -11,11 +11,20 @@ terraform {
   }
 }
 
+data "kubernetes_secret" "argocd_admin" {
+  depends_on = [helm_release.argocd]
+  provider = kubernetes.cinema
+  metadata {
+    name      = "argocd-initial-admin-secret" 
+    namespace = "argocd"
+  }
+}
+
 provider "argocd" {
   server_addr = "argocd.wayofthesys.org:443"
   insecure    = false
   username    = "admin"
-  password    = var.argocd_oidc_client_secret
+  password    = base64decrypt(data.kubernetes_secret.argocd_admin.data['password'])
 
   kubernetes {
   host             = digitalocean_kubernetes_cluster.cinema.endpoint
