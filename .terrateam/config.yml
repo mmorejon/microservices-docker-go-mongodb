@@ -57,9 +57,6 @@ workflows:
       - type: env
         name: TF_VAR_argocd_oidc_client_id
         cmd: ['echo', '$ARGOCD_OIDC_CLIENT_ID']
-      - type: env
-        name: TF_VAR_github_token
-        cmd: ['echo', '$GITHUB_TOKEN']
       - type: init
       - type: plan
     apply:
@@ -84,8 +81,5 @@ workflows:
       - type: env
         name: TF_VAR_argocd_oidc_client_id
         cmd: ['echo', '$ARGOCD_OIDC_CLIENT_ID']
-      - type: env
-        name: TF_VAR_github_token
-        cmd: ['echo', '$GITHUB_TOKEN']
       - type: init
       - type: apply
