@@ -61,7 +61,7 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
 
 data "kubernetes_secret" "argocd_manager" {
   depends_on = [kubernetes_secret.argocd_manager]
-  provider = kubernetes.cinema
+  provider   = kubernetes.cinema
   metadata {
     name      = "argocd-manager" # kubernetes_service_account.argocd_manager.default_secret_name
     namespace = "kube-system"
@@ -69,8 +69,9 @@ data "kubernetes_secret" "argocd_manager" {
 }
 
 resource "argocd_cluster" "do-cinema" {
-  server = digitalocean_kubernetes_cluster.cinema.endpoint
-  name   = "do-cinema"
+  server     = digitalocean_kubernetes_cluster.cinema.endpoint
+  name       = "do-cinema"
+  depends_on = [helm_release.argocd]
 
   config {
     bearer_token = data.kubernetes_secret.argocd_manager.data["token"]
