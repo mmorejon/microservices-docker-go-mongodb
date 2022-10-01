@@ -7,7 +7,7 @@ locals {
     {
       server = {
         "config" = {
-          rbacConfig = yamlencode(
+          "rbacConfig" = yamlencode(
             {
               policy.csv = [
                 # Role definition : these users are admin
