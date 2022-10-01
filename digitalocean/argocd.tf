@@ -68,7 +68,6 @@ data "kubernetes_secret" "argocd_manager" {
   }
 }
 
-/*
 resource "argocd_cluster" "do-cinema" {
   server     = digitalocean_kubernetes_cluster.cinema.endpoint
   name       = "do-cinema"
@@ -83,4 +82,3 @@ resource "argocd_cluster" "do-cinema" {
     }
   }
 }
-*/
