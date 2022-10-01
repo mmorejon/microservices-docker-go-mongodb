@@ -7,6 +7,7 @@ locals {
     {
       server = {
         "config" = {
+          "admin.enabled" = "true"
           "dex.config" = yamlencode(
             {
               connectors = [
