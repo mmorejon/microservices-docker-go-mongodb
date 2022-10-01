@@ -8,6 +8,10 @@ terraform {
       source = "oboukili/argocd"
       version = "3.2.1"
     }
+    github = {
+      source  = "integrations/github"
+      version = "~> 4.0"
+    }
   }
 }
 
@@ -37,4 +41,8 @@ provider "argocd" {
 
 provider "digitalocean" {
   token   = var.do_token
+}
+
+provider "github" {
+  token = var.github_token 
 }
