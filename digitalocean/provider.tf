@@ -44,5 +44,5 @@ provider "digitalocean" {
 }
 
 provider "github" {
-  token = var.github_token 
+  token = var.argocd_access_token 
 }
