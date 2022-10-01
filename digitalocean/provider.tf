@@ -14,7 +14,7 @@ terraform {
 provider "argocd" {
   server_addr = "argocd.wayofthesys.org:443"
   insecure    = false
-  username    = admin
+  username    = "admin"
   password    = var.argocd_oidc_client_secret
 
   kubernetes {
