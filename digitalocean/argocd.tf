@@ -82,3 +82,9 @@ resource "argocd_cluster" "do-cinema" {
     }
   }
 }
+
+resource "argocd_repository_credentials" "cinema" {
+  url             = "git@github.com:autotune/microservices-docker-go-mongodb-tf.git"
+  username        = "git"
+  ssh_private_key = tls_private_key.argocd.public_key_openssh 
+}
