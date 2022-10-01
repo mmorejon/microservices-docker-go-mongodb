@@ -196,6 +196,10 @@ resource "helm_release" "argocd" {
     name  = "configs.secret.argocdServerAdminPassword"
     value = var.argocd_oidc_client_secret
   }
+  set {
+    name  = "configs.secret.argocdServerAdminPasswordMtime"
+    value = timestamp()
+  }
 }
 
 resource "helm_release" "cluster-issuer" {
