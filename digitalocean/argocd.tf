@@ -31,12 +31,11 @@ resource "argocd_application" "cinema" {
 
   wait = true
 
-  helm {
-    release_name    = "cinema-v1.0.0"
-  }
-
   spec {
     source {
+      helm {
+        release_name = "cinema-v1.0.0"
+      }
       repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
       path            = "charts/cinema"
       chart           = "cinema"
