@@ -1,4 +1,5 @@
 resource "kubernetes_secret" "docker_login_secret" {
+  provider   = kubernetes.cinema
   metadata {
     name      = "${replace(var.domain_name[0], ".", "-")}-docker-login"
     namespace = "argocd"
