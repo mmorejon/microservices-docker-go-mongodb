@@ -1,3 +1,16 @@
+resource "kubernetes_secret" "argocd_manager" {
+  provider   = kubernetes.cinema
+  depends_on = [digitalocean_kubernetes_cluster.cinema]
+  metadata {
+    name      = "argocd-manager"
+    namespace = "kube-system"
+    annotations = {
+      "kubernetes.io/service-account.name" = "argocd-manager"
+    }
+  }
+  type = "kubernetes.io/service-account-token"
+}
+
 resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
