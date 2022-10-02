@@ -38,11 +38,10 @@ locals {
     {
       server = {
         rbacConfig = {
-          "policy.csv" = yamlencode(
-            [
-              "g, autotune@contrasting.org, role:admin",
-            ]
-          )
+          "policy.csv" = replace(yamlencode(
+            "g, autotune@contrasting.org, role:admin",
+            ),
+          "\"", "")
         }
       }
     }
