@@ -1,19 +1,11 @@
 resource "kubernetes_secret" "docker_login_secret" {
   metadata {
     name      = "${replace(var.domain_name, ".", "-")}-docker-login"
-    namespace = "pritunl"
+    namespace = "argocd"
   }
 
   data = {
-      ".dockerconfigjson": <<EOF
-{
-  "auths": {
-    "ghcr.io": {
-      "auth": "${local.docker_secret_encoded}"
-    }
-  }
-}
-EOF
+      ".dockerconfigjson": local.docker-credentials
   }
   type = "kubernetes.io/dockerconfigjson" 
 }
