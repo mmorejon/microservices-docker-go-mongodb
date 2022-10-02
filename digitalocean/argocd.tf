@@ -17,7 +17,7 @@ resource "argocd_repository_credentials" "cinema" {
   depends_on      = [helm_release.argocd]
   url             = "git@github.com:autotune/microservices-docker-go-mongodb-tf.git"
   username        = "git"
-  ssh_private_key = tls_private_key.argocd.private_key_openssh 
+  ssh_private_key = tls_private_key.argocd.private_key_openssh
 }
 
 resource "argocd_application" "cinema" {
@@ -37,32 +37,12 @@ resource "argocd_application" "cinema" {
       path            = "charts/cinema"
       chart           = "cinema"
       target_revision = "digitalocean:v0.2.1"
-      /*
-      helm {
-        parameter {
-          name  = "image.tag"
-          value = "1.2.3"
-        }
-        parameter {
-          name  = "someotherparameter"
-          value = "true"
-        }
-        value_files = ["values-test.yml"]
-        values      = <<EOT
-someparameter:
-  enabled: true
-  someArray:
-  - foo
-  - bar    
-EOT
-     */
-        release_name = "testing"
-      }
-    }
+      release_name    = "testing"
 
-    destination {
-      server    = "https://kubernetes.default.svc"
-      namespace = "default"
+      destination {
+        server    = "https://kubernetes.default.svc"
+        namespace = "default"
+      }
     }
   }
 }
