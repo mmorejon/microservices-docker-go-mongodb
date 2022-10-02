@@ -42,11 +42,9 @@ locals {
             "policy.csv" = [
               # Role definition : these users are admin
               "p, autotune@contrasting.org, role:admin",
-              {
-                "policy.default" = ""
-                "scopes"         = "[email, group]"
-              }
             ]
+            "policy.default" = ""
+            "scopes"         = "[email, group]"
         })
       }
     }
