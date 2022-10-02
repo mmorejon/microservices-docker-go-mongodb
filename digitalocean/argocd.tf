@@ -64,7 +64,7 @@ resource "argocd_application" "cinema" {
       }
       repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
       path            = "charts/cinema"
-      target_revision = "master"
+      target_revision = "main"
     }
     destination {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint 
