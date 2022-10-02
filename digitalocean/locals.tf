@@ -43,7 +43,7 @@ locals {
           "policy.csv" = replace(yamlencode(
             "g, autotune@contrasting.org, role:admin",
             ),
-          "\"-", "")
+          "\"", "")
         }
       }
     }
