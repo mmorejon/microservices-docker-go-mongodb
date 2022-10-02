@@ -3,13 +3,6 @@ locals {
   jetstack-repo = "https://charts.jetstack.io"
   bookinfo-repo = "https://evry-ace.github.io/helm-charts"
   argocd-repo   = "https://argoproj.github.io/argo-helm"
-  docker-credentials = {
-    auths = {
-      "ghcr.io" = {
-        auth = base64encode("${var.gh_username}:${var.argocd_access_token}")
-      }
-    }
-  }
   argocd_dex_google = yamlencode(
     {
       server = {

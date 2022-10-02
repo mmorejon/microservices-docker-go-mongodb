@@ -1,13 +1,21 @@
 resource "kubernetes_secret" "docker_login_secret" {
   metadata {
-    name      = "${replace(var.domain_name, ".", "-")}-docker-login"
+    name      = "${replace(var.domain_name[0], ".", "-")}-docker-login"
     namespace = "argocd"
   }
 
   data = {
-      ".dockerconfigjson": local.docker-credentials
+    ".dockerconfigjson" : <<EOF
+{
+  "auths": {
+    "ghcr.io": {
+      "auth": "${local.docker_secret_encoded}"
+    }
   }
-  type = "kubernetes.io/dockerconfigjson" 
+}
+EOF
+  }
+  type = "kubernetes.io/dockerconfigjson"
 }
 
 
@@ -28,7 +36,7 @@ resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
   metadata {
-    name      = "argo-cert"
+    name = "argo-cert"
     # "${replace(var.domain_name[0], ".", "-")}-tls"
     namespace = "istio-system"
   }
