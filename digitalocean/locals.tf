@@ -37,7 +37,7 @@ locals {
   argocd_dex_rbac = yamlencode(
     {
       server = {
-        rbacConfig = yamlencode(
+        "rbacConfig" = yamlencode(
           {
             "policy.csv" = [
               # Role definition : these users are admin
