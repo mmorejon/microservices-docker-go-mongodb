@@ -20,6 +20,32 @@ resource "argocd_repository_credentials" "cinema" {
   ssh_private_key = tls_private_key.argocd.private_key_openssh
 }
 
+resource "argocd_project" "cinema" {
+  depends_on = [helm_release.argocd]
+  metadata {
+    name      = "cinema"
+    namespace = "argocd"
+    labels = {
+      environment = "dev"
+    }
+  }
+
+  spec {
+    description  = "Cinema"
+    source_repos = ["https://github.com/autotune/microservices-docker-go-mongodb-tf"]
+
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "cinema"
+    }
+    destination {
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
+      namespace = "cinema"
+    }
+  }
+}
+
+/*
 resource "argocd_application" "cinema" {
   metadata {
     name      = "cinema"
@@ -46,4 +72,4 @@ resource "argocd_application" "cinema" {
       namespace = "default"
     }
   }
-}
+}*/
