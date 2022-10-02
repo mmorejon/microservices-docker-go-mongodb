@@ -34,26 +34,21 @@ locals {
       }
     }
   )
-  argocd_dex_config_name = yamlencode(
+  argocd_dex_rbac = yamlencode(
     {
       server = {
-        "config" = "dex.config"
+        rbacConfig = yamlencode(
+          {
+            "policy.csv" = [
+              # Role definition : these users are admin
+              "p, autotune@contrasting.org, role:admin",
+              {
+                "policy.default" = "",
+                "scopes"         = "[email, group]"
+              }
+            ]
+        })
       }
-    }
-  )
-  argocd_dex_config_value = yamlencode(
-    {
-      connectors = [
-        {
-          id   = "google"
-          type = "oidc"
-          name = "Google"
-          config = {
-            clientID     = var.argocd_oidc_client_id
-            clientSecret = var.argocd_oidc_client_secret
-          }
-        }
-      ]
     }
   )
 }
