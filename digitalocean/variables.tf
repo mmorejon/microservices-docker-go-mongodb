@@ -72,3 +72,8 @@ variable "github_repo" {
   description = "GitHub Repository for ArgoCD deploy key"
   default     = "microservices-docker-go-mongodb-tf"
 }
+
+variable "gh_username" {
+  type        = "string"
+  description = "GitHub username for container registry"
+}

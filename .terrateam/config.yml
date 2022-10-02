@@ -57,6 +57,9 @@ workflows:
       - type: env
         name: TF_VAR_argocd_oidc_client_id
         cmd: ['echo', '$ARGOCD_OIDC_CLIENT_ID']
+      - type: env
+        name: TF_VAR_gh_username
+        cmd: ['echo', '$GH_USERNAME']
       - type: init
       - type: plan
     apply:
@@ -81,5 +84,8 @@ workflows:
       - type: env
         name: TF_VAR_argocd_oidc_client_id
         cmd: ['echo', '$ARGOCD_OIDC_CLIENT_ID']
+      - type: env
+        name: TF_VAR_gh_username
+        cmd: ['echo', '$GH_USERNAME']
       - type: init
       - type: apply
