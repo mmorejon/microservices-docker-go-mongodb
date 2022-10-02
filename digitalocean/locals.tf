@@ -6,20 +6,20 @@ locals {
   argocd_dex_google = yamlencode(
     {
       server = {
+        "rbacConfig" = yamlencode(
+          {
+            "policy.csv" = [
+              # Role definition : these users are admin
+              "p, autotune@contrasting.org, role:admin",
+              {
+                "policy.default" = "",
+                "scopes"         = "[email, group]"
+              }
+            ]
+        })
         "config" = {
-          "rbacConfig" = yamlencode(
-            {
-              "policy.csv" = [
-                # Role definition : these users are admin
-                "brian, autotune@contrasting.org, role:admin",
-                {
-                  "policy.default" = "",
-                  "scopes"         = "[email, group]"
-                }
-              ]
-          })
           "admin.enabled" = "true"
-          "url" = "https://argocd.${var.domain_name[0]}"
+          "url"           = "https://argocd.${var.domain_name[0]}"
           "dex.config" = yamlencode(
             {
               connectors = [
