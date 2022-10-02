@@ -41,9 +41,7 @@ locals {
           "policy.default" = "readOnly",
           "scopes"         = "[email]"
           "policy.csv" = replace(yamlencode(
-            [
-              "g, autotune@contrasting.org, role:admin",
-            ],
+            "g, autotune@contrasting.org, role:admin",
             ),
           "\"-", "")
         }
