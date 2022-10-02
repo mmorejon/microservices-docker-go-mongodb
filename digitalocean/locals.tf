@@ -38,14 +38,12 @@ locals {
     {
       server = {
         rbacConfig = {
+          "policy.default" = "readOnly",
+          "scopes"         = "[email]"
           "policy.csv" = replace(yamlencode(
             [
               "g, autotune@contrasting.org, role:admin",
             ],
-            {
-              "policy.default" = "readOnly",
-              "scopes"         = "[email]"
-            }
             ),
           "\"-", "")
         }
