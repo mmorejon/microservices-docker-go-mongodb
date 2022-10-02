@@ -179,7 +179,7 @@ resource "helm_release" "argocd" {
   depends_on      = [kubernetes_namespace.argocd]
   provider        = helm.cinema
   repository      = local.argocd-repo
-  version         = "5.0.0"
+  version         = "5.1.0"
   namespace       = "argocd"
   name            = "argocd"
   chart           = "argo-cd"
@@ -187,6 +187,7 @@ resource "helm_release" "argocd" {
   force_update    = true
   values = [
     local.argocd_dex_google
+    local.argocd_dex_rbac
   ]
   set {
     name  = "server.extraArgs"
