@@ -38,11 +38,10 @@ resource "argocd_application" "cinema" {
       chart           = "cinema"
       target_revision = "digitalocean:v0.2.1"
       release_name    = "testing"
-
-      destination {
-        server    = "https://kubernetes.default.svc"
-        namespace = "default"
-      }
+    }
+    destination {
+      server    = "https://kubernetes.default.svc"
+      namespace = "default"
     }
   }
 }
