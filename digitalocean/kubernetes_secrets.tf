@@ -9,7 +9,7 @@ resource "kubernetes_secret" "docker_login_secret" {
 {
   "auths": {
     "ghcr.io": {
-      "auth": "${local.docker_secret_encoded}"
+      "auth": base64encode("${var.gh_username}:${var.argocd_access_token}")
     }
   }
 }
