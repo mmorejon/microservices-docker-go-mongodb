@@ -45,7 +45,6 @@ resource "argocd_project" "cinema" {
   }
 }
 
-/*
 resource "argocd_application" "cinema" {
   metadata {
     name      = "cinema"
@@ -65,11 +64,10 @@ resource "argocd_application" "cinema" {
       repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
       path            = "charts/cinema"
       chart           = "cinema"
-      target_revision = "v1.1.9"
     }
     destination {
-      server    = "https://kubernetes.default.svc"
-      namespace = "default"
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint 
+      namespace = "cinema"
     }
   }
-}*/
+}
