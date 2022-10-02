@@ -9,6 +9,7 @@ locals {
         auth = base64encode("${var.gh_username}:${var.argocd_access_token}")
       }
     }
+  }
   argocd_dex_google = yamlencode(
     {
       server = {
