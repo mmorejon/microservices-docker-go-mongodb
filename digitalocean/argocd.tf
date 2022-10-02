@@ -135,7 +135,7 @@ resource "argocd_project" "cinema" {
     role {
       name = "cinema"
       policies = [
-        "p, proj:cinema:admin, applications, override, cinema/*, allow",
+        "p, proj:cinema:cinema, applications, override, cinema/*, allow",
       ]
     }
     sync_window {
