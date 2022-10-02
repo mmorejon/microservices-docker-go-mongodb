@@ -48,7 +48,7 @@ resource "argocd_project" "cinema" {
 resource "argocd_application" "cinema" {
   metadata {
     name      = "cinema"
-    namespace = "cinema"
+    namespace = "argocd"
     labels = {
       env = "dev"
     }
