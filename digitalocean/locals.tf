@@ -42,8 +42,10 @@ locals {
             [
               "g, autotune@contrasting.org, role:admin",
             ],
-            "policy.default: readOnly",
-            "scopes: '[email]'"
+            {
+              "policy.default" = "readOnly",
+              "scopes"         = "[email]"
+            }
             ),
           "\"-", "")
         }
