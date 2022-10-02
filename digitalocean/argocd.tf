@@ -37,9 +37,9 @@ resource "argocd_application" "cinema" {
         release_name = "cinema-v1.0.0"
       }
       repo_url        = "git@github.com/autotune/microservices-docker-go-mongodb-tf.git"
-      path            = "charts/cinema"
+      path            = "charts"
       chart           = "cinema"
-      target_revision = "digitalocean"
+      target_revision = "v1.1.9"
     }
     destination {
       server    = "https://kubernetes.default.svc"
