@@ -33,9 +33,11 @@ resource "argocd_application" "cinema" {
 
   spec {
     source {
+      repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
       path            = "charts/cinema"
       chart           = "cinema"
-      target_revision = "0.2.1"
+      target_revision = "digitalocean:v0.2.1"
+      /*
       helm {
         parameter {
           name  = "image.tag"
@@ -45,7 +47,6 @@ resource "argocd_application" "cinema" {
           name  = "someotherparameter"
           value = "true"
         }
-        /*
         value_files = ["values-test.yml"]
         values      = <<EOT
 someparameter:
