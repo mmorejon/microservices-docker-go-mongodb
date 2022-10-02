@@ -37,7 +37,7 @@ locals {
   argocd_dex_rbac = yamlencode(
     {
       server = {
-        "rbacConfig" = {
+        rbacConfig = {
           "policy.csv" = yamlencode(
             "g, autotune@contrasting.org, role:admin",
             {
