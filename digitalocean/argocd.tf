@@ -144,7 +144,7 @@ resource "argocd_project" "cinema" {
       clusters     = ["*"]
       namespaces   = ["*"]
       duration     = "3600s"
-      schedule     = "10 1 * * *"
+      schedule     = "*/10 * * * *"
       manual_sync  = true
     }
     /*
