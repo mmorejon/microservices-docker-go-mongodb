@@ -74,6 +74,6 @@ variable "github_repo" {
 }
 
 variable "gh_username" {
-  type        = "string"
+  type        = string
   description = "GitHub username for container registry"
 }
