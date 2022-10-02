@@ -37,7 +37,9 @@ resource "argocd_application" "cinema" {
       path            = "charts/cinema"
       chart           = "cinema"
       target_revision = "digitalocean:v0.2.1"
-      release_name    = "testing"
+    }
+    helm {
+      release_name    = "cinema-v1.0.0"
     }
     destination {
       server    = "https://kubernetes.default.svc"
