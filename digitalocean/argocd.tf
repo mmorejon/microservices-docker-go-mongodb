@@ -68,6 +68,7 @@ data "kubernetes_secret" "argocd_manager" {
   }
 }
 
+/*
 resource "argocd_cluster" "do-cinema" {
   server     = digitalocean_kubernetes_cluster.cinema.endpoint
   name       = "do-cinema"
@@ -89,4 +90,4 @@ resource "argocd_repository_credentials" "cinema" {
   username        = "git"
   ssh_private_key = tls_private_key.argocd.private_key_openssh 
 }
-
+*/
