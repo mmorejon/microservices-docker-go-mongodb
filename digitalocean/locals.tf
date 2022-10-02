@@ -43,7 +43,7 @@ locals {
               # Role definition : these users are admin
               "p, autotune@contrasting.org, role:admin",
               {
-                "policy.default" = "",
+                "policy.default" = ""
                 "scopes"         = "[email, group]"
               }
             ]
