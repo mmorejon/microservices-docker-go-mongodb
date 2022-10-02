@@ -36,7 +36,7 @@ resource "argocd_application" "cinema" {
       helm {
         release_name = "cinema-v1.0.0"
       }
-      repo_url        = "git@github.com:autotune/microservices-docker-go-mongodb-tf.git"
+      repo_url        = "git@github.com/autotune/microservices-docker-go-mongodb-tf.git"
       path            = "charts/cinema"
       chart           = "cinema"
       target_revision = "digitalocean"
