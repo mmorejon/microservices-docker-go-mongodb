@@ -186,7 +186,7 @@ resource "helm_release" "argocd" {
   cleanup_on_fail = true
   force_update    = true
   values = [
-    local.argocd_dex_google
+    local.argocd_dex_google,
     local.argocd_dex_rbac
   ]
   set {
