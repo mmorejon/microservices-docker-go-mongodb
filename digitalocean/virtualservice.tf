@@ -101,7 +101,7 @@ resource "kubernetes_manifest" "cinema_bookings_virtualservice" {
           "match" = [
             {
               "uri" = {
-                "prefix" = "/api/bookings"
+                "prefix" = "/api/bookings/"
               }
             },
           ]
