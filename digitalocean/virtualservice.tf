@@ -131,7 +131,7 @@ resource "kubernetes_manifest" "cinema_showtimes_virtualservice" {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "VirtualService"
     "metadata" = {
-      "name"      = "cinema-bookings"
+      "name"      = "cinema-showtimes"
       "namespace" = "cinema"
     }
     "spec" = {
