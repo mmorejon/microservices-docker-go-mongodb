@@ -7,8 +7,19 @@ resource "argocd_cluster" "do-cinema" {
     bearer_token = data.kubernetes_secret.argocd_manager.data["token"]
     tls_client_config {
       ca_data = data.kubernetes_secret.argocd_manager.data["ca.crt"]
-      // cert_data = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].client_certificate)
-      // key_data = base64decode(digitalocean_kubernetes_cluster.cinema.kube_config[0].client_key)
+    }
+  }
+}
+
+resource "argocd_cluster" "do-loadtesting" {
+  server     = digitalocean_kubernetes_cluster.loadtesting.endpoint
+  name       = "do-loadtesting"
+  depends_on = [helm_release.argocd]
+
+  config {
+    bearer_token = data.kubernetes_secret.loadtesting_manager.data["token"]
+    tls_client_config {
+      ca_data = data.kubernetes_secret.loadtesting_manager.data["ca.crt"]
     }
   }
 }
