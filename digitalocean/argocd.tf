@@ -46,6 +46,7 @@ resource "argocd_project" "cinema" {
 }
 
 resource "argocd_application" "cinema" {
+  depends_on = [argocd_project.cinema]
   metadata {
     name      = "cinema"
     namespace = "argocd"
