@@ -5,7 +5,7 @@ resource "kubernetes_manifest" "virtualservice_resource" {
   "kind" = "VirtualService"
   "metadata" = {
     "name" = "argocd"
-    "namespace" = "cinema"
+    "namespace" = "argocd"
   }
   "spec" = {
     "gateways" = [
