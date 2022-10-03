@@ -79,3 +79,44 @@ resource "kubernetes_manifest" "cinema_virtualservice" {
     }
   }
 }
+
+resource "kubernetes_manifest" "cinema_bookings_virtualservice" {
+  provider = kubernetes.cinema
+  manifest = {
+    "apiVersion" = "networking.istio.io/v1beta1"
+    "kind"       = "VirtualService"
+    "metadata" = {
+      "name"      = "cinema"
+      "namespace" = "cinema"
+    }
+    "spec" = {
+      "gateways" = [
+        "cinema",
+      ]
+      "hosts" = [
+        var.domain_name[0],
+      ]
+      "http" = [
+        {
+          "match" = [
+            {
+              "uri" = {
+                "prefix" = "/api/bookings"
+              }
+            },
+          ]
+          "route" = [
+            {
+              "destination" = {
+                "host" = "cinema-bookings"
+                "port" = {
+                  "number" = 80
+                }
+              }
+            },
+          ]
+        },
+      ]
+    }
+  }
+}
