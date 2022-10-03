@@ -150,7 +150,6 @@ resource "helm_release" "istio-csr" {
   force_update    = true
   depends_on = [helm_release.istiod]
 }
-*/
 
 resource "helm_release" "bookinfo" {
   provider        = helm.cinema
@@ -174,7 +173,8 @@ resource "helm_release" "bookinfo" {
   }
   depends_on = [helm_release.istiod]
 }
-
+*/
+\
 resource "helm_release" "argocd" {
   depends_on      = [kubernetes_namespace.argocd]
   provider        = helm.cinema
