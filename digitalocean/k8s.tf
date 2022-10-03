@@ -8,8 +8,8 @@ resource "digitalocean_kubernetes_cluster" "cinema" {
     name       = "core"
     size       = "s-4vcpu-8gb"
     auto_scale = true
-    min_nodes  = 4
-    max_nodes  = 8 
+    min_nodes  = 2
+    max_nodes  = 4 
   }
   vpc_uuid = digitalocean_vpc.cinema.id
 }
