@@ -11,7 +11,7 @@ variable "do_region" {
 }
 
 variable "domain_name" {
-  type        = list 
+  type        = list(any)
   description = "Domain Name"
   default     = ["wayofthesys.org"]
 }

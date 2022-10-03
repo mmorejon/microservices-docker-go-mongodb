@@ -68,7 +68,7 @@ resource "argocd_application" "cinema" {
       target_revision = "main"
     }
     destination {
-      server    = digitalocean_kubernetes_cluster.cinema.endpoint 
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
       namespace = "cinema"
     }
   }

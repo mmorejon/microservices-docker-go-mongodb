@@ -8,3 +8,14 @@ resource "kubernetes_service_account" "argocd_manager" {
     name = kubernetes_secret.argocd_manager.metadata.0.name
   }
 }
+
+resource "kubernetes_service_account" "loadtesting_manager" {
+  provider = kubernetes.loadtesting 
+  metadata {
+    name      = "loadtesting-manager"
+    namespace = "kube-system"
+  }
+  secret {
+    name = kubernetes_secret.loadtesting_manager.metadata.0.name
+  }
+}

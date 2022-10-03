@@ -9,7 +9,7 @@ resource "digitalocean_kubernetes_cluster" "cinema" {
     size       = "s-4vcpu-8gb"
     auto_scale = true
     min_nodes  = 2
-    max_nodes  = 4 
+    max_nodes  = 4
   }
   vpc_uuid = digitalocean_vpc.cinema.id
 }
@@ -25,7 +25,7 @@ resource "digitalocean_kubernetes_cluster" "loadtesting" {
     size       = "s-4vcpu-8gb"
     auto_scale = true
     min_nodes  = 4
-    max_nodes  = 4 
+    max_nodes  = 4
   }
   vpc_uuid = digitalocean_vpc.loadtesting.id
 }

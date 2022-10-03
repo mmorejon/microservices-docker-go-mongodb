@@ -1,6 +1,6 @@
 resource "kubernetes_manifest" "argocd_virtualservice" {
-  provider = kubernetes.cinema
-  depends_on = [helm_release.argocd] 
+  provider   = kubernetes.cinema
+  depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "VirtualService"
@@ -41,7 +41,7 @@ resource "kubernetes_manifest" "argocd_virtualservice" {
 }
 
 resource "kubernetes_manifest" "cinema_virtualservice" {
-  provider = kubernetes.cinema
+  provider   = kubernetes.cinema
   depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
@@ -83,7 +83,7 @@ resource "kubernetes_manifest" "cinema_virtualservice" {
 }
 
 resource "kubernetes_manifest" "cinema_bookings_virtualservice" {
-  provider = kubernetes.cinema
+  provider   = kubernetes.cinema
   depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
@@ -125,7 +125,7 @@ resource "kubernetes_manifest" "cinema_bookings_virtualservice" {
 }
 
 resource "kubernetes_manifest" "cinema_showtimes_virtualservice" {
-  provider = kubernetes.cinema
+  provider   = kubernetes.cinema
   depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
@@ -167,7 +167,7 @@ resource "kubernetes_manifest" "cinema_showtimes_virtualservice" {
 }
 
 resource "kubernetes_manifest" "cinema_movies_virtualservice" {
-  provider = kubernetes.cinema
+  provider   = kubernetes.cinema
   depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
@@ -209,7 +209,7 @@ resource "kubernetes_manifest" "cinema_movies_virtualservice" {
 }
 
 resource "kubernetes_manifest" "cinema_users_virtualservice" {
-  provider = kubernetes.cinema
+  provider   = kubernetes.cinema
   depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"

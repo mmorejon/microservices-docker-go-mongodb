@@ -19,7 +19,7 @@ resource "kubernetes_manifest" "certificate_argo_argo" {
       "secretName" = "argocd-tls"
     }
   }
-} 
+}
 
 resource "kubernetes_manifest" "certificate_cinema" {
   provider = kubernetes.cinema
@@ -42,7 +42,7 @@ resource "kubernetes_manifest" "certificate_cinema" {
       "secretName" = "${replace(var.domain_name[0], ".", "-")}-tls"
     }
   }
-} 
+}
 
 /*
 resource "kubernetes_manifest" "certificate_argo_istio" {

@@ -48,7 +48,7 @@ resource "kubernetes_manifest" "argocd-gateway" {
 
 resource "kubernetes_manifest" "cinema-gateway" {
   depends_on = [helm_release.argocd]
-  provider = kubernetes.cinema
+  provider   = kubernetes.cinema
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "Gateway"
