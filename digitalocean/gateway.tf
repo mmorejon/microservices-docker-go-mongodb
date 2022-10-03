@@ -35,7 +35,7 @@ resource "kubernetes_manifest" "argocd-gateway" {
             "protocol" = "HTTPS"
           }
           "tls" = {
-            "credentialName"    = "${replace(var.domain_name[0], ".", "-")}-tls"
+            "credentialName"    = "argocd-tls"
             "mode"              = "SIMPLE"
             "serverCertificate" = "/etc/istio/ingressgateway-certs/tls.crt"
             "privateKey"        = "/etc/istio/ingressgateway-certs/tls.key"
