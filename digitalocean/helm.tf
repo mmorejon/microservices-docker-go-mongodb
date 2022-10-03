@@ -174,7 +174,7 @@ resource "helm_release" "bookinfo" {
   depends_on = [helm_release.istiod]
 }
 */
-\
+
 resource "helm_release" "argocd" {
   depends_on      = [kubernetes_namespace.argocd]
   provider        = helm.cinema
