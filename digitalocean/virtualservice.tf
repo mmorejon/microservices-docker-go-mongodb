@@ -50,7 +50,7 @@ resource "kubernetes_manifest" "cinema_virtualservice" {
     }
     "spec" = {
       "gateways" = [
-        "argocd",
+        "cinema",
       ]
       "hosts" = [
         var.domain_name[0],
