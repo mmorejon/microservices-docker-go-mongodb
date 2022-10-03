@@ -38,7 +38,7 @@ resource "kubernetes_secret" "argocd-tls" {
   provider   = kubernetes.cinema
   depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
   metadata {
-    name = "argo-cert"
+    name = "argocd-tls"
     # "${replace(var.domain_name[0], ".", "-")}-tls"
     namespace = "istio-system"
   }
@@ -54,7 +54,7 @@ resource "kubernetes_secret" "wayofthesys-tls" {
   depends_on = [digitalocean_kubernetes_cluster.cinema, helm_release.external-dns, kubernetes_namespace.cinema]
   metadata {
     name = "${replace(var.domain_name[0], ".", "-")}-tls"
-    namespace = "cinema"
+    namespace = "istio-system"
   }
   type = "tls"
   data = {

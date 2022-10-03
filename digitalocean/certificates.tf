@@ -16,7 +16,7 @@ resource "kubernetes_manifest" "certificate_argo_argo" {
         "kind" = "ClusterIssuer"
         "name" = "zerossl"
       }
-      "secretName" = "${replace(var.domain_name[0], ".", "-")}-tls"
+      "secretName" = "argocd-tls"
     }
   }
 } 
