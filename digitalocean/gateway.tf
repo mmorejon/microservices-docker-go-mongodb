@@ -84,7 +84,7 @@ resource "kubernetes_manifest" "cinema-gateway" {
             "protocol" = "HTTPS"
           }
           "tls" = {
-            "credentialName"    = "cinema-cert"
+            "credentialName"    = "${replace(var.domain_name[0], ".", "-")}-tls"
             "mode"              = "SIMPLE"
             "serverCertificate" = "/etc/istio/ingressgateway-certs/tls.crt"
             "privateKey"        = "/etc/istio/ingressgateway-certs/tls.key"
