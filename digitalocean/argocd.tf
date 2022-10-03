@@ -56,6 +56,27 @@ resource "argocd_project" "cinema" {
   }
 }
 
+resource "argocd_project" "loadtesting" {
+  depends_on = [helm_release.argocd]
+  metadata {
+    name      = "cinema"
+    namespace = "loadtesting"
+    labels = {
+      environment = "dev"
+    }
+  }
+
+  spec {
+    description  = "loadtesting"
+    source_repos = ["https://github.com/autotune/microservices-docker-go-mongodb-tf"]
+
+    destination {
+      server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
+      namespace = "loadtesting"
+    }
+  }
+}
+
 resource "argocd_application" "cinema" {
   depends_on = [argocd_project.cinema]
   metadata {
