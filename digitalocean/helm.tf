@@ -139,42 +139,6 @@ resource "helm_release" "istio-egress" {
   depends_on = [helm_release.istiod]
 }
 
-/*
-resource "helm_release" "istio-csr" {
-  provider   = helm.cinema
-  repository = local.jetstack-repo
-  namespace  = "istio-system"
-  name       = "istio-csr"
-  chart      = "cert-manager-istio-csr"
-  cleanup_on_fail = true
-  force_update    = true
-  depends_on = [helm_release.istiod]
-}
-
-resource "helm_release" "bookinfo" {
-  provider        = helm.cinema
-  repository      = local.bookinfo-repo
-  name            = "bookinfo"
-  chart           = "istio-bookinfo"
-  cleanup_on_fail = true
-  force_update    = true
-  namespace       = kubernetes_namespace.devingress.metadata.0.name
-  set {
-    name  = "service.type"
-    value = "ClusterIP"
-  }
-  set {
-    name  = "gateway.selector"
-    value = "ingressgateway"
-  }
-  set {
-    name  = "gateway.hostname"
-    value = var.domain_name[0]
-  }
-  depends_on = [helm_release.istiod]
-}
-*/
-
 resource "helm_release" "argocd" {
   depends_on      = [kubernetes_namespace.argocd]
   provider        = helm.cinema
@@ -227,29 +191,3 @@ resource "helm_release" "cluster-issuer" {
   }
 }
 
-/*
-resource "helm_release" "nginx-ingress-chart" {
-  provider   = helm.cinema
-  name       = "nginx-ingress-controller"
-  namespace  = "default"
-  repository = "https://charts.bitnami.com/bitnami"
-  chart      = "nginx-ingress-controller"
-
-  set {
-    name  = "service.type"
-    value = "LoadBalancer"
-  }
-  set {
-    name  = "service.annotations.kubernetes\\.digitalocean\\.com/load-balancer-id"
-    value = digitalocean_loadbalancer.ingress_load_balancer.id
-  }
-  set {
-    name  = "service.beta.kubernetes.io/do-loadbalancer-hostname"
-    value = "${var.domain_name[0]}-lb"
-  }
-
-  depends_on = [
-    digitalocean_loadbalancer.ingress_load_balancer
-  ]
-}
-*/

@@ -5,7 +5,7 @@ resource "kubernetes_manifest" "certificate_argo_argo" {
     "kind"       = "Certificate"
     "metadata" = {
       "name"      = "argocd-cert"
-      "namespace" = "argocd"
+      "namespace" = "istio-system"
     }
     "spec" = {
       "commonName" = "argocd.${var.domain_name[0]}"
@@ -28,7 +28,7 @@ resource "kubernetes_manifest" "certificate_cinema" {
     "kind"       = "Certificate"
     "metadata" = {
       "name"      = "cinema-cert"
-      "namespace" = "cinema"
+      "namespace" = "istio-system"
     }
     "spec" = {
       "commonName" = var.domain_name[0]
