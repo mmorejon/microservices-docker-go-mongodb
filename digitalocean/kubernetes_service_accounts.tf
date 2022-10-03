@@ -15,7 +15,4 @@ resource "kubernetes_service_account" "loadtesting_manager" {
     name      = "loadtesting-manager"
     namespace = "kube-system"
   }
-  secret {
-    name = kubernetes_secret.loadtesting_manager.metadata.0.name
-  }
 }
