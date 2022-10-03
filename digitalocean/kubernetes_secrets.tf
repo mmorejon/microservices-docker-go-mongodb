@@ -36,7 +36,7 @@ resource "kubernetes_secret" "argocd_manager" {
 
 resource "kubernetes_secret" "loadtesting_manager" {
   provider   = kubernetes.loadtesting 
-  depends_on = [digitalocean_kubernetes_cluster.loadtesting]
+  depends_on = [digitalocean_kubernetes_cluster.loadtesting, kubernetes_service_account.loadtesting_manager]
   metadata {
     name      = "loadtesting-manager"
     namespace = "kube-system"
