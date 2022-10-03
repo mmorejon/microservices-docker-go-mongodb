@@ -165,3 +165,87 @@ resource "kubernetes_manifest" "cinema_showtimes_virtualservice" {
     }
   }
 }
+
+resource "kubernetes_manifest" "cinema_movies_virtualservice" {
+  provider = kubernetes.cinema
+  depends_on = [helm_release.argocd]
+  manifest = {
+    "apiVersion" = "networking.istio.io/v1beta1"
+    "kind"       = "VirtualService"
+    "metadata" = {
+      "name"      = "cinema-movies"
+      "namespace" = "cinema"
+    }
+    "spec" = {
+      "gateways" = [
+        "cinema",
+      ]
+      "hosts" = [
+        var.domain_name[0],
+      ]
+      "http" = [
+        {
+          "match" = [
+            {
+              "uri" = {
+                "prefix" = "/api/movies"
+              }
+            },
+          ]
+          "route" = [
+            {
+              "destination" = {
+                "host" = "cinema-movies"
+                "port" = {
+                  "number" = 80
+                }
+              }
+            },
+          ]
+        },
+      ]
+    }
+  }
+}
+
+resource "kubernetes_manifest" "cinema_users_virtualservice" {
+  provider = kubernetes.cinema
+  depends_on = [helm_release.argocd]
+  manifest = {
+    "apiVersion" = "networking.istio.io/v1beta1"
+    "kind"       = "VirtualService"
+    "metadata" = {
+      "name"      = "cinema-users"
+      "namespace" = "cinema"
+    }
+    "spec" = {
+      "gateways" = [
+        "cinema",
+      ]
+      "hosts" = [
+        var.domain_name[0],
+      ]
+      "http" = [
+        {
+          "match" = [
+            {
+              "uri" = {
+                "prefix" = "/api/users"
+              }
+            },
+          ]
+          "route" = [
+            {
+              "destination" = {
+                "host" = "cinema-users"
+                "port" = {
+                  "number" = 80
+                }
+              }
+            },
+          ]
+        },
+      ]
+    }
+  }
+}
