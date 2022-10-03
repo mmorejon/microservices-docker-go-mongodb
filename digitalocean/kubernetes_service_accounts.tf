@@ -9,6 +9,7 @@ resource "kubernetes_service_account" "argocd_manager" {
   }
 }
 
+/*
 resource "kubernetes_service_account" "loadtesting_manager" {
   provider = kubernetes.loadtesting 
   metadata {
@@ -18,4 +19,4 @@ resource "kubernetes_service_account" "loadtesting_manager" {
   secret {
     name = kubernetes_secret.loadtesting_manager.metadata.0.name
   }
-}
+}*/
