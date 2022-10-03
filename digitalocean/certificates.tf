@@ -44,6 +44,7 @@ resource "kubernetes_manifest" "certificate_cinema" {
   }
 } 
 
+/*
 resource "kubernetes_manifest" "certificate_argo_istio" {
   provider = kubernetes.cinema
   manifest = {
@@ -65,4 +66,4 @@ resource "kubernetes_manifest" "certificate_argo_istio" {
       "secretName" = "${replace(var.domain_name[0], ".", "-")}-tls"
     }
   }
-} 
+} */
