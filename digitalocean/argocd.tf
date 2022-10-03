@@ -59,8 +59,8 @@ resource "argocd_project" "cinema" {
 resource "argocd_project" "loadtesting" {
   depends_on = [helm_release.argocd]
   metadata {
-    name      = "cinema"
-    namespace = "loadtesting"
+    name      = "loadtesting"
+    namespace = "argocd"
     labels = {
       environment = "dev"
     }
