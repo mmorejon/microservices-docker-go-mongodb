@@ -47,6 +47,11 @@ resource "kubernetes_secret" "argocd-tls" {
     "tls.crt" = tls_locally_signed_cert.cert.cert_pem
     "tls.key" = tls_private_key.key.private_key_pem
   }
+
+  lifecycle {
+    ignore_changes = true
+  }
+
 }
 
 resource "kubernetes_secret" "wayofthesys-tls" {
@@ -61,6 +66,11 @@ resource "kubernetes_secret" "wayofthesys-tls" {
     "tls.crt" = tls_locally_signed_cert.cert.cert_pem
     "tls.key" = tls_private_key.key.private_key_pem
   }
+
+  lifecycle {
+    ignore_changes = true
+  }
+
 }
 
 resource "kubernetes_secret" "zerossl-eab-hmac-key" {
