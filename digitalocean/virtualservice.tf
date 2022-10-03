@@ -1,5 +1,6 @@
 resource "kubernetes_manifest" "argocd_virtualservice" {
   provider = kubernetes.cinema
+  depends_on = [helm_release.argocd] 
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "VirtualService"
@@ -41,6 +42,7 @@ resource "kubernetes_manifest" "argocd_virtualservice" {
 
 resource "kubernetes_manifest" "cinema_virtualservice" {
   provider = kubernetes.cinema
+  depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "VirtualService"
@@ -82,6 +84,7 @@ resource "kubernetes_manifest" "cinema_virtualservice" {
 
 resource "kubernetes_manifest" "cinema_bookings_virtualservice" {
   provider = kubernetes.cinema
+  depends_on = [helm_release.argocd]
   manifest = {
     "apiVersion" = "networking.istio.io/v1beta1"
     "kind"       = "VirtualService"
@@ -101,7 +104,7 @@ resource "kubernetes_manifest" "cinema_bookings_virtualservice" {
           "match" = [
             {
               "uri" = {
-                "prefix" = "/api/bookings/"
+                "prefix" = "/api/bookings"
               }
             },
           ]
@@ -109,6 +112,48 @@ resource "kubernetes_manifest" "cinema_bookings_virtualservice" {
             {
               "destination" = {
                 "host" = "cinema-bookings"
+                "port" = {
+                  "number" = 80
+                }
+              }
+            },
+          ]
+        },
+      ]
+    }
+  }
+}
+
+resource "kubernetes_manifest" "cinema_showtimes_virtualservice" {
+  provider = kubernetes.cinema
+  depends_on = [helm_release.argocd]
+  manifest = {
+    "apiVersion" = "networking.istio.io/v1beta1"
+    "kind"       = "VirtualService"
+    "metadata" = {
+      "name"      = "cinema-bookings"
+      "namespace" = "cinema"
+    }
+    "spec" = {
+      "gateways" = [
+        "cinema",
+      ]
+      "hosts" = [
+        var.domain_name[0],
+      ]
+      "http" = [
+        {
+          "match" = [
+            {
+              "uri" = {
+                "prefix" = "/api/showtimes"
+              }
+            },
+          ]
+          "route" = [
+            {
+              "destination" = {
+                "host" = "cinema-showtimes"
                 "port" = {
                   "number" = 80
                 }
