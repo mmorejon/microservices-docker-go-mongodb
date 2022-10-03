@@ -14,17 +14,6 @@ resource "kubernetes_namespace" "istio-system" {
   }
 }
 
-resource "kubernetes_namespace" "devingress" {
-  depends_on = [digitalocean_kubernetes_cluster.cinema]
-  provider   = kubernetes.cinema
-  metadata {
-    name = "devingress"
-    labels = {
-      istio-injection = "enabled"
-    }
-  }
-}
-
 resource "kubernetes_namespace" "argocd" {
   depends_on = [digitalocean_kubernetes_cluster.cinema]
   provider   = kubernetes.cinema
