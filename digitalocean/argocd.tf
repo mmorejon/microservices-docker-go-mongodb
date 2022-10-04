@@ -126,7 +126,7 @@ resource "argocd_application" "locust" {
       }
       repo_url        = "https://github.com/autotune/loadtesting"
       path            = "stable/locust"
-      target_revision = "main"
+      target_revision = "master"
     }
     destination {
       server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
