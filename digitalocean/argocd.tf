@@ -122,7 +122,7 @@ resource "argocd_application" "locust" {
     project = "loadtesting"
     source {
       helm {
-        release_name = "cinema"
+        release_name = "locust"
       }
       repo_url        = "https://github.com/autotune/loadtesting"
       path            = "stable/locust"
