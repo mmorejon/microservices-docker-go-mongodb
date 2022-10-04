@@ -105,3 +105,32 @@ resource "argocd_application" "cinema" {
     }
   }
 }
+
+resource "argocd_application" "locust" {
+  depends_on = [argocd_project.cinema]
+  metadata {
+    name      = "locus"
+    namespace = "argocd"
+    labels = {
+      env = "dev"
+    }
+  }
+
+  wait = true
+
+  spec {
+    project = "loadtesting"
+    source {
+      helm {
+        release_name = "cinema"
+      }
+      repo_url        = "https://github.com/autotune/loadtesting"
+      path            = "stable/locust"
+      target_revision = "main"
+    }
+    destination {
+      server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
+      namespace = "loadtesting"
+    }
+  }
+}
