@@ -15,3 +15,21 @@ resource "kubernetes_cluster_role" "argocd_manager" {
     verbs             = ["*"]
   }
 }
+
+resource "kubernetes_cluster_role" "loadtesting_manager" {
+  provider = kubernetes.loadtesting
+  metadata {
+    name = "loadtesting-manager-role"
+  }
+
+  rule {
+    api_groups = ["*"]
+    resources  = ["*"]
+    verbs      = ["*"]
+  }
+
+  rule {
+    non_resource_urls = ["*"]
+    verbs             = ["*"]
+  }
+}
