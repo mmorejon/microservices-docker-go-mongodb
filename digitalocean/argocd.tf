@@ -68,7 +68,7 @@ resource "argocd_project" "loadtesting" {
 
   spec {
     description  = "loadtesting"
-    source_repos = ["https://github.com/autotune/microservices-docker-go-mongodb-tf"]
+    source_repos = ["https://github.com/autotune/loadtesting"]
 
     destination {
       server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
