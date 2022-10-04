@@ -72,7 +72,7 @@ resource "kubernetes_namespace" "loadtesting" {
   depends_on = [digitalocean_kubernetes_cluster.loadtesting]
   provider   = kubernetes.loadtesting
   metadata {
-    name = "cinema"
+   name = "loadtesting"
     labels = {
       istio-injection = "enabled"
     }
