@@ -106,6 +106,39 @@ resource "argocd_application" "cinema" {
   }
 }
 
+resource "argocd_application" "keda" {
+  depends_on = [argocd_project.cinema]
+  metadata {
+    name      = "cinema"
+    namespace = "argocd"
+    labels = {
+      env = "dev"
+    }
+  }
+
+  wait = true
+
+  spec {
+    project = "cinema"
+    source {
+      helm {
+        release_name = "keda"
+      }
+      repo_url        = "https://kedacore.github.io/charts"
+      path            = "kedacore/keda"
+      target_revision = "main"
+    }
+    destination {
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
+      namespace = "cinema"
+    }
+    destination {
+      server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
+      namespace = "cinema"
+    }
+  }
+}
+
 resource "argocd_application" "locust" {
   depends_on = [argocd_project.cinema]
   metadata {
