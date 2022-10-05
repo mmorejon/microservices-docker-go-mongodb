@@ -125,7 +125,7 @@ resource "argocd_application" "keda" {
         release_name = "keda"
       }
       repo_url        = "https://kedacore.github.io/charts"
-      chart           = "kedacore/keda"
+      chart           = "keda"
       target_revision = "2.8.2"
     }
     destination {
