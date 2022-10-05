@@ -42,6 +42,12 @@ resource "argocd_project" "cinema" {
   }
 
   spec {
+
+    cluster_resource_whitelist {
+      group = "*"
+      kind  = "*"
+    }
+
     description  = "Cinema"
     source_repos = ["https://github.com/autotune/microservices-docker-go-mongodb-tf", "https://kedacore.github.io/charts"]
 
