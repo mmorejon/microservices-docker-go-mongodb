@@ -249,3 +249,45 @@ resource "kubernetes_manifest" "cinema_users_virtualservice" {
     }
   }
 }
+
+resource "kubernetes_manifest" "locust_virtualservice" {
+  provider   = kubernetes.loadtesting
+  depends_on = [helm_release.argocd]
+  manifest = {
+    "apiVersion" = "networking.istio.io/v1beta1"
+    "kind"       = "VirtualService"
+    "metadata" = {
+      "name"      = "locust"
+      "namespace" = "loadtesting"
+    }
+    "spec" = {
+      "gateways" = [
+        "locust",
+      ]
+      "hosts" = [
+        "locust.${var.domain_name[0]}",
+      ]
+      "http" = [
+        {
+          "match" = [
+            {
+              "uri" = {
+                "prefix" = "/"
+              }
+            },
+          ]
+          "route" = [
+            {
+              "destination" = {
+                "host" = "cinema-users"
+                "port" = {
+                  "number" = 80
+                }
+              }
+            },
+          ]
+        },
+      ]
+    }
+  }
+}

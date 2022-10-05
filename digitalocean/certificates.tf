@@ -56,7 +56,7 @@ resource "kubernetes_manifest" "certificate_locust" {
     "spec" = {
       "commonName" = "locust.${var.domain_name[0]}"
       "dnsNames" = [
-        "locust.${var.domain_name[0]},
+        "locust.${var.domain_name[0]}",
       ]
       "issuerRef" = {
         "kind" = "ClusterIssuer"
