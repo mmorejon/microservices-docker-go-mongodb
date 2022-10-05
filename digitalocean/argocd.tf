@@ -109,7 +109,7 @@ resource "argocd_application" "cinema" {
 resource "argocd_application" "keda" {
   depends_on = [argocd_project.cinema]
   metadata {
-    name      = "cinema"
+    name      = "keda"
     namespace = "argocd"
     labels = {
       env = "dev"
@@ -125,8 +125,8 @@ resource "argocd_application" "keda" {
         release_name = "keda"
       }
       repo_url        = "https://kedacore.github.io/charts"
-      path            = "kedacore/keda"
-      target_revision = "main"
+      chart           = "kedacore/keda"
+      target_revision = "2.8.2"
     }
     destination {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
