@@ -53,6 +53,10 @@ resource "argocd_project" "cinema" {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
       namespace = "cinema"
     }
+    destination {
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
+      namespace = "kube-system"
+    }
   }
 }
 
