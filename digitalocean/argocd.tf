@@ -132,10 +132,6 @@ resource "argocd_application" "keda" {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
       namespace = "cinema"
     }
-    destination {
-      server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
-      namespace = "cinema"
-    }
   }
 }
 
