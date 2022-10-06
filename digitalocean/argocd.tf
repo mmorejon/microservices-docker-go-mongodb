@@ -166,6 +166,18 @@ resource "argocd_application" "keda-scaledobject" {
     source {
       helm {
         release_name = "keda-cron"
+        parameter {
+          name = "keda.name"
+          value = "cinema"
+        }
+        parameter {
+          name = "keda.namespace"
+          value = "cinema"
+        }
+        parameter {
+          name = "keda.scaletargetname"
+          value = "cinema"
+        }
       }
       repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
       target_revision = "main"
