@@ -120,10 +120,10 @@ resource "argocd_application" "cinema" {
   }
 }
 
-resource "argocd_application" "keda" {
+resource "argocd_application" "keda-cinema" {
   depends_on = [argocd_project.cinema]
   metadata {
-    name      = "keda"
+    name      = "keda-cinema"
     namespace = "argocd"
     labels = {
       env = "dev"
@@ -149,8 +149,37 @@ resource "argocd_application" "keda" {
   }
 }
 
-resource "argocd_application" "keda-scaledobject" {
-  depends_on = [argocd_application.keda]
+resource "argocd_application" "keda-cinema" {
+  depends_on = [argocd_project.loadtesting]
+  metadata {
+    name      = "keda-loadtesting"
+    namespace = "argocd"
+    labels = {
+      env = "dev"
+    }
+  }
+
+  wait = true
+
+  spec {
+    project = "loadtesting"
+    source {
+      helm {
+        release_name = "keda"
+      }
+      repo_url        = "https://kedacore.github.io/charts"
+      chart           = "keda"
+      target_revision = "2.8.2"
+    }
+    destination {
+      server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
+      namespace = "loadtesting"
+    }
+  }
+}
+
+resource "argocd_application" "keda-scaledobject-cinema" {
+  depends_on = [argocd_application.keda-cinema]
   metadata {
     name      = "keda-cron"
     namespace = "argocd"
