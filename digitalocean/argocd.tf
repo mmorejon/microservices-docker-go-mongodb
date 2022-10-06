@@ -82,7 +82,7 @@ resource "argocd_project" "loadtesting" {
 
   spec {
     description  = "loadtesting"
-    source_repos = ["https://github.com/autotune/loadtesting"]
+    source_repos = ["https://github.com/autotune/loadtesting", "https://kedacore.github.io/charts"]
 
     destination {
       server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
