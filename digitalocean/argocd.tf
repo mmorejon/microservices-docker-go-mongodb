@@ -80,12 +80,13 @@ resource "argocd_project" "loadtesting" {
     }
   }
 
-  cluster_resource_whitelist {
-    group = "*"
-    kind  = "*"
-  }
-
   spec {
+
+    cluster_resource_whitelist {
+      group = "*"
+      kind  = "*"
+    }
+
     description  = "loadtesting"
     source_repos = ["https://github.com/autotune/loadtesting", "https://kedacore.github.io/charts"]
 
