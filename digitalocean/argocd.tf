@@ -94,6 +94,11 @@ resource "argocd_project" "loadtesting" {
       server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
       namespace = "loadtesting"
     }
+
+    destination {
+      server    = digitalocean_kubernetes_cluster.loadtesting.endpoint
+      namespace = "kube-system"
+    }
   }
 }
 
