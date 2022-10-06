@@ -63,6 +63,10 @@ resource "argocd_project" "cinema" {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
       namespace = "kube-system"
     }
+    destination {
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
+      namespace = "loadtesting"
+    }
   }
 }
 
