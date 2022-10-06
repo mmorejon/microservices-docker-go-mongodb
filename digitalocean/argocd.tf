@@ -149,7 +149,7 @@ resource "argocd_application" "keda-cinema" {
   }
 }
 
-resource "argocd_application" "keda-cinema" {
+resource "argocd_application" "keda-loadtesting" {
   depends_on = [argocd_project.loadtesting]
   metadata {
     name      = "keda-loadtesting"
