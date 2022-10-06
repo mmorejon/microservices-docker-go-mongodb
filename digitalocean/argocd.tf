@@ -145,6 +145,36 @@ resource "argocd_application" "keda" {
   }
 }
 
+resource "argocd_application" "keda-scaledobject" {
+  depends_on = [argocd_application.keda]
+  metadata {
+    name      = "keda-cron"
+    namespace = "argocd"
+    labels = {
+      env = "dev"
+    }
+  }
+
+  wait = true
+
+  spec {
+    project = "cinema"
+    source {
+      helm {
+        release_name = "keda-cron"
+      }
+      repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
+      chart           = "keda"
+      target_revision = "0.0.1"
+      path            = charts/keda
+    }
+    destination {
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
+      namespace = "cinema"
+    }
+  }
+}
+
 resource "argocd_application" "locust" {
   depends_on = [argocd_project.cinema]
   metadata {
