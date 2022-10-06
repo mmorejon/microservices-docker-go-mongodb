@@ -166,7 +166,7 @@ resource "argocd_application" "keda-scaledobject" {
       repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
       chart           = "keda"
       target_revision = "0.0.1"
-      path            = charts/keda
+      path            = "charts/keda"
     }
     destination {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
