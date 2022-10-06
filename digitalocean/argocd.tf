@@ -164,8 +164,7 @@ resource "argocd_application" "keda-scaledobject" {
         release_name = "keda-cron"
       }
       repo_url        = "https://github.com/autotune/microservices-docker-go-mongodb-tf"
-      chart           = "keda"
-      target_revision = "0.0.1"
+      target_revision = "main"
       path            = "charts/keda"
     }
     destination {
