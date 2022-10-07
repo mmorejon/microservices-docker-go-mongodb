@@ -173,7 +173,7 @@ resource "argocd_application" "cinema-robusta" {
 
         parameter {
           name  = "clusterName"
-          value = "cinema"
+          value = "do-nyc3-cinema"
         }
 
         parameter {
