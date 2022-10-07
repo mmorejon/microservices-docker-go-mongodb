@@ -9,8 +9,11 @@ locals {
         "name"          = "main_slack_sink"
         "slack_channel" = "robusta-dev"
         "api_key"       = "foo" 
-        # "${var.robusta_slack_api_key}"
       }
+      robusta_sink = {
+        "name"          = "robusta_ui_sink"
+        "token"         = "bar"
+     }
     }
   )
   argocd_dex_google = yamlencode(
