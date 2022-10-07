@@ -5,12 +5,10 @@ locals {
   argocd-repo   = "https://argoproj.github.io/argo-helm"
   robusta_global_sinks_config = yamlencode(
     {
-      sinksConfig = {
-        slack_sink = {
-          "name"          = "main_slack_sink"
-          "slack_channel" = "robusta-dev"
-          "api_key"       = var.robusta_slack_api_key
-        }
+      slack_sink = {
+        "name"          = "main_slack_sink"
+        "slack_channel" = "robusta-dev"
+        "api_key"       = var.robusta_slack_api_key
       }
     }
   )
