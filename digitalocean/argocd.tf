@@ -167,7 +167,7 @@ resource "argocd_application" "cinema-robusta" {
         }
 
         parameter {
-          name  = "sinksConfig['slack_sink']"
+          name  = "sinksConfig.slack_sink"
           value = <<EOT
     name: main_slack_sink
     slack_channel: robusta-dev
