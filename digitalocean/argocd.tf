@@ -68,6 +68,10 @@ resource "argocd_project" "cinema" {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
       namespace = "loadtesting"
     }
+    destination {
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
+      namespace = "robusta"
+    }
   }
 }
 
@@ -224,7 +228,7 @@ resource "argocd_application" "cinema-robusta" {
     }
     destination {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
-      namespace = "cinema"
+      namespace = "robusta"
     }
   }
 }
