@@ -155,6 +155,8 @@ resource "argocd_application" "cinema-robusta" {
       helm {
         release_name = "robusta"
 
+        skip_crds = "true"
+
         parameter {
           name  = "globalConfig.signing_key"
           value = var.robusta_signing_key
