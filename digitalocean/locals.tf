@@ -7,8 +7,8 @@ locals {
     {
       robusta_sink = { 
         {
-          name  = "robusta_ui_sink"
-          token = "bar"
+          "name"  = "robusta_ui_sink"
+          "token" = "bar"
         }
      }
     }
