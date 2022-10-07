@@ -6,13 +6,13 @@ locals {
   robusta_global_sinks_config = yamlencode(
     {
       slack_sink = {
-        "name"          = "main_slack_sink"
-        "slack_channel" = "robusta-dev"
-        "api_key"       = "foo"
-      }
+        name          = "main_slack_sink"
+        slack_channel = "robusta-dev"
+        api_key       = "foo"
+      },
       robusta_sink = {
-        "name"  = "robusta_ui_sink"
-        "token" = "bar"
+        name  = "robusta_ui_sink"
+        token = "bar"
       }
     }
   )
