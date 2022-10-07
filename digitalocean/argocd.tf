@@ -156,7 +156,7 @@ resource "argocd_application" "cinema-robusta" {
 
         parameter {
           name  = "globalConfig.account_key"
-          value = var.robusta_account_key
+          value = var.robusta_account_id
         }
 
         parameter {

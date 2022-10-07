@@ -77,6 +77,16 @@ variable "gh_username" {
   description = "GitHub username for container registry"
 }
 
+variable "robusta_signing_key" {
+  type        = string
+  description = "Robusta Signing Key"
+}
+
+variable "robusta_account_id" {
+  type        = string
+  description = "Robusta Account ID"
+}
+
 variable "robusta_slack_api_key" {
   type        = string
   description = "Robusta Slack API Key"
