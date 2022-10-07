@@ -193,12 +193,12 @@ resource "argocd_application" "cinema-robusta" {
 
         parameter {
           name  = "rsa.pub"
-          value = var.robusta_public_key
+          value = var.robusta_rsa_public_key
         }
 
         parameter {
           name  = "rsa.prv"
-          value = var.robusta_private_key
+          value = var.robusta_rsa_private_key
         }
 
       }
