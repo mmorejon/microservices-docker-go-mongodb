@@ -5,12 +5,12 @@ locals {
   argocd-repo   = "https://argoproj.github.io/argo-helm"
   robusta_global_sinks_config = yamlencode(
     {
-      robusta_sink = { 
+      "robusta_sink" = yamlencode(
         {
           "name"  = "robusta_ui_sink"
           "token" = "bar"
         }
-     }
+      )
     }
   )
   argocd_dex_google = yamlencode(
