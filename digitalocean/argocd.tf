@@ -167,7 +167,7 @@ resource "argocd_application" "cinema-robusta" {
         }
 
         parameter {
-          name  = "sinksConfig"
+          name  = "sinksConfig:"
           value = <<EOT
 - slack_sink:
     name: main_slack_sink
