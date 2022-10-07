@@ -168,6 +168,7 @@ resource "argocd_application" "cinema-robusta" {
 
       repo_url = "https://robusta-charts.storage.googleapis.com"
       chart    = "robusta"
+      target_revision = "0.10.6"
     }
     destination {
       server    = digitalocean_kubernetes_cluster.cinema.endpoint
