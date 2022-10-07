@@ -80,14 +80,17 @@ variable "gh_username" {
 variable "robusta_signing_key" {
   type        = string
   description = "Robusta Signing Key"
+  sensitive   = true
 }
 
 variable "robusta_account_id" {
   type        = string
   description = "Robusta Account ID"
+  sensitive   = true
 }
 
 variable "robusta_slack_api_key" {
   type        = string
   description = "Robusta Slack API Key"
+  sensitive   = true
 }
