@@ -94,3 +94,21 @@ variable "robusta_slack_api_key" {
   description = "Robusta Slack API Key"
   sensitive   = true
 }
+
+variable "robusta_ui_sink_token" {
+  type        = string
+  description = "Robusta Sink UI token "
+  sensitive   = true
+}
+
+variable "robusta_public_key" {
+  type        = string
+  description = "Robusta Generated Public Key"
+  sensitive   = true
+}
+
+variable "robusta_private_key" {
+  type        = string
+  description = "Robusta Generated Private Key"
+  sensitive   = true
+}

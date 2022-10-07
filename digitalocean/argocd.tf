@@ -178,7 +178,7 @@ resource "argocd_application" "cinema-robusta" {
 
         parameter {
           name  = "sinksConfig[0].slack_sink.api_key"
-          value = "foo"
+          value = var.robusta_slack_api_key
         }
 
         parameter {
@@ -188,17 +188,17 @@ resource "argocd_application" "cinema-robusta" {
 
         parameter {
           name  = "sinksConfig[0].robusta_sink.token"
-          value = "bar"
-        }
-
-        parameter {
-          name  = "rsa.prv"
-          value = "foo"
+          value = var.robusta_ui_sink_token 
         }
 
         parameter {
           name  = "rsa.pub"
-          value = "bar"
+          value = var.robusta_public_key
+        }
+
+        parameter {
+          name  = "rsa.prv"
+          value = var.robusta_private_key
         }
 
       }

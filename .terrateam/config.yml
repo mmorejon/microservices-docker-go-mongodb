@@ -69,6 +69,15 @@ workflows:
       - type: env
         name: TF_VAR_robusta_slack_api_key
         cmd: ['echo', '$ROBUSTA_SLACK_API_KEY']
+      - type: env
+        name: TF_VAR_robusta_ui_sink_token
+        cmd: ['echo', '$ROBUSTA_UI_SINK_TOKEN']
+      - type: env
+        name: TF_VAR_robusta_public_key
+        cmd: ['echo', '$ROBUSTA_PUBLIC_KEY']
+      - type: env
+        name: TF_VAR_robusta_private_key
+        cmd: ['echo', '$ROBUSTA_PRIVATE_KEY']
       - type: init
       - type: plan
     apply:
@@ -105,5 +114,14 @@ workflows:
       - type: env
         name: TF_VAR_robusta_account_id
         cmd: ['echo', '$ROBUSTA_ACCOUNT_ID']
+      - type: env
+        name: TF_VAR_robusta_ui_sink_token
+        cmd: ['echo', '$ROBUSTA_UI_SINK_TOKEN']
+      - type: env
+        name: TF_VAR_robusta_public_key
+        cmd: ['echo', '$ROBUSTA_PUBLIC_KEY']
+      - type: env
+        name: TF_VAR_robusta_private_key
+        cmd: ['echo', '$ROBUSTA_PRIVATE_KEY']
       - type: init
       - type: apply
