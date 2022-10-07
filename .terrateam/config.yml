@@ -105,8 +105,5 @@ workflows:
       - type: env
         name: TF_VAR_robusta_account_id
         cmd: ['echo', '$ROBUSTA_ACCOUNT_ID']
-      - type: env
-        name: TF_VAR_robusta_slack_api_key
-        cmd: ['echo', '$ROBUSTA_SLACK_API_KEY']
       - type: init
       - type: apply
