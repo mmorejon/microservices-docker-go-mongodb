@@ -60,6 +60,9 @@ workflows:
       - type: env
         name: TF_VAR_gh_username
         cmd: ['echo', '$GH_USERNAME']
+      - type: env
+        name: TF_VAR_robusta_slack_api_key
+        cmd: ['echo', '$ROBUSTA_SLACK_API_KEY']
       - type: init
       - type: plan
     apply:
@@ -87,5 +90,8 @@ workflows:
       - type: env
         name: TF_VAR_gh_username
         cmd: ['echo', '$GH_USERNAME']
+      - type: env
+        name: TF_VAR_robusta_slack_api_key
+        cmd: ['echo', '$ROBUSTA_SLACK_API_KEY']
       - type: init
       - type: apply

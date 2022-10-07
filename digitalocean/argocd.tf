@@ -131,7 +131,52 @@ resource "argocd_application" "cinema" {
   }
 }
 
-resource "argocd_application" "keda-cinema" {
+resource "argocd_application" "cinema-robusta" {
+  depends_on = [argocd_project.cinema]
+  metadata {
+    name      = "cinema"
+    namespace = "argocd"
+    labels = {
+      env = "dev"
+    }
+  }
+
+  wait = true
+
+  spec {
+    project = "cinema"
+    source {
+      helm {
+        release_name = "robusta"
+
+        parameter {
+          name  = "globalConfig.signing_key"
+          value = var.robusta_signing_key
+        }
+
+        parameter {
+          name  = "globalConfig.account_key"
+          value = var.robusta_account_key
+        }
+
+        parameter {
+          name  = "sinksConfig"
+          value = local.robusta_global_sinks_config
+        }
+
+      }
+
+      repo_url = "https://robusta-charts.storage.googleapis.com"
+      path     = "robusta"
+    }
+    destination {
+      server    = digitalocean_kubernetes_cluster.cinema.endpoint
+      namespace = "cinema"
+    }
+  }
+}
+
+resource "argocd_application" "cinema-keda" {
   depends_on = [argocd_project.cinema]
   metadata {
     name      = "keda-cinema"
@@ -207,15 +252,15 @@ resource "argocd_application" "keda-scaledobject-cinema" {
       helm {
         release_name = "keda-cron"
         parameter {
-          name = "keda.name"
+          name  = "keda.name"
           value = "cinema"
         }
         parameter {
-          name = "keda.namespace"
+          name  = "keda.namespace"
           value = "cinema"
         }
         parameter {
-          name = "keda.scaletargetname"
+          name  = "keda.scaletargetname"
           value = "cinema"
         }
       }
