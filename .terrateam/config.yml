@@ -61,6 +61,12 @@ workflows:
         name: TF_VAR_gh_username
         cmd: ['echo', '$GH_USERNAME']
       - type: env
+        name: TF_VAR_robusta_signing_key
+        cmd: ['echo', '$ROBUSTA_SIGNING_KEY']
+      - type: env
+        name: TF_VAR_robusta_account_id
+        cmd: ['echo', '$ROBUSTA_ACCOUNT_ID']
+      - type: env
         name: TF_VAR_robusta_slack_api_key
         cmd: ['echo', '$ROBUSTA_SLACK_API_KEY']
       - type: init
@@ -90,6 +96,15 @@ workflows:
       - type: env
         name: TF_VAR_gh_username
         cmd: ['echo', '$GH_USERNAME']
+      - type: env
+        name: TF_VAR_robusta_slack_api_key
+        cmd: ['echo', '$ROBUSTA_SLACK_API_KEY']
+      - type: env
+        name: TF_VAR_robusta_signing_key
+        cmd: ['echo', '$ROBUSTA_SIGNING_KEY']
+      - type: env
+        name: TF_VAR_robusta_account_id
+        cmd: ['echo', '$ROBUSTA_ACCOUNT_ID']
       - type: env
         name: TF_VAR_robusta_slack_api_key
         cmd: ['echo', '$ROBUSTA_SLACK_API_KEY']
