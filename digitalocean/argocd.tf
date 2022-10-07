@@ -136,7 +136,7 @@ resource "argocd_application" "cinema-robusta" {
   depends_on = [argocd_project.cinema]
   provider   = argocd
   metadata {
-    name      = "cinema"
+    name      = "robusta"
     namespace = "argocd"
     labels = {
       env = "dev"
