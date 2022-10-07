@@ -191,6 +191,16 @@ resource "argocd_application" "cinema-robusta" {
           value = "bar"
         }
 
+        parameter {
+          name  = "rsa.prv"
+          value = "foo"
+        }
+
+        parameter {
+          name  = "rsa.pub"
+          value = "bar"
+        }
+
       }
 
       repo_url        = "https://robusta-charts.storage.googleapis.com"
