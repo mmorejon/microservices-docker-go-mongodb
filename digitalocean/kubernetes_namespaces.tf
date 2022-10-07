@@ -83,7 +83,7 @@ resource "kubernetes_namespace" "robusta" {
   depends_on = [digitalocean_kubernetes_cluster.cinema]
   provider   = kubernetes.cinema
   metadata {
-   name = "cinema"
+   name = "robusta"
     labels = {
       istio-injection = "disabled"
     }
