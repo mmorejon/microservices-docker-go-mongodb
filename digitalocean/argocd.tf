@@ -1,4 +1,5 @@
 resource "argocd_cluster" "do-cinema" {
+  provider   = argocd
   server     = digitalocean_kubernetes_cluster.cinema.endpoint
   name       = "do-cinema"
   depends_on = [helm_release.argocd]
@@ -133,6 +134,7 @@ resource "argocd_application" "cinema" {
 
 resource "argocd_application" "cinema-robusta" {
   depends_on = [argocd_project.cinema]
+  provider   = argocd
   metadata {
     name      = "cinema"
     namespace = "argocd"
@@ -166,13 +168,18 @@ resource "argocd_application" "cinema-robusta" {
 
         parameter {
           name  = "sinksConfig"
-          value = local.robusta_global_sinks_config
+          value = <<EOT
+- slack_sink:
+    name: main_slack_sink
+    slack_channel: robusta-dev
+    api_key: foo
+EOT
         }
 
       }
 
-      repo_url = "https://robusta-charts.storage.googleapis.com"
-      chart    = "robusta"
+      repo_url        = "https://robusta-charts.storage.googleapis.com"
+      chart           = "robusta"
       target_revision = "0.10.6"
     }
     destination {
