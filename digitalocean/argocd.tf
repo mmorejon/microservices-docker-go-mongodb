@@ -155,6 +155,11 @@ resource "argocd_application" "cinema-robusta" {
         }
 
         parameter {
+          name  = "clusterName"
+          value = "cinema"
+        }
+
+        parameter {
           name  = "globalConfig.account_key"
           value = var.robusta_account_id
         }
