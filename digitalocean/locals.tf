@@ -3,14 +3,17 @@ locals {
   jetstack-repo = "https://charts.jetstack.io"
   bookinfo-repo = "https://evry-ace.github.io/helm-charts"
   argocd-repo   = "https://argoproj.github.io/argo-helm"
-  robusta_global_sinks_config = yamlencode(
-    {
-      "robusta_sink" = {
-        "name"  = "robusta_ui_sink"
-        "token" = "bar"
+  robusta_global_sinks_config = replace(yamlencode(
+    [
+      {
+        "robusta_sink" = {
+          "name"  = "robusta_ui_sink"
+          "token" = "bar"
+        }
       }
-    }
-  )
+    ]
+    ),
+  "\"", "")
   argocd_dex_google = yamlencode(
     {
       server = {
