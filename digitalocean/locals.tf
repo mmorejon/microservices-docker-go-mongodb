@@ -4,16 +4,12 @@ locals {
   bookinfo-repo = "https://evry-ace.github.io/helm-charts"
   argocd-repo   = "https://argoproj.github.io/argo-helm"
   robusta_global_sinks_config = yamlencode(
-    [
-      {
-        "robusta_sink" = yamlencode(
-          {
-            "name"  = "robusta_ui_sink"
-            "token" = "bar"
-          }
-        )
+    {
+      "robusta_sink" = {
+        "name"  = "robusta_ui_sink"
+        "token" = "bar"
       }
-    ]
+    }
   )
   argocd_dex_google = yamlencode(
     {
