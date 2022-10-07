@@ -171,6 +171,26 @@ resource "argocd_application" "cinema-robusta" {
           value = "main_slack_sink"
         }
 
+        parameter {
+          name  = "sinksConfig[0].slack_sink.slack_channel"
+          value = "robusta-dev"
+        }
+
+        parameter {
+          name  = "sinksConfig[0].slack_sink.api_key"
+          value = "foo"
+        }
+
+        parameter {
+          name  = "sinksConfig[0].robusta_sink.name"
+          value = "robusta_ui_sink"
+        }
+
+        parameter {
+          name  = "sinksConfig[0].robusta_sink.token"
+          value = "bar"
+        }
+
       }
 
       repo_url        = "https://robusta-charts.storage.googleapis.com"
