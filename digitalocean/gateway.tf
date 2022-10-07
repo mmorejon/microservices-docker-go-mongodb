@@ -95,6 +95,7 @@ resource "kubernetes_manifest" "cinema-gateway" {
   }
 }
 
+/*
 resource "kubernetes_manifest" "loadtesting-gateway" {
   depends_on = [helm_release.argocd]
   provider   = kubernetes.loadtesting
@@ -143,3 +144,4 @@ resource "kubernetes_manifest" "loadtesting-gateway" {
     }
   }
 }
+*/

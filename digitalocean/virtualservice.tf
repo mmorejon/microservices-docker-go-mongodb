@@ -250,6 +250,7 @@ resource "kubernetes_manifest" "cinema_users_virtualservice" {
   }
 }
 
+/*
 resource "kubernetes_manifest" "locust_virtualservice" {
   provider   = kubernetes.loadtesting
   depends_on = [helm_release.argocd]
@@ -291,3 +292,4 @@ resource "kubernetes_manifest" "locust_virtualservice" {
     }
   }
 }
+*/
