@@ -9,7 +9,7 @@ locals {
         "name"          = "main_slack_sink"
         "slack_channel" = "robusta-dev"
         "api_key"       = "foo" 
-      }
+      },
       robusta_sink = {
         "name"          = "robusta_ui_sink"
         "token"         = "bar"
