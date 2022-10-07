@@ -179,7 +179,7 @@ resource "argocd_application" "cinema-robusta" {
 resource "argocd_application" "cinema-keda" {
   depends_on = [argocd_project.cinema]
   metadata {
-    name      = "keda-cinema"
+    name      = "cinema-keda"
     namespace = "argocd"
     labels = {
       env = "dev"
@@ -235,7 +235,7 @@ resource "argocd_application" "keda-loadtesting" {
 }
 
 resource "argocd_application" "keda-scaledobject-cinema" {
-  depends_on = [argocd_application.keda-cinema]
+  depends_on = [argocd_application.cinema-keda]
   metadata {
     name      = "keda-cron"
     namespace = "argocd"
