@@ -157,6 +157,21 @@ resource "argocd_application" "cinema-robusta" {
         }
 
         parameter {
+          name  = "enablePrometheusStack"
+          value = "true"
+        }
+
+        parameter {
+          name  = "enablePlatformPlaybooks"
+          value = "true"
+        }
+
+        parameter {
+          name  = "runner.sendAdditionalTelemetry"
+          value = "false"
+        }
+
+        parameter {
           name  = "clusterName"
           value = "cinema"
         }
