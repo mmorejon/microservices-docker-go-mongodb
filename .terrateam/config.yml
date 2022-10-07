@@ -119,9 +119,9 @@ workflows:
         cmd: ['echo', '$ROBUSTA_UI_SINK_TOKEN']
       - type: env
         name: TF_VAR_robusta_rsa_public_key
-        cmd: ['echo', '$ROBUSTA_RSA_PUBLIC_KEY']
+        cmd: ['echo', '$ROBUSTA_RSA_PUB_KEY']
       - type: env
         name: TF_VAR_robusta_rsa_private_key
-        cmd: ['echo', '$ROBUSTA_RSA_PRIVATE_KEY']
+        cmd: ['echo', '$ROBUSTA_RSA_PRIV_KEY']
       - type: init
       - type: apply
