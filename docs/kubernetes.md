@@ -16,9 +16,9 @@ The Cinema project can be deployed in a kubernetes cluster in order to know the 
 
 ## Requirements
 
-* kubectl v1.21.0
-* kind v0.11.1
-* helm v3.5.4
+* kubectl v1.25.0
+* kind v0.16.0
+* helm v3.10.0
 
 ## Create Kubernetes Cluster
 
@@ -33,7 +33,7 @@ kind create cluster
 
   ```bash
   Creating cluster "kind" ...
-  ✓ Ensuring node image (kindest/node:v1.21.1) 🖼
+  ✓ Ensuring node image (kindest/node:v1.25.2) 🖼
   ✓ Preparing nodes 📦
   ✓ Writing configuration 📜
   ✓ Starting control-plane 🕹️
@@ -44,7 +44,7 @@ kind create cluster
 
   kubectl cluster-info --context kind-kind
 
-  Have a nice day! 👋
+  Have a question, bug, or feature request? Let us know! https://kind.sigs.k8s.io/#community 🙂
   ```
 </details>
 
@@ -83,14 +83,14 @@ cat ./charts/cinema/Chart.yaml
   # chart type
   type: application
   # chart version
-  version: 0.2.0
+  version: 0.2.1
   # cinema app version
-  appVersion: "v2.1.0"
+  appVersion: "v2.2.0"
   dependencies:
     - condition: mongodb.enabled
       name: mongodb
       repository: https://charts.bitnami.com/bitnami
-      version: 10.4.0
+      version: 13.5.0
     - name: users
       version: 0.x.x
     - name: movies
@@ -154,7 +154,7 @@ Then check the deployment status:
 helm list
 
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-cinema  default         1               2021-02-24 20:03:09.305628 +0100 CET    deployed        cinema-0.2.0    v2.1.0
+cinema  default         1               2022-11-26 23:28:40.745418 +0100 CET    deployed        cinema-0.2.1    v2.2.0
 ```
 
 ## Check Cinema services status
