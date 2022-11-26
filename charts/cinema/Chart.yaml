@@ -6,7 +6,7 @@ type: application
 # chart version
 version: 0.2.1
 # cinema app version
-appVersion: "v2.1.2"
+appVersion: "v2.2.0"
 dependencies:
   - condition: mongodb.enabled
     name: mongodb

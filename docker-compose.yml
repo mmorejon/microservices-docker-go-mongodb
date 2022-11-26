@@ -40,7 +40,7 @@ services:
 
   website:
     # build: ./website
-    image: ghcr.io/mmorejon/cinema-website:v2.1.2
+    image: ghcr.io/mmorejon/cinema-website:v2.2.0
     command:
       - "-usersAPI"
       - "http://users:4000/api/users/"
@@ -57,7 +57,7 @@ services:
 
   movies:
     # build: ./movies
-    image: ghcr.io/mmorejon/cinema-movies:v2.1.2
+    image: ghcr.io/mmorejon/cinema-movies:v2.2.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -75,7 +75,7 @@ services:
 
   bookings:
     # build: ./bookings
-    image: ghcr.io/mmorejon/cinema-bookings:v2.1.2
+    image: ghcr.io/mmorejon/cinema-bookings:v2.2.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -91,7 +91,7 @@ services:
 
   showtimes:
     # build: ./showtimes
-    image: ghcr.io/mmorejon/cinema-showtimes:v2.1.2
+    image: ghcr.io/mmorejon/cinema-showtimes:v2.2.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
@@ -107,7 +107,7 @@ services:
 
   users:
     # build: ./users
-    image: ghcr.io/mmorejon/cinema-users:v2.1.2
+    image: ghcr.io/mmorejon/cinema-users:v2.2.0
     command:
       - "-mongoURI"
       - "mongodb://db:27017/"
