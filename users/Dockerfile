@@ -1,5 +1,5 @@
-# golang alpine 1.15.6-alpine as base image
-FROM golang:1.16.7-alpine AS builder
+# base image
+FROM golang:1.19.3-alpine AS builder
 # create appuser
 RUN adduser -D -g '' elf
 # create workspace
@@ -15,7 +15,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o 
 
 
 # build a small image
-FROM alpine:3.14.1
+FROM alpine:3.17.0
 LABEL language="golang"
 LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-docker-go-mongodb
 # import the user and group files from the builder
