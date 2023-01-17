@@ -69,6 +69,12 @@ kubectl cluster-info
 
 To deploy this project should be used the `cinema` Helm chart located in `./charts` folder. This chart is an umbrella for all services needed to deploy the project. Take a look at the `dependencies` section in the `Chart.yaml` file.
 
+Also make sure to add Bitnami to your helm repo list if it's not already configured as such
+
+```bash
+helm repo add bitnami https://charts.bitnami.com/bitnami
+```
+
 ```bash
 cat ./charts/cinema/Chart.yaml
 ```
