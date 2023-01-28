@@ -26,7 +26,7 @@ func main() {
 	serverAddr := flag.String("serverAddr", "", "HTTP server network address")
 	serverPort := flag.Int("serverPort", 4000, "HTTP server network port")
 	mongoURI := flag.String("mongoURI", "mongodb://localhost:27017", "Database hostname url")
-	mongoDatabse := flag.String("mongoDatabse", "bookings", "Database name")
+	mongoDatabase := flag.String("mongoDatabase", "bookings", "Database name")
 	enableCredentials := flag.Bool("enableCredentials", false, "Enable the use of credentials for mongo connection")
 	flag.Parse()
 
@@ -69,7 +69,7 @@ func main() {
 		infoLog:  infoLog,
 		errorLog: errLog,
 		bookings: &mongodb.BookingModel{
-			C: client.Database(*mongoDatabse).Collection("bookings"),
+			C: client.Database(*mongoDatabase).Collection("bookings"),
 		},
 	}
 
