@@ -40,6 +40,7 @@ jobs:
         with:
           push: true
           context: ./users/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           file: ./users/Dockerfile
           tags: |
             mmorejon/${{ env.USERS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
@@ -49,6 +50,7 @@ jobs:
         with:
           push: true
           context: ./website/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           file: ./website/Dockerfile
           tags: |
             mmorejon/${{ env.WEBSITE_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
@@ -58,6 +60,7 @@ jobs:
         with:
           push: true
           context: ./movies/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           file: ./movies/Dockerfile
           tags: |
             mmorejon/${{ env.MOVIES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
@@ -67,6 +70,7 @@ jobs:
         with:
           push: true
           context: ./showtimes/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           file: ./showtimes/Dockerfile
           tags: |
             mmorejon/${{ env.SHOWTIMES_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
@@ -76,6 +80,7 @@ jobs:
         with:
           push: true
           context: ./bookings/
+          platforms: linux/amd64,linux/arm/v7,linux/arm64
           file: ./bookings/Dockerfile
           tags: |
             mmorejon/${{ env.BOOKINGS_IMAGE_NAME }}:${{ steps.get_version.outputs.VERSION }}
