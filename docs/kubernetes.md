@@ -106,6 +106,8 @@ cat ./charts/cinema/Chart.yaml
 
 Dependencies like `website`, `users`, `movies`, `showtimes` and `bookings` are charts located inside `charts` folder, and `mongodb` dependency came from Bitnami repository.
 
+> Note: the Bitnami mongodb image was changed by the official version to support ARM architectures. Read more in the [PR](https://github.com/mmorejon/microservices-docker-go-mongodb/pull/23).
+
 Use the following command to deploy the whole project with just one line:
 
 ```bash
@@ -240,8 +242,14 @@ Use the same approach to the rest of the services
 
 ```bash
 helm delete cinema
-
-release "cinema" uninstalled
 ```
+
+<details>
+  <summary>Result</summary>
+
+  ```bash
+  release "cinema" uninstalled
+  ```
+</details>
 
 Next: [Endpoints](endpoints.md)
