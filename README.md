@@ -17,6 +17,8 @@ The project structure is based in the knowledge learned in:
 * Golang structure: <https://peter.bourgon.org/go-best-practices-2016/#repository-structure>
 * Book Let's Go: <https://lets-go.alexedwards.net/>
 
+Container images used support multi-architectures (amd64, arm/v7 and arm64).
+
 ## Index
 
 * [Deployment](#deployment)
