@@ -7,10 +7,17 @@ mongodb:
   # define if use mongodb dependency
   enabled: true
 
-  auth:
+  image:
+    repository: mongo
+    tag: 4.2.23
+
+  readinessProbe:
     enabled: false
+  livenessProbe:
+    enabled: false
+
   persistence:
-    enabled: false
+    mountPath: /data/db
 
 # Cinema website values
 website:
