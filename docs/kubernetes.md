@@ -67,12 +67,6 @@ kubectl cluster-info
 
 ## Deploy Cinema project in Kubernetes
 
-Make sure to add Bitnami to your helm repo list if it's not already configured as such
-
-```bash
-helm repo add bitnami https://charts.bitnami.com/bitnami
-```
-
 To deploy this project should be used the `cinema` Helm chart located in `./charts` folder. This chart is an umbrella for all services needed to deploy the project. Take a look at the `dependencies` section in the `Chart.yaml` file.
 
 ```bash
@@ -91,7 +85,7 @@ cat ./charts/cinema/Chart.yaml
   # chart version
   version: 0.2.1
   # cinema app version
-  appVersion: "v2.2.0"
+  appVersion: "v2.2.1"
   dependencies:
     - condition: mongodb.enabled
       name: mongodb
@@ -112,33 +106,13 @@ cat ./charts/cinema/Chart.yaml
 
 Dependencies like `website`, `users`, `movies`, `showtimes` and `bookings` are charts located inside `charts` folder, and `mongodb` dependency came from Bitnami repository.
 
-First of all is needed update helm dependencies
+Use the following command to deploy the whole project with just one line:
 
 ```bash
-helm dependency update charts/cinema
-```
-<details>
-  <summary>Result</summary>
-
-  ```bash
-  Getting updates for unmanaged Helm repositories...
-  ...Successfully got an update from the "https://charts.bitnami.com/bitnami" chart repository
-  Update Complete. ⎈Happy Helming!⎈
-  Saving 6 charts
-  Downloading mongodb from repo https://charts.bitnami.com/bitnami
-  Dependency users did not declare a repository. Assuming it exists in the charts directory
-  Dependency movies did not declare a repository. Assuming it exists in the charts directory
-  Dependency showtimes did not declare a repository. Assuming it exists in the charts directory
-  Dependency bookings did not declare a repository. Assuming it exists in the charts directory
-  Dependency website did not declare a repository. Assuming it exists in the charts directory
-  Deleting outdated charts
-  ```
-</details>
-
-Then use the following command to deploy the whole project with just one line:
-
-```bash
-helm upgrade cinema --install  ./charts/cinema
+helm upgrade cinema \
+  --install \
+  --dependency-update \
+  ./charts/cinema
 ```
 
 <details>
@@ -147,7 +121,7 @@ helm upgrade cinema --install  ./charts/cinema
   ```bash
   Release "cinema" does not exist. Installing it now.
   NAME: cinema
-  LAST DEPLOYED: Wed Feb 24 20:03:09 2021
+  LAST DEPLOYED: Sun Jan 29 22:24:32 2023
   NAMESPACE: default
   STATUS: deployed
   REVISION: 1
@@ -160,7 +134,7 @@ Then check the deployment status:
 helm list
 
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-cinema  default         1               2022-11-26 23:28:40.745418 +0100 CET    deployed        cinema-0.2.1    v2.2.0
+cinema  default         1               2023-01-29 22:25:56.073712 +0100 CET    deployed        cinema-0.2.1    v2.2.1
 ```
 
 ## Check Cinema services status

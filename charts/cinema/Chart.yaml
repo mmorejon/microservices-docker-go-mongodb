@@ -6,12 +6,12 @@ type: application
 # chart version
 version: 0.2.1
 # cinema app version
-appVersion: "v2.2.0"
+appVersion: "v2.2.1"
 dependencies:
   - condition: mongodb.enabled
     name: mongodb
     repository: https://charts.bitnami.com/bitnami
-    version: 13.6.3
+    version: 13.6.x
   - name: users
     version: 0.x.x
   - name: movies
