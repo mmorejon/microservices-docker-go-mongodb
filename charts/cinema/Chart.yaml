@@ -11,7 +11,7 @@ dependencies:
   - condition: mongodb.enabled
     name: mongodb
     repository: https://charts.bitnami.com/bitnami
-    version: 10.31.5
+    version: 13.6.3
   - name: users
     version: 0.x.x
   - name: movies
