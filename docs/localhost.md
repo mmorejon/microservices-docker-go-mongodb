@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Cinema project can be deployed in a single machine (localhost) using docker compose in order to know the behavior of microservices.
+The Cinema project can be deployed in a single machine (localhost) using Docker Compose V2.
 
 ## Index
 
@@ -17,38 +17,52 @@ The Cinema project can be deployed in a single machine (localhost) using docker 
 
 ## Requirements
 
-* Docker Engine  20.10.0
-* Docker Compose 1.27.4
+* Docker Engine  20.10.22
+* Docker Compose v2.15.1
 
 ## Starting services
 
-Use the following command to deploy all services in your local environment.
+Use the command `compose up` to start all services in your local environment.
 
 ```bash
-$ docker-compose up -d
-
-Creating microservices-docker-go-mongodb_showtimes_1 ... done
-Creating microservices-docker-go-mongodb_db_1        ... done
-Creating microservices-docker-go-mongodb_proxy_1     ... done
-Creating microservices-docker-go-mongodb_website_1   ... done
-Creating microservices-docker-go-mongodb_users_1     ... done
-Creating microservices-docker-go-mongodb_movies_1    ... done
-Creating microservices-docker-go-mongodb_bookings_1  ... done
+docker compose up --detach
 ```
+
+<details>
+  <summary>Output</summary>
+
+  ```bash
+  [+] Running 7/7
+  ⠿ Container microservices-docker-go-mongodb-website-1    Started
+  ⠿ Container microservices-docker-go-mongodb-db-1         Started
+  ⠿ Container microservices-docker-go-mongodb-showtimes-1  Started
+  ⠿ Container microservices-docker-go-mongodb-bookings-1   Started
+  ⠿ Container microservices-docker-go-mongodb-users-1      Started
+  ⠿ Container microservices-docker-go-mongodb-proxy-1      Started
+  ⠿ Container microservices-docker-go-mongodb-movies-1     Started
+  ```
+</details>
+
+Check the containers running.
 
 ```bash
-$ docker-compose ps
-
-                   Name                                  Command               State                     Ports
----------------------------------------------------------------------------------------------------------------------------------
-microservices-docker-go-mongodb_bookings_1    ./cinema-bookins -mongoURI ...   Up
-microservices-docker-go-mongodb_db_1          docker-entrypoint.sh mongod      Up      27017/tcp
-microservices-docker-go-mongodb_movies_1      ./cinema-movies -mongoURI  ...   Up
-microservices-docker-go-mongodb_proxy_1       /entrypoint.sh --api=true  ...   Up      0.0.0.0:80->80/tcp, 0.0.0.0:8080->8080/tcp
-microservices-docker-go-mongodb_showtimes_1   ./cinema-showtimes -mongoU ...   Up
-microservices-docker-go-mongodb_users_1       ./cinema-users -mongoURI m ...   Up
-microservices-docker-go-mongodb_website_1     ./cinema-website -usersAPI ...   Up
+docker compose ps
 ```
+
+<details>
+  <summary>Output</summary>
+
+  ```
+  NAME    IMAGE                                      COMMAND   SERVICE      PORTS
+  .....   ghcr.io/mmorejon/cinema-bookings:v2.2.1    .....     bookings
+  .....   mongo:4.2.23                               .....     db           27017/tcp
+  .....   ghcr.io/mmorejon/cinema-movies:v2.2.1      .....     movies
+  .....   traefik:v2.4.2                             .....     proxy        0.0.0.0:80->80/tcp, 0.0.0.0:8080->8080/tcp
+  .....   ghcr.io/mmorejon/cinema-showtimes:v2.2.1   .....     showtimes
+  .....   ghcr.io/mmorejon/cinema-users:v2.2.1       .....     users
+  .....   ghcr.io/mmorejon/cinema-website:v2.2.1     .....     website
+  ```
+</details>
 
 Once the services have started, you can access the web through the following link: <http://localhost>.
 
@@ -59,29 +73,37 @@ Once the services have started, you can access the web through the following lin
 You will start using an empty database for all microservices, but if you want you can restore a preconfigured data execute this command:
 
 ```bash
-$ docker-compose exec db mongorestore --uri mongodb://db:27017 --gzip  /backup/cinema
-
-2021-01-18T19:10:35.914+0000    preparing collections to restore from
-2021-01-18T19:10:36.016+0000    reading metadata for movies.movies from /backup/cinema/movies/movies.metadata.json.gz
-2021-01-18T19:10:36.089+0000    reading metadata for showtimes.showtimes from /backup/cinema/showtimes/showtimes.metadata.json.gz
-2021-01-18T19:10:36.143+0000    reading metadata for users.users from /backup/cinema/users/users.metadata.json.gz
-2021-01-18T19:10:36.178+0000    reading metadata for bookings.bookings from /backup/cinema/bookings/bookings.metadata.json.gz
-2021-01-18T19:10:36.236+0000    restoring bookings.bookings from /backup/cinema/bookings/bookings.bson.gz
-2021-01-18T19:10:36.308+0000    no indexes to restore
-2021-01-18T19:10:36.314+0000    finished restoring bookings.bookings (2 documents, 0 failures)
-2021-01-18T19:10:36.467+0000    restoring movies.movies from /backup/cinema/movies/movies.bson.gz
-2021-01-18T19:10:36.883+0000    no indexes to restore
-2021-01-18T19:10:36.888+0000    finished restoring movies.movies (6 documents, 0 failures)
-2021-01-18T19:10:36.894+0000    restoring showtimes.showtimes from /backup/cinema/showtimes/showtimes.bson.gz
-2021-01-18T19:10:36.955+0000    no indexes to restore
-2021-01-18T19:10:36.960+0000    finished restoring showtimes.showtimes (3 documents, 0 failures)
-2021-01-18T19:10:36.989+0000    restoring users.users from /backup/cinema/users/users.bson.gz
-2021-01-18T19:10:37.067+0000    no indexes to restore
-2021-01-18T19:10:37.072+0000    finished restoring users.users (5 documents, 0 failures)
-2021-01-18T19:10:37.075+0000    16 document(s) restored successfully. 0 document(s) failed to restore.
+docker compose exec db mongorestore \
+  --uri mongodb://db:27017 \
+  --gzip /backup/cinema
 ```
 
-This command will go inside the mongodb container (`db` service described in `docker-compose.yml` file). Once the command finished the data inserted will be ready to be consulted. Try listing users againg <http://localhost/users/list>.
+<details>
+  <summary>Output</summary>
+
+  ```
+  .....  preparing collections to restore from
+  .....  reading metadata for movies.movies from /backup/cinema/movies/movies.metadata.json.gz
+  .....  reading metadata for showtimes.showtimes from /backup/cinema/showtimes/showtimes.metadata.json.gz
+  .....  reading metadata for users.users from /backup/cinema/users/users.metadata.json.gz
+  .....  reading metadata for bookings.bookings from /backup/cinema/bookings/bookings.metadata.json.gz
+  .....  restoring bookings.bookings from /backup/cinema/bookings/bookings.bson.gz
+  .....  no indexes to restore
+  .....  finished restoring bookings.bookings (2 documents, 0 failures)
+  .....  restoring movies.movies from /backup/cinema/movies/movies.bson.gz
+  .....  no indexes to restore
+  .....  finished restoring movies.movies (6 documents, 0 failures)
+  .....  restoring showtimes.showtimes from /backup/cinema/showtimes/showtimes.bson.gz
+  .....  no indexes to restore
+  .....  finished restoring showtimes.showtimes (3 documents, 0 failures)
+  .....  restoring users.users from /backup/cinema/users/users.bson.gz
+  .....  no indexes to restore
+  .....  finished restoring users.users (5 documents, 0 failures)
+  .....  16 document(s) restored successfully. 0 document(s) failed to restore.
+  ```
+</details>
+
+This command will go inside the mongodb container (`db` service described in `compose.yaml` file). Once the command finished the data inserted will be ready to be consulted. Try listing users again <http://localhost/users/list>.
 
 ![Users List](images/website-users.jpg)
 
@@ -109,24 +131,37 @@ Once exposed all services the following links will be availables:
 The following command is an example of how to list the users:
 
 ```bash
-$ curl -X GET http://localhost/api/users/
-
-[{"ID":"600209d347932ef15c50af15","Name":"Wanda","LastName":"Austin"},{"ID":"600209d347932ef15c50af16","Name":"Charles","LastName":"Babbage"},{"ID":"600209d347932ef15c50af17","Name":"Stefan","LastName":"Banach"},{"ID":"600209d347932ef15c50af18","Name":"Laura","LastName":"Bassi"},{"ID":"600209d347932ef15c50af19","Name":"Niels","LastName":"Bohr"}]
+curl -X GET http://localhost/api/users/
 ```
 
-## Stoping services
+<details>
+  <summary>Output</summary>
+
+  ```
+  [{"ID":"600209d347932ef15c50af15","Name":"Wanda","LastName":"Austin"},{"ID":"600209d347932ef15c50af16","Name":"Charles","LastName":"Babbage"},{"ID":"600209d347932ef15c50af17","Name":"Stefan","LastName":"Banach"},{"ID":"600209d347932ef15c50af18","Name":"Laura","LastName":"Bassi"},{"ID":"600209d347932ef15c50af19","Name":"Niels","LastName":"Bohr"}]
+  ```
+</details>
+
+## Stopping services
 
 ```bash
-$ docker-compose stop
-
-Stopping microservices-docker-go-mongodb_proxy_1     ... done
-Stopping microservices-docker-go-mongodb_users_1     ... done
-Stopping microservices-docker-go-mongodb_movies_1    ... done
-Stopping microservices-docker-go-mongodb_db_1        ... done
-Stopping microservices-docker-go-mongodb_bookings_1  ... done
-Stopping microservices-docker-go-mongodb_website_1   ... done
-Stopping microservices-docker-go-mongodb_showtimes_1 ... done
+docker compose stop
 ```
+
+<details>
+  <summary>Output</summary>
+
+  ```
+  [+] Running 7/7
+  ⠿ Container microservices-docker-go-mongodb-website-1    Stopped
+  ⠿ Container microservices-docker-go-mongodb-db-1         Stopped
+  ⠿ Container microservices-docker-go-mongodb-bookings-1   Stopped
+  ⠿ Container microservices-docker-go-mongodb-showtimes-1  Stopped
+  ⠿ Container microservices-docker-go-mongodb-movies-1     Stopped
+  ⠿ Container microservices-docker-go-mongodb-users-1      Stopped
+  ⠿ Container microservices-docker-go-mongodb-proxy-1      Stopped
+  ```
+</details>
 
 ## Traefik Proxy dashboard
 
@@ -136,7 +171,7 @@ This project use Traefik Proxy v2.4.2, [the dashboard should look like this imag
 
 Next: [Endpoints](endpoints.md)
 
-## Build from souce code
+## Build from source code
 
 If you want to include new functionalities, fix bugs or do some tests use the source code to build the docker image from the docker compose file. To make it uncomment the `build` line in de microservice and comment the `image` line.
 
