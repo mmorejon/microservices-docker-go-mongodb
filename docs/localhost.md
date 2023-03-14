@@ -4,6 +4,8 @@
 
 The Cinema project can be deployed in a single machine (localhost) using Docker Compose V2.
 
+> Access to [compose-v1](https://github.com/mmorejon/microservices-docker-go-mongodb/tree/compose-v1) tag if Compose V1 specification is needed.
+
 ## Index
 
 * [Localhost (docker-compose)](#overview)
