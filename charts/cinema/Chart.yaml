@@ -1,12 +1,10 @@
 apiVersion: v2
+version: 0.2.1
+appVersion: v2.2.1
 name: cinema
 description: A Helm chart to deploy Cinema project in Kubernetes
-# chart type
+home: https://github.com/mmorejon/microservices-docker-go-mongodb
 type: application
-# chart version
-version: 0.2.1
-# cinema app version
-appVersion: "v2.2.1"
 dependencies:
   - condition: mongodb.enabled
     name: mongodb
