@@ -22,3 +22,5 @@ dependencies:
     version: 0.x.x
   - name: website
     version: 0.x.x
+sources:
+  - https://github.com/mmorejon/microservices-docker-go-mongodb
