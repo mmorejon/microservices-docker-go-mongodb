@@ -15,7 +15,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -ldflags="-w -s" -a -installsuffix cgo -o 
 
 
 # build a small image
-FROM alpine:3.17.0
+FROM alpine:3.17.3
 LABEL language="golang"
 LABEL org.opencontainers.image.source https://github.com/mmorejon/microservices-docker-go-mongodb
 # import the user and group files from the builder
