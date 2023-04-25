@@ -33,7 +33,7 @@ kind create cluster
 
   ```bash
   Creating cluster "kind" ...
-  ✓ Ensuring node image (kindest/node:v1.25.2) 🖼
+  ✓ Ensuring node image (kindest/node:v1.26.3) 🖼
   ✓ Preparing nodes 📦
   ✓ Writing configuration 📜
   ✓ Starting control-plane 🕹️
@@ -123,7 +123,7 @@ helm upgrade cinema \
   ```bash
   Release "cinema" does not exist. Installing it now.
   NAME: cinema
-  LAST DEPLOYED: Sun Jan 29 22:24:32 2023
+  LAST DEPLOYED: Wed Apr 26 01:13:15 2023
   NAMESPACE: default
   STATUS: deployed
   REVISION: 1
@@ -136,7 +136,7 @@ Then check the deployment status:
 helm list
 
 NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART           APP VERSION
-cinema  default         1               2023-01-29 22:25:56.073712 +0100 CET    deployed        cinema-0.2.1    v2.2.1
+cinema  cinema          1               2023-04-25 23:08:21.689250811 +0000 UTC deployed        cinema-0.2.2    v2.2.2
 ```
 
 ## Check Cinema services status
