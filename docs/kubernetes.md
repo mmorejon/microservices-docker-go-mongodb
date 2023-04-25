@@ -83,9 +83,9 @@ cat ./charts/cinema/Chart.yaml
   # chart type
   type: application
   # chart version
-  version: 0.2.1
+  version: 0.2.2
   # cinema app version
-  appVersion: "v2.2.1"
+  appVersion: "v2.2.2"
   dependencies:
     - condition: mongodb.enabled
       name: mongodb
