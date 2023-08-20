@@ -1,0 +1,16 @@
+# VCS
+.git/
+.gitignore
+.gitmodules
+.gitattributes
+
+# Go
+vendor/
+go.mod
+go.sum
+
+# CUE
+*_tool.cue
+
+# Timoni
+timoni.ignore
