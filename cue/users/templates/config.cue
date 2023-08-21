@@ -31,8 +31,9 @@ import (
 	topologySpreadConstraints?: [...corev1.#TopologySpreadConstraint]
 
 	// Container
-	image:            timoniv1.#Image
-	imagePullPolicy:  *"IfNotPresent" | string
+	image:           timoniv1.#Image
+	imagePullPolicy: *"IfNotPresent" | string
+	args?: [...string]
 	resources?:       corev1.#ResourceRequirements
 	securityContext?: corev1.#SecurityContext
 

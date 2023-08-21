@@ -28,6 +28,9 @@ import (
 						name:            _config.metadata.name
 						image:           _config.image.reference
 						imagePullPolicy: _config.imagePullPolicy
+						if _config.args != _|_ {
+							args: _config.args
+						}
 						ports: [
 							{
 								name:          "http"
