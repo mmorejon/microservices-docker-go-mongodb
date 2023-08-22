@@ -1,4 +1,4 @@
-# Cinema - Kubernetes Deployment
+# Cinema - Kubernetes Deployment (Helm)
 
 ## Overview
 
