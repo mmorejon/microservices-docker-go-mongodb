@@ -13,10 +13,10 @@ import (
 	metadata:   _config.metadata
 	spec:       appsv1.#DeploymentSpec & {
 		replicas: _config.replicas
-		selector: matchLabels: _config.selectorLabels
+		selector: matchLabels: _config.selector.labels
 		template: {
 			metadata: {
-				labels: _config.selectorLabels
+				labels: _config.selector.labels
 				if _config.podAnnotations != _|_ {
 					annotations: _config.podAnnotations
 				}

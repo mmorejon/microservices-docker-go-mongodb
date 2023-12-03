@@ -11,13 +11,13 @@ import (
 	metadata:   _config.metadata
 	spec:       corev1.#ServiceSpec & {
 		type:     corev1.#ServiceTypeClusterIP
-		selector: _config.selectorLabels
+		selector: _config.selector.labels
 		ports: [
 			{
-				name:       "http"
 				port:       _config.service.port
-				targetPort: "\(name)"
 				protocol:   "TCP"
+				name:       "http"
+				targetPort: name
 			},
 		]
 	}

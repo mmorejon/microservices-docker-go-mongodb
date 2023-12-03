@@ -20,7 +20,7 @@ The Timoni project strives to improve the UX of authoring Kubernetes configs. In
 
 * kubectl >= v1.26.0
 * kind >= v0.20.0
-* timoni >= 0.11.1
+* timoni >= 0.17.0
 
 ## Create Kubernetes cluster
 
@@ -85,7 +85,7 @@ cat modules/cinema.bundle.cue
           instances: {
                   website: {
                           module: url:     "oci://ghcr.io/mmorejon/modules/website"
-                          module: version: "0.1.0"
+                          module: version: "0.2.0"
                           namespace: "default"
                           values: args: [
                                   "-usersAPI",
@@ -98,45 +98,65 @@ cat modules/cinema.bundle.cue
                                   "http://bookings/api/bookings/",
                           ]
                   }
-                  users: {
-                          module: url:     "oci://ghcr.io/mmorejon/modules/users"
-                          module: version: "0.1.0"
+                  bookings: {
+                          module: url:     "oci://ghcr.io/mmorejon/modules/api"
+                          module: version: "0.2.0"
                           namespace: "default"
                           values: args: [
                                   "-mongoURI",
                                   "mongodb://mongodb:27017/",
                           ]
+                          values: image: {
+                                  repository: "ghcr.io/mmorejon/cinema-bookings"
+                                  digest:     "sha256:9b51714509861b1dad066f56f1c1e5387f20828b113c6d557761fa5b11eef858"
+                                  tag:        "v2.2.2"
+                          }
                   }
                   movies: {
-                          module: url:     "oci://ghcr.io/mmorejon/modules/movies"
-                          module: version: "0.1.0"
+                          module: url:     "oci://ghcr.io/mmorejon/modules/api"
+                          module: version: "0.2.0"
                           namespace: "default"
                           values: args: [
                                   "-mongoURI",
                                   "mongodb://mongodb:27017/",
                           ]
+                          values: image: {
+                                  repository: "ghcr.io/mmorejon/cinema-movies"
+                                  digest:     "sha256:6f15801d3fa8fbfa58b6718851c28841e010935c205b5770c7deb949fc2e2e25"
+                                  tag:        "v2.2.2"
+                          }
                   }
                   showtimes: {
-                          module: url:     "oci://ghcr.io/mmorejon/modules/showtimes"
-                          module: version: "0.1.0"
+                          module: url:     "oci://ghcr.io/mmorejon/modules/api"
+                          module: version: "0.2.0"
                           namespace: "default"
                           values: args: [
                                   "-mongoURI",
                                   "mongodb://mongodb:27017/",
                           ]
+                          values: image: {
+                                  repository: "ghcr.io/mmorejon/cinema-showtimes"
+                                  digest:     "sha256:70d087aaf0e888310cfb585eb81e308721e38bb96819e2908358131be1fc2dc8"
+                                  tag:        "v2.2.2"
+                          }
                   }
-                  bookings: {
-                          module: url:     "oci://ghcr.io/mmorejon/modules/bookings"
-                          module: version: "0.1.0"
+                  users: {
+                          module: url:     "oci://ghcr.io/mmorejon/modules/api"
+                          module: version: "0.2.0"
                           namespace: "default"
                           values: args: [
                                   "-mongoURI",
                                   "mongodb://mongodb:27017/",
                           ]
+                          values: image: {
+                                  repository: "ghcr.io/mmorejon/cinema-users"
+                                  digest:     "sha256:3a1e8fd1f3cb832981bcadb3fff056eb0a2300cf7cb6bf94460c6bccdd6743ed"
+                                  tag:        "v2.2.2"
+                          }
                   }
                   mongodb: {
                           module: url:     "oci://ghcr.io/mmorejon/modules/mongodb"
-                          module: version: "0.1.0"
+                          module: version: "0.2.0"
                           namespace: "default"
                   }
           }
@@ -144,7 +164,7 @@ cat modules/cinema.bundle.cue
   ```
 </details>
 
-This file has six [instances](https://timoni.sh/#timoni-instances) `website`, `users`, `movies`, `showtimes`, `bookings`, and `mongodb`. Each instance represents a [module](https://timoni.sh/#timoni-modules) instantiation on a Kubernetes cluster.
+This file has six [instances](https://timoni.sh/#timoni-instances) `website`, `bookings`, `movies`, `showtimes`, `users`, and `mongodb`. Each instance represents a [module](https://timoni.sh/#timoni-modules) instantiation on a Kubernetes cluster.
 
 All instances make reference to OCI artifacts stored in GitHub container registry and [linked to this repository](https://github.com/mmorejon?tab=packages&repo_name=microservices-docker-go-mongodb).
 
@@ -160,56 +180,44 @@ timoni bundle apply --file modules/cinema.bundle.cue
   <summary>Result</summary>
 
   ```bash
-  11:19PM INF b:cinema > applying 6 instance(s)
-  11:19PM INF b:cinema > applying instance website
-  11:19PM INF b:cinema > i:website > pulling oci://ghcr.io/mmorejon/modules/website:0.1.0
-  11:19PM INF b:cinema > i:website > using module timoni.sh/website version 0.1.0
-  11:19PM INF b:cinema > i:website > installing website in namespace default
-  11:19PM INF b:cinema > i:website > ServiceAccount/default/website created
-  11:19PM INF b:cinema > i:website > Service/default/website created
-  11:19PM INF b:cinema > i:website > Deployment/default/website created
-  11:19PM INF b:cinema > i:website > resources are ready
-  11:19PM INF b:cinema > applying instance users
-  11:19PM INF b:cinema > i:users > pulling oci://ghcr.io/mmorejon/modules/users:0.1.0
-  11:19PM INF b:cinema > i:users > using module timoni.sh/users version 0.1.0
-  11:19PM INF b:cinema > i:users > installing users in namespace default
-  11:19PM INF b:cinema > i:users > ServiceAccount/default/users created
-  11:19PM INF b:cinema > i:users > Service/default/users created
-  11:19PM INF b:cinema > i:users > Deployment/default/users created
-  11:19PM INF b:cinema > i:users > resources are ready
-  11:19PM INF b:cinema > applying instance movies
-  11:19PM INF b:cinema > i:movies > pulling oci://ghcr.io/mmorejon/modules/movies:0.1.0
-  11:19PM INF b:cinema > i:movies > using module timoni.sh/movies version 0.1.0
-  11:19PM INF b:cinema > i:movies > installing movies in namespace default
-  11:19PM INF b:cinema > i:movies > ServiceAccount/default/movies created
-  11:19PM INF b:cinema > i:movies > Service/default/movies created
-  11:19PM INF b:cinema > i:movies > Deployment/default/movies created
-  11:19PM INF b:cinema > i:movies > resources are ready
-  11:19PM INF b:cinema > applying instance showtimes
-  11:19PM INF b:cinema > i:showtimes > pulling oci://ghcr.io/mmorejon/modules/showtimes:0.1.0
-  11:19PM INF b:cinema > i:showtimes > using module timoni.sh/showtimes version 0.1.0
-  11:19PM INF b:cinema > i:showtimes > installing showtimes in namespace default
-  11:19PM INF b:cinema > i:showtimes > ServiceAccount/default/showtimes created
-  11:19PM INF b:cinema > i:showtimes > Service/default/showtimes created
-  11:19PM INF b:cinema > i:showtimes > Deployment/default/showtimes created
-  11:19PM INF b:cinema > i:showtimes > resources are ready
-  11:19PM INF b:cinema > applying instance bookings
-  11:19PM INF b:cinema > i:bookings > pulling oci://ghcr.io/mmorejon/modules/bookings:0.1.0
-  11:19PM INF b:cinema > i:bookings > using module timoni.sh/bookings version 0.1.0
-  11:19PM INF b:cinema > i:bookings > installing bookings in namespace default
-  11:19PM INF b:cinema > i:bookings > ServiceAccount/default/bookings created
-  11:19PM INF b:cinema > i:bookings > Service/default/bookings created
-  11:19PM INF b:cinema > i:bookings > Deployment/default/bookings created
-  11:19PM INF b:cinema > i:bookings > resources are ready
-  11:19PM INF b:cinema > applying instance mongodb
-  11:19PM INF b:cinema > i:mongodb > pulling oci://ghcr.io/mmorejon/modules/mongodb:0.1.0
-  11:19PM INF b:cinema > i:mongodb > using module timoni.sh/mongodb version 0.1.0
-  11:19PM INF b:cinema > i:mongodb > installing mongodb in namespace default
-  11:19PM INF b:cinema > i:mongodb > ServiceAccount/default/mongodb created
-  11:19PM INF b:cinema > i:mongodb > Service/default/mongodb created
-  11:19PM INF b:cinema > i:mongodb > Deployment/default/mongodb created
-  11:20PM INF b:cinema > i:mongodb > resources are ready
-  11:20PM INF b:cinema > applied successfully
+  7:00PM INF b:cinema > applying 6 instance(s)
+  7:00PM INF b:cinema > i:website > applying module timoni.sh/website version 0.2.0
+  7:00PM INF b:cinema > i:website > installing website in namespace default
+  7:00PM INF b:cinema > i:website > ServiceAccount/default/website created
+  7:00PM INF b:cinema > i:website > Service/default/website created
+  7:00PM INF b:cinema > i:website > Deployment/default/website created
+  7:00PM INF b:cinema > i:website > app resources ready
+  7:00PM INF b:cinema > i:users > applying module timoni.sh/api version 0.2.0
+  7:00PM INF b:cinema > i:users > installing users in namespace default
+  7:00PM INF b:cinema > i:users > ServiceAccount/default/users created
+  7:00PM INF b:cinema > i:users > Service/default/users created
+  7:00PM INF b:cinema > i:users > Deployment/default/users created
+  7:00PM INF b:cinema > i:users > app resources ready
+  7:00PM INF b:cinema > i:movies > applying module timoni.sh/api version 0.2.0
+  7:00PM INF b:cinema > i:movies > installing movies in namespace default
+  7:00PM INF b:cinema > i:movies > ServiceAccount/default/movies created
+  7:00PM INF b:cinema > i:movies > Service/default/movies created
+  7:00PM INF b:cinema > i:movies > Deployment/default/movies created
+  7:00PM INF b:cinema > i:movies > app resources ready
+  7:00PM INF b:cinema > i:showtimes > applying module timoni.sh/api version 0.2.0
+  7:00PM INF b:cinema > i:showtimes > installing showtimes in namespace default
+  7:00PM INF b:cinema > i:showtimes > ServiceAccount/default/showtimes created
+  7:00PM INF b:cinema > i:showtimes > Service/default/showtimes created
+  7:00PM INF b:cinema > i:showtimes > Deployment/default/showtimes created
+  7:01PM INF b:cinema > i:showtimes > app resources ready
+  7:01PM INF b:cinema > i:bookings > applying module timoni.sh/api version 0.2.0
+  7:01PM INF b:cinema > i:bookings > installing bookings in namespace default
+  7:01PM INF b:cinema > i:bookings > ServiceAccount/default/bookings created
+  7:01PM INF b:cinema > i:bookings > Service/default/bookings created
+  7:01PM INF b:cinema > i:bookings > Deployment/default/bookings created
+  7:01PM INF b:cinema > i:bookings > app resources ready
+  7:01PM INF b:cinema > i:mongodb > applying module timoni.sh/mongodb version 0.2.0
+  7:01PM INF b:cinema > i:mongodb > installing mongodb in namespace default
+  7:01PM INF b:cinema > i:mongodb > ServiceAccount/default/mongodb created
+  7:01PM INF b:cinema > i:mongodb > Service/default/mongodb created
+  7:01PM INF b:cinema > i:mongodb > Deployment/default/mongodb created
+  7:01PM INF b:cinema > i:mongodb > app resources ready
+  7:01PM INF b:cinema > applied successfully in 48s
   ```
 </details>
 
@@ -218,13 +226,13 @@ Then, list all instances created inside `default` namespace.
 ```bash
 $ timoni list --bundle cinema
 
-NAME            MODULE                                          VERSION LAST APPLIED            BUNDLE
-bookings        oci://ghcr.io/mmorejon/modules/bookings         0.1.0   2023-08-22T21:19:56Z    cinema
-mongodb         oci://ghcr.io/mmorejon/modules/mongodb          0.1.0   2023-08-22T21:20:07Z    cinema
-movies          oci://ghcr.io/mmorejon/modules/movies           0.1.0   2023-08-22T21:19:42Z    cinema
-showtimes       oci://ghcr.io/mmorejon/modules/showtimes        0.1.0   2023-08-22T21:19:49Z    cinema
-users           oci://ghcr.io/mmorejon/modules/users            0.1.0   2023-08-22T21:19:35Z    cinema
-website         oci://ghcr.io/mmorejon/modules/website          0.1.0   2023-08-22T21:19:28Z    cinema
+NAME            MODULE                                  VERSION LAST APPLIED            BUNDLE
+bookings        oci://ghcr.io/mmorejon/modules/api      0.2.0   2023-12-03T18:01:07Z    cinema
+mongodb         oci://ghcr.io/mmorejon/modules/mongodb  0.2.0   2023-12-03T18:01:12Z    cinema
+movies          oci://ghcr.io/mmorejon/modules/api      0.2.0   2023-12-03T18:00:56Z    cinema
+showtimes       oci://ghcr.io/mmorejon/modules/api      0.2.0   2023-12-03T18:01:01Z    cinema
+users           oci://ghcr.io/mmorejon/modules/api      0.2.0   2023-12-03T18:00:50Z    cinema
+website         oci://ghcr.io/mmorejon/modules/website  0.2.0   2023-12-03T18:00:45Z    cinema
 ```
 
 ## Check Cinema services status
@@ -237,13 +245,13 @@ kubectl get po
   <summary>Result</summary>
 
   ```bash
-  NAME                         READY   STATUS    RESTARTS   AGE
-  bookings-744f576dfb-rtddx    1/1     Running   0          3m7s
-  mongodb-77cc88b944-rf52n     1/1     Running   0          3m1s
-  movies-848ffd8cd9-mjx85      1/1     Running   0          3m21s
-  showtimes-8679b6c95f-8dpfm   1/1     Running   0          3m14s
-  users-9f675d99f-mzx97        1/1     Running   0          3m28s
-  website-55448c4fd9-zpvvg     1/1     Running   0          3m35s
+  NAME                        READY   STATUS    RESTARTS   AGE
+  bookings-94dcdf8cf-rfczb    1/1     Running   0          102s
+  mongodb-77cc88b944-wqsks    1/1     Running   0          97s
+  movies-f9559598f-wztff      1/1     Running   0          113s
+  showtimes-95c475fcc-7dz9j   1/1     Running   0          108s
+  users-9f675d99f-944gz       1/1     Running   0          119s
+  website-55448c4fd9-vp8mf    1/1     Running   0          2m4s
   ```
 </details>
 
