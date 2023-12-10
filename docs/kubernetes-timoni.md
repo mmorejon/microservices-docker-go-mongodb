@@ -10,6 +10,7 @@ The Timoni project strives to improve the UX of authoring Kubernetes configs. In
 
 * [Requirements](#requirements)
 * [Create Kubernetes Cluster](#create-kubernetes-cluster)
+* [Pull Cinema bundle](#pull-cinema-bundle)
 * [Deploy Cinema project](#deploy-cinema-project)
 * [Check Cinema services status](#check-cinema-services-status)
 * [Populate mongodb cluster](#populate-mongodb-cluster)
