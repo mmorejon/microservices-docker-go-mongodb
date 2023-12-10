@@ -72,7 +72,7 @@ kubectl cluster-info
 The Cinema project is described as a [bundle](https://timoni.sh/bundles/). From Timoni perspective, a bundle is a declarative way of managing the lifecycle of applications and their infra dependencies.
 
 ```bash
-cat modules/cinema.bundle.cue
+cat timoni/bundles/cinema.cue
 ```
 
 <details>
@@ -173,7 +173,7 @@ All instances make reference to OCI artifacts stored in GitHub container registr
 Deploy the cinema bundle:
 
 ```bash
-timoni bundle apply --file modules/cinema.bundle.cue
+timoni bundle apply --file timoni/bundles/cinema.cue
 ```
 
 <details>
