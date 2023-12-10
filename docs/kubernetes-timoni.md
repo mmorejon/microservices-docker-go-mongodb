@@ -67,12 +67,30 @@ kubectl cluster-info
   ```
 </details>
 
+## Pull Cinema bundle
+
+The bundle [cinema](https://github.com/mmorejon/microservices-docker-go-mongodb/pkgs/container/bundles%2Fcinema) is an [OCI artifact](https://timoni.sh/bundle-distribution/) that describe the cinema deployment.
+
+```
+timoni artifact pull oci://ghcr.io/mmorejon/bundles/cinema
+```
+
+<details>
+  <summary>Result</summary>
+
+  ```bash
+  7:32PM INF extracted: .
+  ```
+</details>
+
+The OCI artifact contains a `cinema.cue` [bundle](https://timoni.sh/bundles/) file. This file is extracted in the root folder where the command was executed. From Timoni perspective, a bundle is a declarative way of managing the lifecycle of applications and their infra dependencies.
+
 ## Deploy Cinema project
 
-The Cinema project is described as a [bundle](https://timoni.sh/bundles/). From Timoni perspective, a bundle is a declarative way of managing the lifecycle of applications and their infra dependencies.
+Explore the bundle file to identify the components inside it.
 
 ```bash
-cat timoni/bundles/cinema.cue
+cat ./cinema.cue
 ```
 
 <details>
@@ -173,7 +191,7 @@ All instances make reference to OCI artifacts stored in GitHub container registr
 Deploy the cinema bundle:
 
 ```bash
-timoni bundle apply --file timoni/bundles/cinema.cue
+timoni bundle apply --file cinema.cue
 ```
 
 <details>
